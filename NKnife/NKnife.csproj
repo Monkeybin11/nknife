@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>NKnife.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyVersion>19.0.0.0</AssemblyVersion>
+    <FileVersion>19.0.0.0</FileVersion>
+    <Version>19.0.0</Version>
+    <Authors>lukan@xknife.net</Authors>
+    <Company>xknife.net</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+</Project>
