@@ -5,21 +5,23 @@ namespace NKnife.Chinese
     /// <summary>
     ///     中国大陆地区第二代身份证相关操作函数
     /// </summary>
-    public class IdCardChecker
+    // ReSharper disable once InconsistentNaming
+    public class IDCardChecker
     {
         /// <summary>
         ///     验证身份证号码
         /// </summary>
         /// <param name="id">身份证号码</param>
         /// <returns>验证成功为True，否则为False</returns>
-        public static bool CheckIdCard(string id)
+        public static bool Check(string id)
         {
             if (id.Length == 18)
             {
                 bool check = CheckIdCard18(id);
                 return check;
             }
-            else if (id.Length == 15)
+
+            if (id.Length == 15)
             {
                 bool check = CheckIdCard15(id);
                 return check;
@@ -36,8 +38,11 @@ namespace NKnife.Chinese
         /// <returns>验证成功为True，否则为False</returns>
         private static bool CheckIdCard18(string id)
         {
-            long n = 0;
-            if (long.TryParse(id.Remove(17), out n) == false || n < Math.Pow(10, 16) || long.TryParse(id.Replace('x', '0').Replace('X', '0'), out n) == false)
+            if (!long.TryParse(id.Remove(17), out var n) || n < Math.Pow(10, 16))
+            {
+                return false; //数字验证
+            }
+            else if (!long.TryParse(id.Replace('x', '0').Replace('X', '0'), out n))
             {
                 return false; //数字验证
             }
@@ -47,8 +52,7 @@ namespace NKnife.Chinese
                 return false; //省份验证
             }
             string birth = id.Substring(6, 8).Insert(6, "-").Insert(4, "-");
-            DateTime time;
-            if (DateTime.TryParse(birth, out time) == false)
+            if (DateTime.TryParse(birth, out var time) == false)
             {
                 return false; //生日验证
             }
@@ -76,7 +80,7 @@ namespace NKnife.Chinese
         /// <returns>验证成功为True，否则为False</returns>
         private static bool CheckIdCard15(string id)
         {
-            if (long.TryParse(id, out var n) == false || n < Math.Pow(10, 14))
+            if (!long.TryParse(id, out var n) || n < Math.Pow(10, 14))
             {
                 return false; //数字验证
             }
@@ -86,7 +90,7 @@ namespace NKnife.Chinese
                 return false; //省份验证
             }
             string birth = id.Substring(6, 6).Insert(4, "-").Insert(2, "-");
-            if (DateTime.TryParse(birth, out _) == false)
+            if (!DateTime.TryParse(birth, out var time))
             {
                 return false; //生日验证
             }

@@ -247,7 +247,7 @@ namespace NKnife.Chinese
                 int area = arrCn[0];
                 int pos = arrCn[1];
                 int code = (area << 8) + pos;
-                int[] areacode =
+                int[] areaCode =
                 {
                     45217, 3, 45761, 46318, 46826, 47010, 47297, 47614, 48119, 48119, 49062, 49324, 49896, 50371, 50614, 50622, 50906, 51387,
                     51446, 52218, 52698, 52698, 52698, 52980, 53689, 54481
@@ -255,8 +255,8 @@ namespace NKnife.Chinese
                 for (int i = 0; i < 26; i++)
                 {
                     int max = 55290;
-                    if (i != 25) max = areacode[i + 1];
-                    if (areacode[i] <= code && code < max)
+                    if (i != 25) max = areaCode[i + 1];
+                    if (areaCode[i] <= code && code < max)
                     {
                         return Encoding.Default.GetString(new[] {(byte) (65 + i)});
                     }
