@@ -19,7 +19,7 @@ namespace NKnife.Chinese
                 bool check = CheckIdCard18(id);
                 return check;
             }
-            if (id.Length == 15)
+            else if (id.Length == 15)
             {
                 bool check = CheckIdCard15(id);
                 return check;
@@ -52,7 +52,7 @@ namespace NKnife.Chinese
             {
                 return false; //生日验证
             }
-            string[] arrVarifyCode = ("1,0,x,9,8,7,6,5,4,3,2").Split(',');
+            string[] arrVerifyCode = ("1,0,x,9,8,7,6,5,4,3,2").Split(',');
             string[] wi = ("7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2").Split(',');
             char[] ai = id.Remove(17).ToCharArray();
             int sum = 0;
@@ -62,7 +62,7 @@ namespace NKnife.Chinese
             }
             int y = -1;
             Math.DivRem(sum, 11, out y);
-            if (arrVarifyCode[y] != id.Substring(17, 1).ToLower())
+            if (arrVerifyCode[y] != id.Substring(17, 1).ToLower())
             {
                 return false; //校验码验证
             }
@@ -76,8 +76,7 @@ namespace NKnife.Chinese
         /// <returns>验证成功为True，否则为False</returns>
         private static bool CheckIdCard15(string id)
         {
-            long n = 0;
-            if (long.TryParse(id, out n) == false || n < Math.Pow(10, 14))
+            if (long.TryParse(id, out var n) == false || n < Math.Pow(10, 14))
             {
                 return false; //数字验证
             }
@@ -87,8 +86,7 @@ namespace NKnife.Chinese
                 return false; //省份验证
             }
             string birth = id.Substring(6, 6).Insert(4, "-").Insert(2, "-");
-            DateTime time;
-            if (DateTime.TryParse(birth, out time) == false)
+            if (DateTime.TryParse(birth, out _) == false)
             {
                 return false; //生日验证
             }

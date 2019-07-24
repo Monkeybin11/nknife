@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -468,7 +469,7 @@ namespace NKnife.XML
         /// <param name="localname">The localname.</param>
         /// <param name="value">The value.</param>
         /// <param name="attributes">属性集合</param>
-        public static XmlElement SetChildElement(this XmlElement element, string localname, object value, params Pair<string, string>[] attributes)
+        public static XmlElement SetChildElement(this XmlElement element, string localname, object value, params Tuple<string, string>[] attributes)
         {
             XmlElement ele = null;
             if (element != null && element.OwnerDocument != null)
@@ -480,8 +481,8 @@ namespace NKnife.XML
                 {
                     foreach (var attribute in attributes)
                     {
-                        if (!ele.HasAttribute(attribute.First))
-                            ele.SetAttribute(attribute.First, attribute.Second);
+                        if (!ele.HasAttribute(attribute.Item1))
+                            ele.SetAttribute(attribute.Item1, attribute.Item2);
                     }
                 }
                 element.AppendChild(ele);

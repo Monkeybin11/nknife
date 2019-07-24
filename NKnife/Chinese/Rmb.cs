@@ -36,53 +36,35 @@ namespace NKnife.Chinese
         /// Gets 位的数字.
         /// </summary>
         /// <value>The number.</value>
-        public int Number
-        {
-            get { return _number; }
-        }
+        public int Number => _number;
 
         /// <summary>
         /// Gets 第几位.
         /// </summary>
         /// <value>The digit.</value>
-        public int Digit
-        {
-            get { return _digit; }
-        }
+        public int Digit => _digit;
 
         /// <summary>
         /// Gets 转换成的大写字符.
         /// </summary>
         /// <value>The number char.</value>
-        public char NumberChar
-        {
-            get { return _numberChar; }
-        }
+        public char NumberChar => _numberChar;
 
         /// <summary>
         /// Gets 转换成的单位字符.
         /// </summary>
         /// <value>The unit char.</value>
-        public char UnitChar
-        {
-            get { return _unitChar; }
-        }
+        public char UnitChar => _unitChar;
 
         /// <summary>
         /// Gets 0-9所对应的汉字
         /// </summary>
-        public static string ChineseNumber
-        {
-            get { return "零壹贰叁肆伍陆柒捌玖"; }
-        }
+        public static string ChineseNumber => "零壹贰叁肆伍陆柒捌玖";
 
         /// <summary>
         /// Gets 数字位所对应的汉字 
         /// </summary>
-        public static string ChineseUnit
-        {
-            get { return "分角元拾佰仟万拾佰仟亿拾佰仟万"; }
-        }
+        public static string ChineseUnit => "分角元拾佰仟万拾佰仟亿拾佰仟万";
 
         public static bool operator ==(Rmb a, Rmb b)
         {
@@ -96,9 +78,12 @@ namespace NKnife.Chinese
 
         public override bool Equals(object obj)
         {
-            var r = (Rmb) (obj);
+            if (obj == null)
+                return false;
+            var r = (Rmb) obj;
             if (!_number.Equals(r._number)) return false;
             if (!_digit.Equals(r._digit)) return false;
+
             return true;
         }
 
@@ -189,8 +174,7 @@ namespace NKnife.Chinese
 
         public static string ToUpperChineseRmb(string numString, UtilityMath.RoundingMode roundMode = UtilityMath.RoundingMode.Rounding4She5Ru)
         {
-            decimal num;
-            if (!decimal.TryParse(numString, out num))
+            if (!decimal.TryParse(numString, out var num))
                 throw new ArgumentException("非数字的字符串。");
             return ToUpperChineseRmb(num, roundMode);
         }

@@ -16,7 +16,8 @@ namespace NKnife.Utility
         /// <summary>
         /// 每次搜索Type是比较耗时的，在这里采用一个字典进行缓存
         /// </summary>
-        private static readonly Dictionary<string, Dictionary<string, Type>> _AppTypes = new Dictionary<string, Dictionary<string, Type>>();
+        private static readonly Dictionary<string, Dictionary<string, Type>> _AppTypes =
+            new Dictionary<string, Dictionary<string, Type>>();
 
         /// <summary>
         /// 从程序集中获取程序集实例中具有指定名称的 System.Type 对象。
@@ -47,6 +48,7 @@ namespace NKnife.Utility
             {
                 return type;
             }
+
             return assignableFromType.IsAssignableFrom(type) ? type : null;
         }
 
@@ -71,7 +73,8 @@ namespace NKnife.Utility
         /// <param name="parameterTypes">创建实例所需参数的类型列表</param>
         /// <param name="parameterValues">创建实例所需的参数值列表</param>
         /// <returns>类型实例</returns>
-        public static object CreateObject(Type type, Type expectedType, bool throwOnError, Type[] parameterTypes, object[] parameterValues)
+        public static object CreateObject(Type type, Type expectedType, bool throwOnError, Type[] parameterTypes,
+            object[] parameterValues)
         {
             if (expectedType != null && !expectedType.IsAssignableFrom(type))
             {
@@ -79,8 +82,10 @@ namespace NKnife.Utility
                 {
                     throw new Exception(String.Format("将要创建的类型：{0}，不是期望的类型：{1}", type.FullName, expectedType.FullName));
                 }
+
                 return null;
             }
+
             if (parameterTypes != null && parameterValues != null && parameterTypes.Length != parameterValues.Length)
             {
                 if (throwOnError)
@@ -88,11 +93,13 @@ namespace NKnife.Utility
                     throw new Exception("构造函数参数类型数量和参数数量不一致");
                 }
             }
+
             object createdObject = null;
             if (parameterTypes == null)
             {
-                parameterTypes = new Type[] {};
+                parameterTypes = new Type[] { };
             }
+
             ConstructorInfo constructor = type.GetConstructor(parameterTypes);
             if (constructor == null)
             {
@@ -116,6 +123,7 @@ namespace NKnife.Utility
                     throw new Exception("对象创建失败：" + e.Message, e);
                 }
             }
+
             return createdObject;
         }
 
@@ -141,26 +149,31 @@ namespace NKnife.Utility
                 createdObject = propertyMe.GetValue(null, null);
                 isSueess = true;
             }
+
             if (!isSueess && propertyInstance != null)
             {
                 createdObject = propertyInstance.GetValue(null, null);
                 isSueess = true;
             }
+
             if (!isSueess && methodInstance != null)
             {
                 createdObject = methodInstance.Invoke(null, null);
                 isSueess = true;
             }
+
             if (!isSueess && propertyMeLower != null)
             {
                 createdObject = propertyMeLower.GetValue(null, null);
                 isSueess = true;
             }
+
             if (!isSueess && methodMe != null)
             {
                 createdObject = methodMe.Invoke(null, null);
                 isSueess = true;
             }
+
             if (!isSueess)
                 createdObject = CreatedObjectByNonPublic(type, parameterValues);
             return createdObject;
@@ -175,7 +188,9 @@ namespace NKnife.Utility
         {
             try
             {
-                const BindingFlags bindingFlags = BindingFlags.CreateInstance | (BindingFlags.NonPublic | (BindingFlags.Public | BindingFlags.Instance));
+                const BindingFlags bindingFlags = BindingFlags.CreateInstance |
+                                                  (BindingFlags.NonPublic |
+                                                   (BindingFlags.Public | BindingFlags.Instance));
                 return Activator.CreateInstance(type, bindingFlags, null, parameterValues, null);
             }
             catch (Exception e)
@@ -198,6 +213,7 @@ namespace NKnife.Utility
             {
                 paramNum = parameters.Length;
             }
+
             var paramTypes = new Type[paramNum];
             var paramValues = new object[paramNum];
             for (int i = 0; i < paramNum; i++)
@@ -209,11 +225,14 @@ namespace NKnife.Utility
                     {
                         throw new Exception("不支持参数可为Null的构造函数，请使用本方法的另外重载版本");
                     }
+
                     return null;
                 }
+
                 paramTypes[i] = parameters[i].GetType();
                 paramValues[i] = parameters[i];
             }
+
             return CreateObject(type, expectedType, throwOnError, paramTypes, paramValues);
         }
 
@@ -225,7 +244,8 @@ namespace NKnife.Utility
         /// <param name="throwOnError">失败时是否抛出异常</param>
         /// <param name="parameters">创建实例所需的参数值列表</param>
         /// <returns>类型实例</returns>
-        public static object CreateObject(Assembly assembly, string typeName, Type expectedType, bool throwOnError, params object[] parameters)
+        public static object CreateObject(Assembly assembly, string typeName, Type expectedType, bool throwOnError,
+            params object[] parameters)
         {
             Type type = CreateType(assembly, typeName, throwOnError);
             return CreateObject(type, expectedType, throwOnError, parameters);
@@ -240,7 +260,8 @@ namespace NKnife.Utility
         /// <param name="parameterTypes">创建实例所需参数的类型列表</param>
         /// <param name="parameterValues">创建实例所需的参数值列表</param>
         /// <returns>类型实例</returns>
-        public static object CreateObject(Assembly assembly, string typeName, Type expectedType, bool throwOnError, Type[] parameterTypes, object[] parameterValues)
+        public static object CreateObject(Assembly assembly, string typeName, Type expectedType, bool throwOnError,
+            Type[] parameterTypes, object[] parameterValues)
         {
             Type type = CreateType(assembly, typeName, throwOnError);
             return CreateObject(type, expectedType, throwOnError, parameterTypes, parameterValues);
@@ -257,10 +278,12 @@ namespace NKnife.Utility
             {
                 throw new ArgumentNullException();
             }
+
             if (!Directory.Exists(path))
             {
                 throw new DirectoryNotFoundException(path + "不存在");
             }
+
             Dictionary<string, Type> typeMap = null;
             if (!_AppTypes.ContainsKey(path))
             {
@@ -271,10 +294,12 @@ namespace NKnife.Utility
             {
                 typeMap = _AppTypes[path];
             }
+
             if (typeMap != null && typeMap.ContainsKey(typeName))
             {
                 return typeMap[typeName];
             }
+
             return null;
         }
 
@@ -297,10 +322,12 @@ namespace NKnife.Utility
             {
                 return _AppTypes[path];
             }
+
             if (!Directory.Exists(path))
             {
                 throw new DirectoryNotFoundException(path + "目录不存在。");
             }
+
             var typeMap = new Dictionary<string, Type>();
             var assemblys = UtilityAssembly.SearchAssemblyByDirectory(path);
             foreach (var assembly in assemblys)
@@ -314,6 +341,7 @@ namespace NKnife.Utility
                 {
                     continue;
                 }
+
                 foreach (var type in types)
                 {
                     if (type.FullName == null)
@@ -322,6 +350,7 @@ namespace NKnife.Utility
                         typeMap.Add(type.FullName, type);
                 }
             }
+
             return typeMap;
         }
 
@@ -332,12 +361,14 @@ namespace NKnife.Utility
         /// <param name="isGenericTypeInterface">是否是泛型接口</param>
         /// <param name="containAbstract">是否包含虚类型</param>
         /// <returns></returns>
-        public static IEnumerable<Type> FindTypesByDirectory(string path, Type targetType, bool isGenericTypeInterface = false, bool containAbstract = false)
+        public static IEnumerable<Type> FindTypesByDirectory(string path, Type targetType,
+            bool isGenericTypeInterface = false, bool containAbstract = false)
         {
             if (!_AppTypes.ContainsKey(path))
             {
                 _AppTypes.Add(path, FindTypeMap(path));
             }
+
             var typemap = _AppTypes[path];
             var list = new List<Type>();
             foreach (var type in typemap.Values)
@@ -346,11 +377,12 @@ namespace NKnife.Utility
                 {
                     continue;
                 }
+
                 if (!isGenericTypeInterface)
                 {
                     if (type.ContainsInterface(targetType))
                         list.Add(type);
-                    else if(type.IsSubclassOf(targetType))
+                    else if (type.IsSubclassOf(targetType))
                         list.Add(type);
                 }
                 else
@@ -359,6 +391,7 @@ namespace NKnife.Utility
                         list.Add(type);
                 }
             }
+
             return list;
         }
 
@@ -385,12 +418,13 @@ namespace NKnife.Utility
                 {
                     Debug.Fail(string.Format("Assembly.GetTypes()异常:{0}", e.Message));
                 }
+
                 if (!UtilityCollection.IsNullOrEmpty(types))
                 {
                     Parallel.ForEach(types, type =>
                     {
                         object[] attrs = type.GetCustomAttributes(true);
-                        typeList.AddRange(attrs.Where(attr => attr.GetType() == typeof (T)).Cast<T>());
+                        typeList.AddRange(attrs.Where(attr => attr.GetType() == typeof(T)).Cast<T>());
                     });
                 }
             });
@@ -402,9 +436,9 @@ namespace NKnife.Utility
         /// </summary>
         /// <param name="appStartPath">The app start path.</param>
         /// <returns></returns>
-        public static List<Pair<T, Type>> FindAttributeMap<T>(string appStartPath) where T : Attribute
+        public static List<Tuple<T, Type>> FindAttributeMap<T>(string appStartPath) where T : Attribute
         {
-            var list = new List<Pair<T, Type>>();
+            var list = new List<Tuple<T, Type>>();
             Assembly[] assArray = UtilityAssembly.SearchAssemblyByDirectory(appStartPath);
             if (UtilityCollection.IsNullOrEmpty(assArray))
                 return list;
@@ -420,6 +454,7 @@ namespace NKnife.Utility
                 {
                     Debug.Fail(string.Format("程序集获取Type失败。{0}", e.Message));
                 }
+
                 if (!UtilityCollection.IsNullOrEmpty(types))
                 {
                     Parallel.ForEach(types, type =>
@@ -428,12 +463,8 @@ namespace NKnife.Utility
                         if (!UtilityCollection.IsNullOrEmpty(attrs))
                         {
                             list.AddRange(from attr in attrs
-                                where attr.GetType() == typeof (T)
-                                select new Pair<T, Type>()
-                                {
-                                    First = (T) attr,
-                                    Second = type
-                                });
+                                where attr.GetType() == typeof(T)
+                                select new Tuple<T, Type>((T) attr, type));
                         }
                     });
                 }
@@ -465,6 +496,7 @@ namespace NKnife.Utility
                 {
                     Debug.Fail(string.Format("程序集获取Type失败。{0}", e.Message));
                 }
+
                 if (!UtilityCollection.IsNullOrEmpty(types))
                 {
                     typeList.AddRange(from type in types
@@ -491,7 +523,7 @@ namespace NKnife.Utility
 
             Parallel.ForEach(assemblies, assembly =>
             {
-                var attributes = (T[]) assembly.GetCustomAttributes(typeof (T), false);
+                var attributes = (T[]) assembly.GetCustomAttributes(typeof(T), false);
                 if (attributes.Length > 0)
                 {
                     list.AddRange(attributes);
@@ -514,7 +546,7 @@ namespace NKnife.Utility
             {
                 StackFrame f = t.GetFrame(i);
                 var m = (MethodInfo) f.GetMethod();
-                var a = Attribute.GetCustomAttributes(m, typeof (T)) as T[];
+                var a = Attribute.GetCustomAttributes(m, typeof(T)) as T[];
                 if (a != null && a.Length > 0)
                 {
                     list.AddRange(a);
@@ -524,6 +556,7 @@ namespace NKnife.Utility
                     }
                 }
             }
+
             return list.ToArray();
         }
 
@@ -586,7 +619,7 @@ namespace NKnife.Utility
         /// <returns></returns>
         public static T GetFirstCustomAttribute<T>(this Type targetType)
         {
-            object[] attrs = targetType.GetCustomAttributes(typeof (T), true);
+            object[] attrs = targetType.GetCustomAttributes(typeof(T), true);
             if (attrs.Length > 0)
                 return (T) attrs[0];
             return default(T);
@@ -611,6 +644,7 @@ namespace NKnife.Utility
                     return null;
                 }
             }
+
             return null;
         }
 
@@ -621,22 +655,24 @@ namespace NKnife.Utility
         /// <typeparam name="T"></typeparam>
         /// <param name="node"></param>
         /// <returns></returns>
-        public static Pair<string, T> InterfaceBuilder<T>(XmlNode node)
+        public static Tuple<string, T> InterfaceBuilder<T>(XmlNode node)
         {
             if (node == null || node.Attributes == null || node.Attributes.Count <= 0)
             {
-                throw new ArgumentNullException("node", @"参数不能为空");
+                throw new ArgumentNullException(nameof(node), @"参数不能为空");
             }
+
             string name = node.Attributes["name"].Value;
             string classname = node.Attributes["class"].Value;
             if (!String.IsNullOrWhiteSpace(classname))
             {
                 Type type = FindType(classname);
-                object klass = CreateObject(type, typeof (T), true);
-                var pair = new Pair<string, T> {First = name, Second = (T) klass};
+                object lass = CreateObject(type, typeof(T), true);
+                var pair = new Tuple<string, T>(name, (T) lass);
                 return pair;
             }
-            return new Pair<string, T> {First = name, Second = default(T)};
+
+            return new Tuple<string, T>(name, default(T));
         }
 
         /// <summary>
@@ -648,38 +684,45 @@ namespace NKnife.Utility
         /// <param name="node"></param>
         /// <param name="typeFilter"></param>
         /// <returns></returns>
-        public static Pair<string, T> CoderSettingClassBuilder<T>(XmlNode node, Func<Type, bool> typeFilter)
+        public static Tuple<string, T> CoderSettingClassBuilder<T>(XmlNode node, Func<Type, bool> typeFilter)
         {
             if (node == null || node.ChildNodes.Count <= 0)
             {
-                throw new ArgumentNullException("node", @"参数不能为空");
+                throw new ArgumentNullException(nameof(node), @"参数不能为空");
             }
+
             var typeList = new List<Type>();
             XmlNode selectSingleNode = node.SelectSingleNode("Interface");
             if (selectSingleNode == null)
             {
-                throw new ArgumentNullException("node", @"Node中的关键参数不能解析到");
+                throw new ArgumentNullException(nameof(node), @"Node中的关键参数不能解析到");
             }
+
             string interfaceName = selectSingleNode.InnerText;
             var classNameList = node.SelectNodes("ClassName");
-            for (int i = 0; i < classNameList.Count; i++)
+            if (classNameList != null)
             {
-                XmlNode nd = classNameList[i];
-                string className = nd.InnerText;
-                if (!String.IsNullOrWhiteSpace(className))
+                for (int i = 0; i < classNameList.Count; i++)
                 {
-                    Type type = FindType(className);
-                    typeList.Add(type);
+                    XmlNode nd = classNameList[i];
+                    string className = nd.InnerText;
+                    if (!String.IsNullOrWhiteSpace(className))
+                    {
+                        Type type = FindType(className);
+                        typeList.Add(type);
+                    }
                 }
             }
+
             Type finalType = null;
             foreach (Type type in typeList)
             {
                 if (typeFilter.Invoke(type))
                     finalType = type;
             }
-            object klass = CreateObject(finalType, typeof (T), true);
-            var pair = new Pair<string, T> {First = interfaceName, Second = (T) klass};
+
+            object lass = CreateObject(finalType, typeof(T), true);
+            var pair = new Tuple<string, T>(interfaceName, (T) lass);
             return pair;
         }
 
@@ -690,12 +733,13 @@ namespace NKnife.Utility
         /// <typeparam name="T"></typeparam>
         /// <param name="node"></param>
         /// <returns></returns>
-        public static Pair<string, T> CoderSettingClassBuilder<T>(XmlNode node)
+        public static Tuple<string, T> CoderSettingClassBuilder<T>(XmlNode node)
         {
             if (node == null || node.ChildNodes.Count <= 0)
             {
-                throw new ArgumentNullException("node", "参数不能为空");
+                throw new ArgumentNullException(nameof(node), "参数不能为空");
             }
+
             var interfaceNode = node.SelectSingleNode("Interface");
             var classnameNode = node.SelectSingleNode("ClassName");
 
@@ -705,13 +749,15 @@ namespace NKnife.Utility
                 string className = classnameNode.InnerText;
                 if (!String.IsNullOrWhiteSpace(className))
                 {
-                    object klass = CreateObject(FindType(className), typeof (T), true);
-                    var pair = new Pair<string, T> {First = interfaceName, Second = (T) klass};
+                    object klass = CreateObject(FindType(className), typeof(T), true);
+                    var pair = new Tuple<string, T>(interfaceName, (T) klass);
                     return pair;
                 }
-                return new Pair<string, T> {First = interfaceName, Second = default(T)};
+
+                return new Tuple<string, T>(interfaceName, default(T));
             }
-            return new Pair<string, T>();
+
+            return new Tuple<string, T>("", default(T));
         }
     }
 }
