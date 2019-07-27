@@ -30,11 +30,10 @@ namespace NKnife.Collections
 
         public void Clear()
         {
-            bool isDequeueSucess = true;
-            while (isDequeueSucess)
+            bool isDequeueSuccess = true;
+            while (isDequeueSuccess)
             {
-                T value;
-                isDequeueSucess = _Q.TryDequeue(out value);
+                isDequeueSuccess = _Q.TryDequeue(out _);
             }
         }
 

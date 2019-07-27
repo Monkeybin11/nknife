@@ -203,14 +203,12 @@ namespace NKnife.Collections
 
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (CollectionChanged != null)
-                CollectionChanged(this, e);
+            CollectionChanged?.Invoke(this, e);
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

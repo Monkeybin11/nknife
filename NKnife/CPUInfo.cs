@@ -1,4 +1,4 @@
-﻿namespace NKnife.Entities
+﻿namespace NKnife
 {
     public class CpuInfo
     {

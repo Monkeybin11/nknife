@@ -3,17 +3,18 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using NKnife.Exceptions;
+using NKnife.Interface;
 using NKnife.ShareResources;
 using NKnife.Utility;
 using NKnife.Wrapper;
 
-namespace NKnife.Converts
+namespace NKnife
 {
     /// <summary>
-    ///     定义一些基础的转换方法(对系统方法的一些扩展)
-    ///     Defines some basic conversion routines.
+    /// 转换抽象类
     /// </summary>
-    public static class UtilityConvert
+    public static class Converting
     {
         #region ConvertMode enum
 
@@ -34,6 +35,33 @@ namespace NKnife.Converts
         }
 
         #endregion
+
+        #region 基础转换
+
+        /// <summary>
+        /// 字符串转换成枚举
+        /// </summary>
+        /// <typeparam name="T">枚举类型</typeparam>
+        /// <param name="enumString">字符串</param>
+        /// <returns>枚举值</returns>
+        public static T StringToEnum<T>(string enumString) where T : struct
+        {
+            Type type = typeof(T);
+            if (!type.IsEnum)
+            {
+                throw new ArgumentException("类型必须是枚举", "T");
+            }
+            Enum e;
+            try
+            {
+                e = (Enum)Enum.Parse(type, enumString, true);
+            }
+            catch
+            {
+                e = default(T) as Enum;
+            }
+            return (T)System.Convert.ChangeType(e, type);
+        }
 
         public static T EnumParse<T>(object obj, T defaultEnum) where T : struct
         {
@@ -162,6 +190,8 @@ namespace NKnife.Converts
             return value;
         }
 
+        #endregion
+
         #region 各进制数间转换
 
         /// <summary>
@@ -226,11 +256,11 @@ namespace NKnife.Converts
             if (string.IsNullOrEmpty(v))
                 return defaultValue;
             if (typeof(T) == typeof(string))
-                return (T) (object) v;
+                return (T)(object)v;
             try
             {
                 var c = TypeDescriptor.GetConverter(typeof(T));
-                return (T) c.ConvertFromInvariantString(v);
+                return (T)c.ConvertFromInvariantString(v);
             }
             catch (Exception)
             {
@@ -245,7 +275,7 @@ namespace NKnife.Converts
         {
             if (typeof(T) == typeof(string))
             {
-                var s = (string) (object) val;
+                var s = (string)(object)val;
                 return string.IsNullOrEmpty(s) ? null : s;
             }
 
@@ -306,13 +336,13 @@ namespace NKnife.Converts
             try
             {
                 //如果数据是T类型，则直接转换
-                if (data is T) return (T) data;
+                if (data is T) return (T)data;
 
                 //如果目标类型是枚举
                 if (typeof(T).BaseType == typeof(Enum)) return UtilityEnums.GetInstance<T>(data);
 
                 //如果数据实现了IConvertible接口，则转换类型
-                if (data is IConvertible) return (T) Convert.ChangeType(data, typeof(T));
+                if (data is IConvertible) return (T)Convert.ChangeType(data, typeof(T));
                 return default(T);
             }
             catch
@@ -350,17 +380,17 @@ namespace NKnife.Converts
             switch (mode)
             {
                 case ConvertMode.Strict:
-                {
-                    switch (intParam)
                     {
-                        case 0:
-                            return false;
-                        case 1:
-                            return true;
-                    }
+                        switch (intParam)
+                        {
+                            case 0:
+                                return false;
+                            case 1:
+                                return true;
+                        }
 
-                    throw new ArgumentOutOfRangeException(string.Format(ArgumentValidationString.ValueMustIs0or1, "intParam"));
-                }
+                        throw new ArgumentOutOfRangeException(string.Format(ArgumentValidationString.ValueMustIs0or1, "intParam"));
+                    }
                 case ConvertMode.Relaxed:
                     return IntToBoolean(intParam);
                 default:
@@ -458,6 +488,7 @@ namespace NKnife.Converts
             var hex = hexSrc.Replace(" ", "");
             var byteArray = new byte[hex.Length / 2];
             for (int i = 0, j = 0; i < hex.Length; i = i + 2, j++)
+            {
                 try
                 {
                     byteArray[j] = Convert.ToByte(hex.Substring(i, 2), 16);
@@ -465,6 +496,7 @@ namespace NKnife.Converts
                 catch (Exception)
                 {
                 }
+            }
 
             return byteArray;
         }
@@ -564,69 +596,6 @@ namespace NKnife.Converts
 
         #endregion
 
-        #region Image和base64之间的转换
-
-        /*
-        public static string ImageToBase64(string filePath)
-        {
-            if (!File.Exists(filePath))
-            {
-                throw new ArgumentException(filePath + " is NOT exist.");
-            }
-
-            var ext = Path.GetExtension(filePath).ToLower();
-            //jpg格式，则直接读内存。否则先读成Image，再转成jpg格式
-            if (ext != ".jpg" && ext != ".jpeg")
-            {
-                try
-                {
-                    var image = Image.FromFile(filePath);
-                    return ImageToBase64(image);
-                }
-                catch
-                {
-                    throw new OutOfMemoryException(filePath + " -- File is TOO LARGE!");
-                }
-            }
-            var bytes = File.ReadAllBytes(filePath);
-            return Convert.ToBase64String(bytes);
-        }
-
-        public static string ImageToBase64(Image image)
-        {
-            var memory = new MemoryStream();
-            image.Save(memory, ImageFormat.Jpeg);
-            var bytes = memory.ToArray();
-            return Convert.ToBase64String(bytes);
-        }
-
-        public static Image Base64ToImage(string base64String)
-        {
-            var bytes = Convert.FromBase64String(base64String);
-            var memory = new MemoryStream(bytes);
-            try
-            {
-                if (memory.Length == 0)
-                {
-                    return null;
-                }
-                return Image.FromStream(memory);
-            }
-            finally
-            {
-                memory.Close();
-            }
-        }
-
-        public static void Base64ToImage(string base64String, string filePath)
-        {
-            var bytes = Convert.FromBase64String(base64String);
-            File.WriteAllBytes(filePath, bytes);
-        }
-        */
-
-        #endregion
-
         #region object和base64之间的转换
 
         public static string FileToBase64(string filePath)
@@ -634,44 +603,6 @@ namespace NKnife.Converts
             var bytes = File.ReadAllBytes(filePath);
             return Convert.ToBase64String(bytes);
         }
-
-        /*
-        public static Icon Base64ToIcon(string base64String)
-        {
-            var bytes = Convert.FromBase64String(base64String);
-            var memory = new MemoryStream(bytes);
-            try
-            {
-                if (memory.Length == 0)
-                {
-                    return null;
-                }
-                return new Icon(memory);
-            }
-            finally
-            {
-                memory.Close();
-            }
-        }
-
-        public static Cursor Base64ToCursor(string base64String)
-        {
-            var bytes = Convert.FromBase64String(base64String);
-            var memory = new MemoryStream(bytes);
-            try
-            {
-                if (memory.Length == 0)
-                {
-                    return null;
-                }
-                return new Cursor(memory);
-            }
-            finally
-            {
-                memory.Close();
-            }
-        }
-        */
 
         public static byte[] Base64ToByteArray(string base64String)
         {

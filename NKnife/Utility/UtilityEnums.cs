@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using NKnife.Converts;
 
 namespace NKnife.Utility
 {
@@ -76,7 +75,7 @@ namespace NKnife.Utility
         {
             //转成基础类型的成员值
             Type underlyingType = GetUnderlyingType(typeof(T));
-            object memberValue = UtilityConvert.ConvertTo(member, underlyingType);
+            object memberValue = Converting.ConvertTo(member, underlyingType);
 
             //获取枚举成员的名称
             return Enum.GetName(typeof(T), memberValue);
@@ -110,7 +109,7 @@ namespace NKnife.Utility
             T instance = GetInstance<T>(memberName);
 
             //获取枚举成员的值
-            return UtilityConvert.ConvertTo(instance, underlyingType);
+            return Converting.ConvertTo(instance, underlyingType);
         }
         #endregion
 

@@ -88,7 +88,7 @@ namespace NKnife.Collections
             int itemIdx = 0;
             foreach (var kvp in this)
             {
-                info.AddValue(String.Format("Item{0}", itemIdx), kvp, typeof (KeyValuePair<TK, TV>));
+                info.AddValue($"Item{itemIdx}", kvp, typeof (KeyValuePair<TK, TV>));
                 itemIdx++;
             }
         }
