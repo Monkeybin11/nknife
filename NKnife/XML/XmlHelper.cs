@@ -6,7 +6,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
 using NKnife.Base;
-using NKnife.Utility;
+using NKnife.Util;
 
 namespace NKnife.XML
 {
@@ -391,7 +391,7 @@ namespace NKnife.XML
             doc.AppendChild(rootele);
             if (!File.Exists(file))
             {
-                UtilityFile.CreateDirectory(file.Substring(0, file.LastIndexOf(@"\")));
+                UtilFile.CreateDirectory(file.Substring(0, file.LastIndexOf(@"\")));
             }
             doc.Save(file);
             return doc;
@@ -477,7 +477,7 @@ namespace NKnife.XML
                 ele = element.OwnerDocument.CreateElement(localname);
                 if (value != null && !string.IsNullOrWhiteSpace(value.ToString()))
                     ele.InnerText = value.ToString();
-                if (!UtilityCollection.IsNullOrEmpty(attributes))
+                if (!UtilCollection.IsNullOrEmpty(attributes))
                 {
                     foreach (var attribute in attributes)
                     {

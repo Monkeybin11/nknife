@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using NKnife.Utility;
+using NKnife.Util;
 
 // ReSharper disable once CheckNamespace
 namespace System
@@ -112,7 +112,7 @@ namespace System
         public static string TrimBr(this string str)
         {
             Match m = null;
-            for (m = UtilityRegex.Br.Match(str); m.Success; m = m.NextMatch())
+            for (m = UtilRegex.Br.Match(str); m.Success; m = m.NextMatch())
                 str = str.Replace(m.Groups[0].ToString(), "");
             return str;
         }

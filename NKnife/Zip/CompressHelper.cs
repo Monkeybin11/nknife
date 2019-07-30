@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.IO.Compression;
-using NKnife.Utility;
+using NKnife.Util;
 
 // ReSharper disable once CheckNamespace
 namespace System
@@ -17,7 +17,7 @@ namespace System
         /// </returns>
         public static bool IsCompressed(this byte[] bytes)
         {
-            if (UtilityCollection.IsNullOrEmpty(bytes))
+            if (UtilCollection.IsNullOrEmpty(bytes))
                 return false;
             return (bytes[0] == 31) && (bytes[1] == 139);
         }

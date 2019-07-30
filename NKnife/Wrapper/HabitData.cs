@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Xml;
-using NKnife.Utility;
+using NKnife.Util;
 using NKnife.XML;
 
 namespace NKnife.Wrapper
@@ -59,7 +59,7 @@ namespace NKnife.Wrapper
                     string subpath = namespaceStr.Replace('.', '\\').Insert(0, "\\");
                     _UserApplicationDataPath = path + subpath;
                     if (!Directory.Exists(_UserApplicationDataPath))
-                        UtilityFile.CreateDirectory(_UserApplicationDataPath);
+                        UtilFile.CreateDirectory(_UserApplicationDataPath);
                 }
                 return _UserApplicationDataPath;
             }

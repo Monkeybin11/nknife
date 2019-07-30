@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using NKnife.Utility;
+using NKnife.Util;
 
 namespace NKnife.Encrypt
 {
@@ -129,7 +129,7 @@ namespace NKnife.Encrypt
         /// <returns>加密成功返回加密后的字符串,失败返回源串</returns>
         public static string DesEncrypt(string encryptString, string encryptKey)
         {
-            encryptKey = UtilityString.GetSubString(encryptKey, 0, 8, "");
+            encryptKey = UtilString.GetSubString(encryptKey, 0, 8, "");
             encryptKey = encryptKey.PadRight(8, ' ');
             byte[] rgbKey = Encoding.UTF8.GetBytes(encryptKey.Substring(0, 8));
             byte[] rgbIv = Keys;
@@ -152,7 +152,7 @@ namespace NKnife.Encrypt
         {
             try
             {
-                decryptKey = UtilityString.GetSubString(decryptKey, 0, 8, "");
+                decryptKey = UtilString.GetSubString(decryptKey, 0, 8, "");
                 decryptKey = decryptKey.PadRight(8, ' ');
                 byte[] rgbKey = Encoding.UTF8.GetBytes(decryptKey);
                 byte[] rgbIv = Keys;

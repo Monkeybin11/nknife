@@ -4,7 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
-using NKnife.Utility;
+using NKnife.Util;
 using NKnife.Wrapper.Files;
 
 namespace NKnife.Zip
@@ -342,7 +342,7 @@ namespace NKnife.Zip
                                     // make sure the folder exists
                                     if (!Directory.Exists(lpFolder))
                                     {
-                                        UtilityFile.CreateDirectory(lpFolder);
+                                        UtilFile.CreateDirectory(lpFolder);
                                     }
 
                                     // read from fsTemp and write out the file

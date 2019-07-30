@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using NKnife.Utility;
+using NKnife.Util;
 
 namespace NKnife.Collections
 {
@@ -27,12 +27,12 @@ namespace NKnife.Collections
 
         protected XmlSerializer ValueSerializer
         {
-            get { return UtilitySerialize.GetSerializer(typeof(TV)); }
+            get { return UtilSerialize.GetSerializer(typeof(TV)); }
         }
 
         private XmlSerializer KeySerializer
         {
-            get { return UtilitySerialize.GetSerializer(typeof(TK)); }
+            get { return UtilSerialize.GetSerializer(typeof(TK)); }
         }
 
         #endregion
