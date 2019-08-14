@@ -134,7 +134,6 @@
 #endregion
 
 using System;
-using NKnife.Wrapper;
 
 namespace NKnife.Maths
 {

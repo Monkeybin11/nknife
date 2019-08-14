@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace NKnife.Wrapper.FTP
+namespace NKnife.FTP
 {
     [Serializable]
     public class FtpException : ApplicationException

@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace NKnife.Wrapper
+namespace NKnife
 {
     public class CsvFile
     {

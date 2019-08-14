@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace NKnife.Wrapper.FTP
+namespace NKnife.FTP
 {
     /// <summary>重载WebClient，支持FTP进度
     /// </summary>

@@ -1,4 +1,4 @@
-﻿namespace NKnife.Wrapper
+﻿namespace NKnife
 {
     public class CpuInfo
     {

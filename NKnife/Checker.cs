@@ -1,7 +1,7 @@
 ﻿using System;
 using NKnife.ShareResources;
 
-namespace NKnife.Wrapper
+namespace NKnife
 {
     public class Checker
     {

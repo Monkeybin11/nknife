@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace NKnife.Wrapper.FTP
+namespace NKnife.FTP
 {
     /// <summary>FTP处理操作类
     /// 功能：

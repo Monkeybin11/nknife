@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace NKnife.Wrapper
+namespace NKnife
 {
     /// <summary>
     /// 二进制授权帮助类,最多支持 62 种不同权限，鉴权值最大为2的62次方（即：4611686018427387904）

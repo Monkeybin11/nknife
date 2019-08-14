@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Net;
 
-namespace NKnife.Wrapper.FTP
+namespace NKnife.FTP
 {
     public delegate void FtpDownloadDataCompletedDelegate(object sender, AsyncCompletedEventArgs e);
 

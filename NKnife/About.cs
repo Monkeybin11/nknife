@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using NKnife.Interface;
 
-namespace NKnife.Wrapper
+namespace NKnife
 {
     public class About : IAbout
     {

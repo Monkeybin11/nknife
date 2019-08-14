@@ -1,6 +1,6 @@
 using System;
 
-namespace NKnife.Wrapper.FTP
+namespace NKnife.FTP
 {
     public struct FtpFileStruct
     {

@@ -6,7 +6,7 @@ using System.Xml;
 using NKnife.Util;
 using NKnife.XML;
 
-namespace NKnife.Wrapper
+namespace NKnife
 {
     /// <summary>
     ///     描述用户习惯的数据，这是一个保存用户目录下的数据文件，该文件可以不存在，当使用时发现该文件不存在时，将创建，并创建默认值。

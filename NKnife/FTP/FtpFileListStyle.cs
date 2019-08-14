@@ -1,4 +1,4 @@
-namespace NKnife.Wrapper.FTP
+namespace NKnife.FTP
 {
     public enum FtpFileListStyle
     {

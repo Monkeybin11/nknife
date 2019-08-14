@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Timers;
 
-namespace NKnife.Wrapper.Mail
+namespace NKnife.Mail
 {
     /// <summary>
     /// 邮件发送工具，支持认证发送

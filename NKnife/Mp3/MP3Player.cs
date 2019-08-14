@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace NKnife.Wrapper.Mp3
+namespace NKnife.Mp3
 {
     /// <summary>
     ///     一个基本的MP3的播放类

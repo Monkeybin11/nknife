@@ -1,6 +1,5 @@
 ﻿using System.Collections.Specialized;
 using NKnife.Util;
-using NKnife.Wrapper;
 
 namespace NKnife.Chinese
 {

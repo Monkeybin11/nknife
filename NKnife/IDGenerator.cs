@@ -4,7 +4,7 @@ using System.Text;
 using NKnife.Interface;
 using NKnife.Maths;
 
-namespace NKnife.Wrapper
+namespace NKnife
 {
     /// <summary>
     ///     ID生成器。本生成器主要思想是将当前时间中的年月日时分替换成一个在当年不可重复的4位（大写字母与数字）字符串标识，

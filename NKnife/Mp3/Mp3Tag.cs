@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace NKnife.Wrapper.Mp3
+namespace NKnife.Mp3
 {
     /// <summary>
     ///     获取MP3文件的ID3 V1版本的TAG信息的类

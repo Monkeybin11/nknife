@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using NKnife.Wrapper;
 using Xunit;
 
 namespace NKnife.UnitTests.Wrapper

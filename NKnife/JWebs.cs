@@ -6,7 +6,7 @@ using System.Text;
 using System.Web;
 using NKnife.ShareResources;
 
-namespace NKnife.Wrapper
+namespace NKnife
 {
     /// <summary>
     ///     面向Java的Servlet的Web请求操作
