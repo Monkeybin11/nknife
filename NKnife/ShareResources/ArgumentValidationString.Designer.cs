@@ -19,10 +19,10 @@ namespace NKnife.ShareResources {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ArgumentValidationString {
+    public class ArgumentValidationString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace NKnife.ShareResources {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NKnife.ShareResources.ArgumentValidationString", typeof(ArgumentValidationString).Assembly);
@@ -51,7 +51,7 @@ namespace NKnife.ShareResources {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 数值必须大于0字节。 的本地化字符串。
         /// </summary>
-        internal static string ExceptionByteArrayValueMustBeGreaterThanZeroBytes {
+        public static string ExceptionByteArrayValueMustBeGreaterThanZeroBytes {
             get {
                 return ResourceManager.GetString("ExceptionByteArrayValueMustBeGreaterThanZeroBytes", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 参数 &apos;{0}&apos;的值不能为空字符串。 的本地化字符串。
         /// </summary>
-        internal static string ExceptionEmptyString {
+        public static string ExceptionEmptyString {
             get {
                 return ResourceManager.GetString("ExceptionEmptyString", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 {0}不是{1}的一个有效值。 的本地化字符串。
         /// </summary>
-        internal static string ExceptionEnumerationNotDefined {
+        public static string ExceptionEnumerationNotDefined {
             get {
                 return ResourceManager.GetString("ExceptionEnumerationNotDefined", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 无效的类型，期待的类型必须为&apos;{0}&apos;。 的本地化字符串。
         /// </summary>
-        internal static string ExceptionExpectedType {
+        public static string ExceptionExpectedType {
             get {
                 return ResourceManager.GetString("ExceptionExpectedType", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 参数&apos;{0}&apos;的名称不能为空引用或空字符串。 的本地化字符串。
         /// </summary>
-        internal static string ExceptionInvalidNullNameArgument {
+        public static string ExceptionInvalidNullNameArgument {
             get {
                 return ResourceManager.GetString("ExceptionInvalidNullNameArgument", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 变量&apos;{0}&apos;的值必须是0或者1。 的本地化字符串。
         /// </summary>
-        internal static string ValueMustIs0or1 {
+        public static string ValueMustIs0or1 {
             get {
                 return ResourceManager.GetString("ValueMustIs0or1", resourceCulture);
             }

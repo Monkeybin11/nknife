@@ -19,10 +19,10 @@ namespace NKnife.ShareResources {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SmartDateString {
+    public class SmartDateString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace NKnife.ShareResources {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NKnife.ShareResources.SmartDateString", typeof(SmartDateString).Assembly);
@@ -51,7 +51,7 @@ namespace NKnife.ShareResources {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 今天 的本地化字符串。
         /// </summary>
-        internal static string SmartDateT {
+        public static string SmartDateT {
             get {
                 return ResourceManager.GetString("SmartDateT", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 今天 的本地化字符串。
         /// </summary>
-        internal static string SmartDateToday {
+        public static string SmartDateToday {
             get {
                 return ResourceManager.GetString("SmartDateToday", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 明天 的本地化字符串。
         /// </summary>
-        internal static string SmartDateTom {
+        public static string SmartDateTom {
             get {
                 return ResourceManager.GetString("SmartDateTom", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 明天 的本地化字符串。
         /// </summary>
-        internal static string SmartDateTomorrow {
+        public static string SmartDateTomorrow {
             get {
                 return ResourceManager.GetString("SmartDateTomorrow", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 昨天 的本地化字符串。
         /// </summary>
-        internal static string SmartDateY {
+        public static string SmartDateY {
             get {
                 return ResourceManager.GetString("SmartDateY", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 昨天 的本地化字符串。
         /// </summary>
-        internal static string SmartDateYesterday {
+        public static string SmartDateYesterday {
             get {
                 return ResourceManager.GetString("SmartDateYesterday", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 字符串不能转化成日期 的本地化字符串。
         /// </summary>
-        internal static string StringToDateException {
+        public static string StringToDateException {
             get {
                 return ResourceManager.GetString("StringToDateException", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace NKnife.ShareResources {
         /// <summary>
         ///   查找类似 值不是SmartDate 类型 的本地化字符串。
         /// </summary>
-        internal static string ValueNotSmartDateException {
+        public static string ValueNotSmartDateException {
             get {
                 return ResourceManager.GetString("ValueNotSmartDateException", resourceCulture);
             }
