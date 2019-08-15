@@ -17,6 +17,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Chinese\CnCities.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ShareResources\CnCities.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="ShareResources\ArgumentValidationString.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

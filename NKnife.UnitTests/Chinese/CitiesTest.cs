@@ -19,9 +19,10 @@ namespace NKnife.UnitTests.Chinese
         [Fact]
         public void GetRandomCityNameTest1()
         {
+            var cities = new Cities();
             var count = 10000;
-            //var cs = Cities.(count);
-            //cs.Count.Should().Be(count);
+            var cs = cities.GetRandomCityName(count);
+            cs.Count.Should().Be(count);
         }
     }
 }

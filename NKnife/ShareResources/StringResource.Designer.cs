@@ -61,6 +61,16 @@ namespace NKnife.ShareResources {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] CnCities {
+            get {
+                object obj = ResourceManager.GetObject("CnCities", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 异常详细信息 的本地化字符串。
         /// </summary>
         public static string Exception_TabName_Error {

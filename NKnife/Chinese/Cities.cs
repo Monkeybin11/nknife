@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
+using NKnife.ShareResources;
 using NKnife.Util;
 
 namespace NKnife.Chinese
@@ -11,32 +14,37 @@ namespace NKnife.Chinese
     /// </summary>
     public class Cities
     {
-        private static readonly Random _Random = UtilRandom.Random;
-
         public static List<City> Data { get; }
+
+        static Cities()
+        {
+            var bs = StringResource.CnCities;
+            var city = Encoding.UTF8.GetString(bs).Substring(1);
+            Data = JsonConvert.DeserializeObject<List<City>>(city);
+        }
 
         /// <summary>
         ///     随机生成指定数量的城市（省份+城市）
         /// </summary>
         public StringCollection GetRandomCityName(int count)
         {
-            if (Data == null || Data.Any())
+            if (Data == null || !Data.Any())
                 return new StringCollection();
             var indexArray = new int[count];
             for (var i = 0; i < count; i++)
-                indexArray[i] = _Random.Next(0, 34);
+                indexArray[i] = UtilRandom.Random.Next(0, 34);
             var sc = new StringCollection();
             foreach (var i in indexArray)
             {
                 var sheng = Data[i];
                 CityItem city;
                 if (sheng.city.Length > 1)
-                    city = sheng.city[_Random.Next(0, sheng.city.Length - 1)];
+                    city = sheng.city[UtilRandom.Random.Next(0, sheng.city.Length - 1)];
                 else
                     city = sheng.city[0];
                 string area;
                 if (city.area.Count > 1)
-                    area = city.area[_Random.Next(0, city.area.Count - 1)];
+                    area = city.area[UtilRandom.Random.Next(0, city.area.Count - 1)];
                 else
                     area = city.area[0];
                 if (sheng.name == city.name)
@@ -58,6 +66,7 @@ namespace NKnife.Chinese
         {
             public string name { get; set; }
             public List<string> area { get; set; }
+
         }
     }
 }
