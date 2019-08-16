@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FC94B5B1-F70C-44D4-9463-AB8EB8FAF170}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NKnife.NLog.Winform</RootNamespace>
-    <AssemblyName>NKnife.NLog.Winform</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>NKnife.NLog.WinForm</RootNamespace>
+    <AssemblyName>NKnife.NLog.WinForm</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -67,6 +67,7 @@
     <Compile Include="LoggerListView.designer.cs">
       <DependentUpon>LoggerListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\LogUtil.cs" />
     <Compile Include="NotFlickerListView.cs">
       <SubType>Component</SubType>
     </Compile>

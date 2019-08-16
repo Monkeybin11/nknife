@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using NKnife.ShareResources;
-using NKnife.Utility;
+﻿using System.Windows.Forms;
 
-namespace NKnife.NLog
+namespace NKnife.NLog.WinForm
 {
     public class NotFlickerListView : ListView
     {
@@ -20,15 +14,15 @@ namespace NKnife.NLog
         private void BuildLoggerInfoColumn()
         {
             var timeHeader = new ColumnHeader();
-            timeHeader.Text = UtilityResource.GetString(StringResource.ResourceManager, "LogPanel_Time_Header");
+            timeHeader.Text = "发生时间";
             timeHeader.Width = 80;
 
             var logMessageHeader = new ColumnHeader();
-            logMessageHeader.Text = UtilityResource.GetString(StringResource.ResourceManager, "LogPanel_Info_Header");
+            logMessageHeader.Text = "日志信息";
             logMessageHeader.Width = 380;
 
             var loggerNameHeader = new ColumnHeader();
-            loggerNameHeader.Text = UtilityResource.GetString(StringResource.ResourceManager, "LogPanel_Source_Header");
+            loggerNameHeader.Text = "日志源";
             loggerNameHeader.Width = 200;
 
             Columns.AddRange(

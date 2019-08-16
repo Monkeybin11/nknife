@@ -90,9 +90,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NKnife.NLog.Winform\NKnife.NLog.Winform.csproj">
+    <ProjectReference Include="..\NKnife.NLog.Winform\NKnife.NLog.WinForm.csproj">
       <Project>{fc94b5b1-f70c-44d4-9463-ab8eb8faf170}</Project>
-      <Name>NKnife.NLog.Winform</Name>
+      <Name>NKnife.NLog.WinForm</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

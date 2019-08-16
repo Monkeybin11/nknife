@@ -38,7 +38,7 @@
             this._ErrorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._FatalMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._ClearToolButton = new System.Windows.Forms.ToolStripButton();
-            this._ListView = new NKnife.NLog.NotFlickerListView();
+            this._ListView = new NotFlickerListView();
             this._ToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 

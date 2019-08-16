@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
-using NKnife.Base;
+using NKnife.NLog.WinForm.Util;
 using NLog;
 
 namespace NKnife.NLog.WinForm
@@ -14,16 +14,15 @@ namespace NKnife.NLog.WinForm
     /// </summary>
     public partial class LoggerListView : UserControl
     {
-        private Pair<Color, Color> _trackColor = Pair<Color, Color>.Build(Color.CornflowerBlue, Color.White);
-        private Pair<Color, Color> _debugColor = Pair<Color, Color>.Build(Color.DarkSlateBlue, Color.White);
-        private Pair<Color, Color> _infoColor = Pair<Color, Color>.Build(Color.Black, Color.White);
-        private Pair<Color, Color> _warnColor = Pair<Color, Color>.Build(Color.Black, Color.Khaki);
-        private Pair<Color, Color> _errorColor = Pair<Color, Color>.Build(Color.Black, Color.Orange);
-        private Pair<Color, Color> _fatalColor = Pair<Color, Color>.Build(Color.White, Color.OrangeRed);
+        private Tuple<Color, Color> _trackColor = new Tuple<Color, Color>(Color.CornflowerBlue, Color.White);
+        private Tuple<Color, Color> _debugColor = new Tuple<Color, Color>(Color.DarkSlateBlue, Color.White);
+        private Tuple<Color, Color> _infoColor = new Tuple<Color, Color>(Color.Black, Color.White);
+        private Tuple<Color, Color> _warnColor = new Tuple<Color, Color>(Color.Black, Color.Khaki);
+        private Tuple<Color, Color> _errorColor = new Tuple<Color, Color>(Color.Black, Color.Orange);
+        private Tuple<Color, Color> _fatalColor = new Tuple<Color, Color>(Color.White, Color.OrangeRed);
 
         private LoggerListView()
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Global.Culture);
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             UpdateStyles();
             InitializeComponent();
@@ -77,8 +76,13 @@ namespace NKnife.NLog.WinForm
             }
         }
 
-        public void SetColors(Pair<Color, Color> trace, Pair<Color, Color> debug, Pair<Color, Color> info, Pair<Color, Color> warn, Pair<Color, Color> error,
-            Pair<Color, Color> fatal)
+        public void SetColors(
+            Tuple<Color, Color> trace, 
+            Tuple<Color, Color> debug, 
+            Tuple<Color, Color> info,
+            Tuple<Color, Color> warn, 
+            Tuple<Color, Color> error,
+            Tuple<Color, Color> fatal)
         {
             _trackColor = trace;
             _debugColor = debug;
@@ -104,28 +108,28 @@ namespace NKnife.NLog.WinForm
                     switch (info.LogLevel.Name)
                     {
                         case "Trace":
-                            viewItem.ForeColor = _trackColor.First;
-                            viewItem.BackColor = _trackColor.Second;
+                            viewItem.ForeColor = _trackColor.Item1;
+                            viewItem.BackColor = _trackColor.Item2;
                             break;
                         case "Debug":
-                            viewItem.ForeColor = _debugColor.First;
-                            viewItem.BackColor = _debugColor.Second;
+                            viewItem.ForeColor = _debugColor.Item1;
+                            viewItem.BackColor = _debugColor.Item2;
                             break;
                         case "Info":
-                            viewItem.ForeColor = _infoColor.First;
-                            viewItem.BackColor = _infoColor.Second;
+                            viewItem.ForeColor = _infoColor.Item1;
+                            viewItem.BackColor = _infoColor.Item2;
                             break;
                         case "Warn":
-                            viewItem.ForeColor = _warnColor.First;
-                            viewItem.BackColor = _warnColor.Second;
+                            viewItem.ForeColor = _warnColor.Item1;
+                            viewItem.BackColor = _warnColor.Item2;
                             break;
                         case "Error":
-                            viewItem.ForeColor = _errorColor.First;
-                            viewItem.BackColor = _errorColor.Second;
+                            viewItem.ForeColor = _errorColor.Item1;
+                            viewItem.BackColor = _errorColor.Item2;
                             break;
                         case "Fatal":
-                            viewItem.ForeColor = _fatalColor.First;
-                            viewItem.BackColor = _fatalColor.Second;
+                            viewItem.ForeColor = _fatalColor.Item1;
+                            viewItem.BackColor = _fatalColor.Item2;
                             break;
                     }
                     _ListView.Items.Insert(0, viewItem);

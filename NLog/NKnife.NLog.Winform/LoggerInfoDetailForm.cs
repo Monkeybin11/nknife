@@ -4,9 +4,6 @@ using System.Drawing;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
-using NKnife.IoC;
-using NKnife.ShareResources;
-using NKnife.Utility;
 using NLog;
 
 namespace NKnife.NLog.WinForm
@@ -17,15 +14,13 @@ namespace NKnife.NLog.WinForm
     {
         public static void Show(LogEventInfo info)
         {
-            var form = DI.Get<LoggerInfoDetailForm>();
-            form.Size = new Size(600, 480);
+            var form = new LoggerInfoDetailForm {Size = new Size(600, 480)};
             form.FillLogInfo(info);
             form.ShowDialog();
         }
 
         public LoggerInfoDetailForm()
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Global.Culture);
             components = new Container();
             SuspendLayout();
             AutoScaleMode = AutoScaleMode.Font;
@@ -58,13 +53,13 @@ namespace NKnife.NLog.WinForm
                 case "Trace":
                 case "Debug":
                 case "Info":
-                    _exInfoPage.Text = UtilityResource.GetString(StringResource.ResourceManager, "Exception_TabName_Simple");
+                    _exInfoPage.Text = "详细信息";
                     break;
                 case "Warn":
                 case "Error":
                 case "Fatal":
                 default:
-                    _exInfoPage.Text = UtilityResource.GetString(StringResource.ResourceManager, "Exception_TabName_Error");
+                    _exInfoPage.Text = "异常详细信息";
                     break;
             }
             _logStackTracePropertyGrid.SelectedObject = info;

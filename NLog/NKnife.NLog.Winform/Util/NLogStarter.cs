@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using NKnife.NLog.Winform.Properties;
+using NKnife.NLog.WinForm.Properties;
 
-namespace NKnife.NLog.Winform.Util
+namespace NKnife.NLog.WinForm.Util
 {
     class NLogStarter
     {

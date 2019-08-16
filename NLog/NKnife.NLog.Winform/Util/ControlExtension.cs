@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 
 // ReSharper disable once CheckNamespace
-namespace NKnife.NLog.Winform.Util
+namespace NKnife.NLog.WinForm.Util
 {
     static class ControlExtension
     {

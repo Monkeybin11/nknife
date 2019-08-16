@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace NKnife.NLog.Winform.Util
+namespace NKnife.NLog.WinForm.Util
 {
     /// <summary>一个同步安全的队列类型，内部包含一个AutoResetEvent，可通过该AutoResetEvent处理本队列的监听。
     /// </summary>

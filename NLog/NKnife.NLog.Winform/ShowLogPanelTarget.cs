@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
-using NKnife.NLog.Winform.Util;
+using NKnife.NLog.WinForm.Util;
 using NLog;
 using NLog.Targets;
 

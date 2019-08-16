@@ -8,8 +8,7 @@ namespace NKnife.NLog.WinForm
 {
     public class LoggerCollectionViewModel
     {
-        internal Level CurrentLevel { get; set; } 
-            = Level.Trace | Level.Debug | Level.Info | Level.Warn | Level.Error | Level.Fatal;
+        internal Level CurrentLevel { get; set; } = Level.Trace | Level.Debug | Level.Info | Level.Warn | Level.Error | Level.Fatal;
 
         public int MaxViewCount { get; set; } = 300;
 
@@ -25,8 +24,7 @@ namespace NKnife.NLog.WinForm
 
         private static Level GetTopLevel(LogLevel logLevel)
         {
-            Level result;
-            if (!Enum.TryParse(logLevel.Name, out result))
+            if (!Enum.TryParse(logLevel.Name, out Level result))
             {
                 result = Level.None;
             }
