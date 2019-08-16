@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NKnife.NLog.Winform.Demo
+namespace NKnife.NLog.WinForm.Example
 {
     static class Program
     {
@@ -16,6 +13,7 @@ namespace NKnife.NLog.Winform.Demo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Application.Run(new Form1());
         }
     }

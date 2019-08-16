@@ -14,7 +14,7 @@ namespace NKnife.NLog.WinForm
     {
         public static void Show(LogEventInfo info)
         {
-            var form = new LoggerInfoDetailForm {Size = new Size(600, 480)};
+            var form = new LoggerInfoDetailForm();
             form.FillLogInfo(info);
             form.ShowDialog();
         }
@@ -23,7 +23,6 @@ namespace NKnife.NLog.WinForm
         {
             components = new Container();
             SuspendLayout();
-            AutoScaleMode = AutoScaleMode.Font;
             Font = new Font("Tahoma", 8.25F);
             MinimumSize = new Size(320, 300);
             Size = new Size(640, 600);
@@ -107,7 +106,7 @@ namespace NKnife.NLog.WinForm
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoggerInfoDetailForm));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(LoggerInfoDetailForm));
             this._label1 = new System.Windows.Forms.Label();
             this._label2 = new System.Windows.Forms.Label();
             this._label3 = new System.Windows.Forms.Label();

@@ -43,7 +43,7 @@ namespace NKnife.NLog.WinForm
             {
                 _writeEnable = false;
                 _logQueue.AddEvent.Set();
-                Thread.Sleep(10);
+                Thread.Sleep(5);
                 thread.Abort();
             };
             thread.Start();

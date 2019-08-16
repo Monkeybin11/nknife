@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="_label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="_label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 18</value>
   </data>
@@ -138,7 +138,7 @@
     <value>_label1</value>
   </data>
   <data name="&gt;&gt;_label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_label1.Parent" xml:space="preserve">
     <value>_mainPage</value>
@@ -165,7 +165,7 @@
     <value>_label2</value>
   </data>
   <data name="&gt;&gt;_label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_label2.Parent" xml:space="preserve">
     <value>_mainPage</value>
@@ -192,7 +192,7 @@
     <value>_label3</value>
   </data>
   <data name="&gt;&gt;_label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_label3.Parent" xml:space="preserve">
     <value>_mainPage</value>
@@ -219,7 +219,7 @@
     <value>_label4</value>
   </data>
   <data name="&gt;&gt;_label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_label4.Parent" xml:space="preserve">
     <value>_mainPage</value>
@@ -227,7 +227,7 @@
   <data name="&gt;&gt;_label4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="_levelTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -235,7 +235,7 @@
     <value>89, 13</value>
   </data>
   <data name="_levelTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 23</value>
+    <value>372, 23</value>
   </data>
   <data name="_levelTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -244,7 +244,7 @@
     <value>_levelTextBox</value>
   </data>
   <data name="&gt;&gt;_levelTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_levelTextBox.Parent" xml:space="preserve">
     <value>_mainPage</value>
@@ -259,7 +259,7 @@
     <value>89, 38</value>
   </data>
   <data name="_timeTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 23</value>
+    <value>372, 23</value>
   </data>
   <data name="_timeTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -268,7 +268,7 @@
     <value>_timeTextBox</value>
   </data>
   <data name="&gt;&gt;_timeTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_timeTextBox.Parent" xml:space="preserve">
     <value>_mainPage</value>
@@ -283,7 +283,7 @@
     <value>89, 63</value>
   </data>
   <data name="_sourceTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 23</value>
+    <value>372, 23</value>
   </data>
   <data name="_sourceTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -292,7 +292,7 @@
     <value>_sourceTextBox</value>
   </data>
   <data name="&gt;&gt;_sourceTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_sourceTextBox.Parent" xml:space="preserve">
     <value>_mainPage</value>
@@ -313,7 +313,7 @@
     <value>Vertical</value>
   </data>
   <data name="_logInfoTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 97</value>
+    <value>372, 149</value>
   </data>
   <data name="_logInfoTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -322,7 +322,7 @@
     <value>_logInfoTextBox</value>
   </data>
   <data name="&gt;&gt;_logInfoTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_logInfoTextBox.Parent" xml:space="preserve">
     <value>_mainPage</value>
@@ -340,7 +340,7 @@
     <value>3, 3</value>
   </data>
   <data name="_logStackTracePropertyGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 201</value>
+    <value>473, 253</value>
   </data>
   <data name="_logStackTracePropertyGrid.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -349,7 +349,7 @@
     <value>_logStackTracePropertyGrid</value>
   </data>
   <data name="&gt;&gt;_logStackTracePropertyGrid.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PropertyGrid, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PropertyGrid, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_logStackTracePropertyGrid.Parent" xml:space="preserve">
     <value>_exInfoPage</value>
@@ -361,7 +361,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="_closeButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>359, 251</value>
+    <value>367, 303</value>
   </data>
   <data name="_closeButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 27</value>
@@ -376,7 +376,7 @@
     <value>_closeButton</value>
   </data>
   <data name="&gt;&gt;_closeButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_closeButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -387,51 +387,6 @@
   <data name="_mainTabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;_mainPage.Name" xml:space="preserve">
-    <value>_mainPage</value>
-  </data>
-  <data name="&gt;&gt;_mainPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_mainPage.Parent" xml:space="preserve">
-    <value>_mainTabControl</value>
-  </data>
-  <data name="&gt;&gt;_mainPage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_exInfoPage.Name" xml:space="preserve">
-    <value>_exInfoPage</value>
-  </data>
-  <data name="&gt;&gt;_exInfoPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_exInfoPage.Parent" xml:space="preserve">
-    <value>_mainTabControl</value>
-  </data>
-  <data name="&gt;&gt;_exInfoPage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="_mainTabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="_mainTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>479, 237</value>
-  </data>
-  <data name="_mainTabControl.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;_mainTabControl.Name" xml:space="preserve">
-    <value>_mainTabControl</value>
-  </data>
-  <data name="&gt;&gt;_mainTabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_mainTabControl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;_mainTabControl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="_mainPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 26</value>
   </data>
@@ -439,7 +394,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="_mainPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 207</value>
+    <value>479, 259</value>
   </data>
   <data name="_mainPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -451,7 +406,7 @@
     <value>_mainPage</value>
   </data>
   <data name="&gt;&gt;_mainPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_mainPage.Parent" xml:space="preserve">
     <value>_mainTabControl</value>
@@ -466,7 +421,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="_exInfoPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 207</value>
+    <value>479, 259</value>
   </data>
   <data name="_exInfoPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -478,7 +433,7 @@
     <value>_exInfoPage</value>
   </data>
   <data name="&gt;&gt;_exInfoPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_exInfoPage.Parent" xml:space="preserve">
     <value>_mainTabControl</value>
@@ -486,11 +441,32 @@
   <data name="&gt;&gt;_exInfoPage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="_mainTabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="_mainTabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 289</value>
+  </data>
+  <data name="_mainTabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;_mainTabControl.Name" xml:space="preserve">
+    <value>_mainTabControl</value>
+  </data>
+  <data name="&gt;&gt;_mainTabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_mainTabControl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_mainTabControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>503, 290</value>
+    <value>511, 342</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei UI, 9pt</value>
@@ -499,6 +475,6 @@
     <value>LoggerInfoDetailForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

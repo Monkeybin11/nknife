@@ -67,6 +67,11 @@
     <Compile Include="LoggerListView.designer.cs">
       <DependentUpon>LoggerListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\LogUtil.cs" />
     <Compile Include="NotFlickerListView.cs">
       <SubType>Component</SubType>
@@ -76,13 +81,7 @@
     <Compile Include="Util\ControlExtension.cs" />
     <Compile Include="Util\NLogStarter.cs" />
     <Compile Include="Util\SyncQueue.cs" />
-    <EmbeddedResource Include="LoggerInfoDetailForm.en-US.resx">
-      <DependentUpon>LoggerInfoDetailForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LoggerInfoDetailForm.resx">
-      <DependentUpon>LoggerInfoDetailForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LoggerInfoDetailForm.zh-CN.resx">
       <DependentUpon>LoggerInfoDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoggerListView.en-US.resx">
@@ -96,17 +95,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\nlog_winform_config.config" />
-    <None Include="Properties\nlog_wpf_config.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -119,9 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Properties\NLogForm.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

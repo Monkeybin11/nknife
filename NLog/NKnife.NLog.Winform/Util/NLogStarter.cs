@@ -30,9 +30,6 @@ namespace NKnife.NLog.WinForm.Util
                 string configContent;
                 switch (Style)
                 {
-                    case AppStyle.Wpf:
-                        configContent = Resources.nlog_wpf_config;
-                        break;
                     default:
                         configContent = Resources.nlog_winform_config;
                         break;

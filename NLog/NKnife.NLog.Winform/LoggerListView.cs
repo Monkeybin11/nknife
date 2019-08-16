@@ -57,8 +57,8 @@ namespace NKnife.NLog.WinForm
         /// </summary>
         public bool ToolStripVisible
         {
-            get { return _ToolStrip.Visible; }
-            set { _ToolStrip.Visible = value; }
+            get => _ToolStrip.Visible;
+            set => _ToolStrip.Visible = value;
         }
 
         /// <summary>

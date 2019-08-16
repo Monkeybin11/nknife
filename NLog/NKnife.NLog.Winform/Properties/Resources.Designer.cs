@@ -65,7 +65,7 @@ namespace NKnife.NLog.WinForm.Properties {
         ///
         ///&lt;nlog xmlns=&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
         ///  &lt;extensions&gt;
-        ///    &lt;add assembly=&quot;NKnife.NLog4&quot; /&gt;
+        ///    &lt;add assembly=&quot;NKnife.NLog.WinForm&quot; /&gt;
         ///  &lt;/extensions&gt;
         ///  &lt;targets async=&quot;true&quot;&gt;
         ///    &lt;!--在主程序的界面上显示日志--&gt;
@@ -74,43 +74,11 @@ namespace NKnife.NLog.WinForm.Properties {
         ///    &lt;target name=&quot;console&quot; xsi:type=&quot;ColoredConsole&quot; layout=&quot;${date:format=mm\:ss\.fff} : ${message}&quot; /&gt;
         ///  &lt;/targets&gt;
         ///  &lt;rules&gt;
-        ///    &lt;logger n [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///    &lt;l [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string nlog_winform_config {
             get {
                 return ResourceManager.GetString("nlog_winform_config", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///
-        ///&lt;nlog xmlns=&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
-        ///  &lt;extensions&gt;
-        ///    &lt;add assembly=&quot;NKnife.NLog4&quot; /&gt;
-        ///  &lt;/extensions&gt;
-        ///  &lt;targets async=&quot;true&quot;&gt;
-        ///    &lt;!--在主程序的界面上显示日志--&gt;
-        ///    &lt;target name=&quot;wpf_logger_collection&quot; xsi:type=&quot;Log_Collection&quot; /&gt;
-        ///    &lt;!--记录详细日志彩色控制台--&gt;
-        ///    &lt;target name=&quot;console&quot; xsi:type=&quot;ColoredConsole&quot; layout=&quot;${date:format=mm\:ss\.fff} : ${message}&quot; /&gt;
-        ///  &lt;/targets&gt;
-        ///  &lt;rules&gt;
-        ///    &lt;log [字符串的其余部分被截断]&quot;; 的本地化字符串。
-        /// </summary>
-        internal static string nlog_wpf_config {
-            get {
-                return ResourceManager.GetString("nlog_wpf_config", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Icon NLogForm {
-            get {
-                object obj = ResourceManager.GetObject("NLogForm", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
     }
