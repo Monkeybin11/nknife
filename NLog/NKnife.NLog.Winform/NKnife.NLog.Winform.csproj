@@ -79,7 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowLogPanelTarget.cs" />
     <Compile Include="Util\ControlExtension.cs" />
-    <Compile Include="Util\NLogStarter.cs" />
+    <Compile Include="NLogConfigSimpleFileCreate.cs" />
     <Compile Include="Util\SyncQueue.cs" />
     <EmbeddedResource Include="LoggerInfoDetailForm.resx">
       <DependentUpon>LoggerInfoDetailForm.cs</DependentUpon>

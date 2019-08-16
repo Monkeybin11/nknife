@@ -50,7 +50,7 @@ namespace NKnife.NLog.WinForm
             _ListView.MouseDoubleClick += LoggerListViewDoubleClick;
         }
 
-        public LoggerCollectionViewModel ViewModel { get; } = new LoggerCollectionViewModel();
+        internal LoggerCollectionViewModel ViewModel { get; } = new LoggerCollectionViewModel();
 
         /// <summary>
         ///     是否显示工具栏

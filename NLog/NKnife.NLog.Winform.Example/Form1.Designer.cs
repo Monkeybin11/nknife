@@ -33,7 +33,6 @@
             this._SimpleTestButton = new System.Windows.Forms.ToolStripButton();
             this._Input100LogButton = new System.Windows.Forms.ToolStripButton();
             this._SetDebugModeButton = new System.Windows.Forms.ToolStripButton();
-            this._LoggerFormButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,8 +41,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._SimpleTestButton,
             this._Input100LogButton,
-            this._SetDebugModeButton,
-            this._LoggerFormButton});
+            this._SetDebugModeButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(866, 25);
@@ -77,15 +75,6 @@
             this._SetDebugModeButton.Text = "设置调试模式";
             this._SetDebugModeButton.Click += new System.EventHandler(this._SetDebugModeButton_Click);
             // 
-            // _LoggerFormButton
-            // 
-            this._LoggerFormButton.Image = ((System.Drawing.Image)(resources.GetObject("_LoggerFormButton.Image")));
-            this._LoggerFormButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._LoggerFormButton.Name = "_LoggerFormButton";
-            this._LoggerFormButton.Size = new System.Drawing.Size(76, 22);
-            this._LoggerFormButton.Text = "日志窗体";
-            this._LoggerFormButton.Click += new System.EventHandler(this._LoggerFormButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -108,7 +97,6 @@
         private System.Windows.Forms.ToolStripButton _Input100LogButton;
         private System.Windows.Forms.ToolStripButton _SetDebugModeButton;
         private System.Windows.Forms.ToolStripButton _SimpleTestButton;
-        private System.Windows.Forms.ToolStripButton _LoggerFormButton;
     }
 }
 

@@ -6,7 +6,7 @@ using NLog;
 
 namespace NKnife.NLog.WinForm
 {
-    public class LoggerCollectionViewModel
+    class LoggerCollectionViewModel
     {
         internal Level CurrentLevel { get; set; } = Level.Trace | Level.Debug | Level.Info | Level.Warn | Level.Error | Level.Fatal;
 

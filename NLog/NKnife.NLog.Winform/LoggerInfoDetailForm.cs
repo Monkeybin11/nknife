@@ -10,7 +10,7 @@ namespace NKnife.NLog.WinForm
 {
     /// <summary>日志详细信息展现窗体
     /// </summary>
-    public sealed class LoggerInfoDetailForm : Form
+    sealed class LoggerInfoDetailForm : Form
     {
         public static void Show(LogEventInfo info)
         {

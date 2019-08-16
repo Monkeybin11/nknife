@@ -6,7 +6,7 @@ using NLog;
 
 namespace NKnife.NLog.WinForm
 {
-    public class CustomLogInfo
+    class CustomLogInfo
     {
         public CustomLogInfo()
         {

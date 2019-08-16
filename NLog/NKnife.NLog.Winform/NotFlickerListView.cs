@@ -2,7 +2,7 @@
 
 namespace NKnife.NLog.WinForm
 {
-    public class NotFlickerListView : ListView
+    class NotFlickerListView : ListView
     {
         public NotFlickerListView()
         {
