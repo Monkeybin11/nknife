@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
 using NKnife.ShareResources;
 using NKnife.Util;
 
 namespace NKnife.Chinese
 {
     /// <summary>
-    ///     中国的城市
+    ///     中国的城市列表。
     /// </summary>
     public class Cities
     {
-        public static List<City> Data { get; }
+        private Func<string, List<City>> _cityConvertFunc;
+        public static List<City> Data { get; private set; }
 
-        static Cities()
+        public Func<string, List<City>> CityConvertFunc
         {
-            var bs = StringResource.CnCities;
-            var city = Encoding.UTF8.GetString(bs).Substring(1);
-            Data = JsonConvert.DeserializeObject<List<City>>(city);
+            get => _cityConvertFunc;
+            set
+            {
+                _cityConvertFunc = value;
+                if (value != null)
+                {
+                    var bs = StringResource.CnCities;
+                    var city = Encoding.UTF8.GetString(bs).Substring(1);
+                    Data = _cityConvertFunc.Invoke(city);
+                }
+            }
         }
 
         /// <summary>
@@ -37,20 +45,15 @@ namespace NKnife.Chinese
             foreach (var i in indexArray)
             {
                 var sheng = Data[i];
-                CityItem city;
-                if (sheng.city.Length > 1)
-                    city = sheng.city[UtilRandom.Random.Next(0, sheng.city.Length - 1)];
-                else
-                    city = sheng.city[0];
-                string area;
-                if (city.area.Count > 1)
-                    area = city.area[UtilRandom.Random.Next(0, city.area.Count - 1)];
-                else
-                    area = city.area[0];
-                if (sheng.name == city.name)
-                    sc.Add($"{city.name}{area}".Replace(" ", ""));
-                else
-                    sc.Add($"{sheng.name}{city.name}{area}".Replace(" ", ""));
+                var city = sheng.city.Length > 1
+                    ? sheng.city[UtilRandom.Random.Next(0, sheng.city.Length - 1)]
+                    : sheng.city[0];
+                var area = city.area.Count > 1
+                    ? city.area[UtilRandom.Random.Next(0, city.area.Count - 1)]
+                    : city.area[0];
+                sc.Add(sheng.name == city.name
+                    ? $"{city.name}{area}".Replace(" ", "")
+                    : $"{sheng.name}{city.name}{area}".Replace(" ", ""));
             }
 
             return sc;
@@ -66,7 +69,6 @@ namespace NKnife.Chinese
         {
             public string name { get; set; }
             public List<string> area { get; set; }
-
         }
     }
 }
