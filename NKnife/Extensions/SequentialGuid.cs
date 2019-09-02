@@ -74,11 +74,11 @@ namespace System
         /// with the GUID ordering on Microsoft SQL Server.
         /// </para>
         /// </remarks>
-        public static Guid Create(SequentialGuidType guidType)
+        public static Guid Create(SequentialGuidType guidType = SequentialGuidType.SequentialAsString)
         {
             // We start with 16 bytes of cryptographically strong random data.
             byte[] randomBytes = new byte[10];
-            SequentialGuid._RandomGenerator.GetBytes(randomBytes);
+            _RandomGenerator.GetBytes(randomBytes);
             // An alternate method: use a normally-created GUID to get our initial
             // random data:
             // byte[] randomBytes = Guid.NewGuid().ToByteArray();
@@ -137,14 +137,49 @@ namespace System
 
                     // For sequential-at-the-end versions, we copy the random data first,
                     // followed by the timestamp.
-                    Buffer.BlockCopy(randomBytes, 0, guidBytes, 0, 10);
                     Buffer.BlockCopy(timestampBytes, 2, guidBytes, 10, 6);
+                    Buffer.BlockCopy(randomBytes, 0, guidBytes, 0, 10);
                     break;
             }
 
             return new Guid(guidBytes);
         }
+
+        public static long ExtractDateTimeTicks(Guid guid)
+        {
+            return ExtractDateTimeTicks(guid.ToByteArray());
+        }
+
+        public static long ExtractDateTimeTicks(string guid)
+        {
+            return !Guid.TryParse(guid, out var id)
+                ? throw new ArgumentException("The incoming parameter is not a GUID string!", nameof(guid))
+                : ExtractDateTimeTicks(id);
+        }
+
+        public static long ExtractDateTimeTicks(byte[] guidBytes, SequentialGuidType guidType = SequentialGuidType.SequentialAsString)
+        {
+            byte[] timestampBytes = new byte[8];
+            switch (guidType)
+            {
+                case SequentialGuidType.SequentialAsString:
+                case SequentialGuidType.SequentialAsBinary:
+                    Buffer.BlockCopy(guidBytes, 0, timestampBytes, 2, 6);
+                    break;
+                case SequentialGuidType.SequentialAtEnd:
+                    Buffer.BlockCopy(guidBytes, 2, timestampBytes, 10, 6);
+                    break;
+            }
+
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(timestampBytes);
+            }
+
+            return BitConverter.ToInt64(timestampBytes, 0);
+        }
     }
+
 
     /// <summary>
     /// Describes the type of a sequential GUID value.

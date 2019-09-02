@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
-namespace NKnife.UnitTests.Wrapper
+namespace NKnife.UnitTests
 {
     public class BinAuthTest
     {
