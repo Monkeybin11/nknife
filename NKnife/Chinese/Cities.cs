@@ -13,10 +13,10 @@ namespace NKnife.Chinese
     /// </summary>
     public class Cities
     {
-        private Func<string, List<City>> _cityConvertFunc;
-        public static List<City> Data { get; private set; }
+        private static Func<string, List<City>> _cityConvertFunc;
+        public static List<City> Data { get; set; }
 
-        public Func<string, List<City>> CityConvertFunc
+        public static Func<string, List<City>> CityConvertFunc
         {
             get => _cityConvertFunc;
             set
@@ -26,6 +26,7 @@ namespace NKnife.Chinese
                 {
                     var bs = StringResource.CnCities;
                     var city = Encoding.UTF8.GetString(bs).Substring(1);
+                    Data?.Clear();
                     Data = _cityConvertFunc.Invoke(city);
                 }
             }
