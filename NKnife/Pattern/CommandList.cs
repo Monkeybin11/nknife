@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using NKnife.Interface.Patterns;
 
-namespace NKnife.Collections
+namespace NKnife.Pattern
 {
     /// <summary>
     ///     命令模式中命令接口的集合类

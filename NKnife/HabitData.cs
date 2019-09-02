@@ -56,8 +56,8 @@ namespace NKnife
                     string namespaceStr = Assembly.GetEntryAssembly().GetName().Name;
                     if (string.IsNullOrWhiteSpace(namespaceStr))
                         namespaceStr = "HabitDataKnife";
-                    string subpath = namespaceStr.Replace('.', '\\').Insert(0, "\\");
-                    _UserApplicationDataPath = path + subpath;
+                    string subPath = namespaceStr.Replace('.', '\\').Insert(0, "\\");
+                    _UserApplicationDataPath = path + subPath;
                     if (!Directory.Exists(_UserApplicationDataPath))
                         UtilFile.CreateDirectory(_UserApplicationDataPath);
                 }
@@ -68,13 +68,13 @@ namespace NKnife
         /// <summary>
         ///     尝试按指定的名称获取选项值
         /// </summary>
-        /// <param name="localname">The localname.</param>
+        /// <param name="localName">The localName.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public bool TryGetValue(string localname, out object value)
+        public bool TryGetValue(string localName, out object value)
         {
             value = null;
-            XmlElement ele = GetElement(localname);
+            XmlElement ele = GetElement(localName);
             if (ele == null) return false;
             string innerText = ele.InnerText;
             if (!string.IsNullOrEmpty(innerText))
@@ -93,16 +93,16 @@ namespace NKnife
         /// <summary>
         ///     按指定的名称获取选项值，如果该值无法获取，将保存指定的默认值
         /// </summary>
-        /// <param name="localname">The localname.</param>
-        /// <param name="defalutValue">The defalut value.</param>
+        /// <param name="localName">The localName.</param>
+        /// <param name="defaultValue">The default value.</param>
         /// <returns></returns>
-        public string GetValue(string localname, object defalutValue)
+        public string GetValue(string localName, object defaultValue)
         {
-            XmlElement ele = GetElement(localname);
+            XmlElement ele = GetElement(localName);
             string value = ele.InnerText;
             if (string.IsNullOrEmpty(value))
             {
-                value = defalutValue.ToString();
+                value = defaultValue.ToString();
                 ele.InnerText = value;
                 Save();
             }
@@ -112,11 +112,11 @@ namespace NKnife
         /// <summary>
         ///     按指定的名称设置值
         /// </summary>
-        /// <param name="localname">The localname.</param>
+        /// <param name="localName">The localName.</param>
         /// <param name="value">The value.</param>
-        public void SetValue(string localname, object value)
+        public void SetValue(string localName, object value)
         {
-            XmlElement ele = GetElement(localname);
+            XmlElement ele = GetElement(localName);
             ele.InnerText = value.ToString();
             Save();
         }
@@ -160,16 +160,16 @@ namespace NKnife
         /// <summary>
         ///     获取指定名称的XmlElement，如果不存在，将创建
         /// </summary>
-        /// <param name="localname">The localname.</param>
+        /// <param name="localName">The localName.</param>
         /// <returns></returns>
-        protected virtual XmlElement GetElement(string localname)
+        protected virtual XmlElement GetElement(string localName)
         {
             if (Document.DocumentElement != null)
             {
-                XmlNode node = Document.DocumentElement.SelectSingleNode(localname);
+                XmlNode node = Document.DocumentElement.SelectSingleNode(localName);
                 if (node == null)
                 {
-                    node = Document.CreateElement(localname);
+                    node = Document.CreateElement(localName);
                     if (Document.DocumentElement != null)
                         Document.DocumentElement.AppendChild(node);
                     Save();
