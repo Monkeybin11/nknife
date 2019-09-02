@@ -64,6 +64,7 @@ namespace NKnife.UnitTests.Extensions
             var ticks = SequentialGuid.ExtractDateTimeTicks(id);
 
             ticks.Should().Be(timestampNew);
+            var dt = new DateTime(ticks);
         }
     }
 }

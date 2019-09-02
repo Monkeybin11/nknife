@@ -25,6 +25,8 @@ namespace System
 
         #endregion
 
+        private static int _TimeOffset = 2;
+
         /// <summary>
         /// Returns a new GUID value which is sequentially ordered when formatted as
         /// a string, a byte array, or ordered by the least significant six bytes of the
@@ -118,7 +120,7 @@ namespace System
 
                     // For string and byte-array version, we copy the timestamp first, followed
                     // by the random data.
-                    Buffer.BlockCopy(timestampBytes, 2, guidBytes, 0, 6);
+                    Buffer.BlockCopy(timestampBytes, _TimeOffset, guidBytes, 0, 6);
                     Buffer.BlockCopy(randomBytes, 0, guidBytes, 6, 10);
 
                     // If formatting as a string, we have to compensate for the fact
@@ -137,7 +139,7 @@ namespace System
 
                     // For sequential-at-the-end versions, we copy the random data first,
                     // followed by the timestamp.
-                    Buffer.BlockCopy(timestampBytes, 2, guidBytes, 10, 6);
+                    Buffer.BlockCopy(timestampBytes, _TimeOffset, guidBytes, 10, 6);
                     Buffer.BlockCopy(randomBytes, 0, guidBytes, 0, 10);
                     break;
             }
@@ -164,18 +166,12 @@ namespace System
             {
                 case SequentialGuidType.SequentialAsString:
                 case SequentialGuidType.SequentialAsBinary:
-                    Buffer.BlockCopy(guidBytes, 0, timestampBytes, 2, 6);
+                    Buffer.BlockCopy(guidBytes, 0, timestampBytes, 2, 4);
                     break;
                 case SequentialGuidType.SequentialAtEnd:
-                    Buffer.BlockCopy(guidBytes, 2, timestampBytes, 10, 6);
+                    Buffer.BlockCopy(guidBytes, 2, timestampBytes, 12, 4);
                     break;
             }
-
-            if (BitConverter.IsLittleEndian)
-            {
-                Array.Reverse(timestampBytes);
-            }
-
             return BitConverter.ToInt64(timestampBytes, 0);
         }
     }
