@@ -16,6 +16,12 @@ namespace NKnife.Chinese
         private static Func<string, List<City>> _cityConvertFunc;
         public static List<City> Data { get; set; }
 
+        /// <summary>
+        /// 城市列表的生成方法，可以给入外界的方法，也可使用内部的资源文件
+        /// <code>
+        /// JsonConvert.DeserializeObject
+        /// </code>
+        /// </summary>
         public static Func<string, List<City>> CityConvertFunc
         {
             get => _cityConvertFunc;
