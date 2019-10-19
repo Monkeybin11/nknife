@@ -13,6 +13,7 @@ namespace NKnife.UnitTests.Chinese
         [Fact]
         public void CityTest1()
         {
+            //传入解析方法
             Cities.CityConvertFunc += JsonConvert.DeserializeObject<List<Cities.City>>;
             Cities.Data.Should().NotBeNull();
             Cities.Data.Count.Should().Be(34);//34个省份
