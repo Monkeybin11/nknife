@@ -6,13 +6,31 @@ namespace NKnife.Util
 {
     public class UtilByte
     {
-        public static int MakeInt(byte[] bs)
+        /// <summary>
+        ///     将int转为低字节在后，高字节在前的byte数组
+        ///     b[0] = 11111111(0xff) & 01100001
+        ///     b[1] = 11111111(0xff) & 00000000
+        ///     b[2] = 11111111(0xff) & 00000000
+        ///     b[3] = 11111111(0xff) & 00000000
+        /// </summary>
+        public static byte[] IntToByteArray2(int value)
         {
-            byte b3 = bs[0];
-            byte b2 = bs[1];
-            byte b1 = bs[2];
-            byte b0 = bs[3];
-            return (int)((((b3 & 0xff) << 24) | ((b2 & 0xff) << 16) | ((b1 & 0xff) << 8) | ((b0 & 0xff) << 0)));
+            var src = new byte[4];
+            src[0] = (byte)((value >> 24) & 0xFF);
+            src[1] = (byte)((value >> 16) & 0xFF);
+            src[2] = (byte)((value >> 8) & 0xFF);
+            src[3] = (byte)(value & 0xFF);
+            return src;
+        }
+
+        /// <summary>
+        ///     将高字节在前，低字节在后的byte数组转为int(与IntToByteArray2想对应)
+        /// </summary>
+        public static int ByteArrayToInt2(byte[] array)
+        {
+            if (array.Length != 4)
+                return -1;
+            return ((array[0] & 0xff) << 24) | ((array[1] & 0xff) << 16) | ((array[2] & 0xff) << 8) | ((array[3] & 0xff) << 0);
         }
 
         /// <summary>
