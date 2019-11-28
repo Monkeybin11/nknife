@@ -30,9 +30,9 @@ namespace System.Xml
         /// </summary>
         /// <param name="node">将要查找的父级XmlNode</param>
         /// <param name="name">要查找的Element的LcoalName</param>
-        /// <param name="ifNotCreateNew">没有这个节点，是否新建</param>
+        /// <param name="ifNotCreateNew">没有这个节点，是否新建。默认false，如果没有找到该节点，则返加null，不创建。</param>
         /// <returns></returns>
-        public static XmlElement GetElementByName(this XmlNode node, string name, bool ifNotCreateNew = true)
+        public static XmlElement GetElementByName(this XmlNode node, string name, bool ifNotCreateNew = false)
         {
             Debug.Assert(!string.IsNullOrEmpty(name));
             XmlNode singleNode = node.SelectSingleNode($@"(.//{name})[1]");
@@ -254,9 +254,10 @@ namespace System.Xml
                         {
                             foreach (string value in valueList)
                             {
-                                XmlElement item = groupEle.OwnerDocument.CreateElement(itemNodeName);
-                                item.SetAttribute(attributeName, value);
-                                groupEle.AppendChild(item);
+                                XmlElement item = groupEle.OwnerDocument?.CreateElement(itemNodeName);
+                                item?.SetAttribute(attributeName, value);
+                                if (item != null)
+                                    groupEle.AppendChild(item);
                             }
                         }
                         else
@@ -328,21 +329,6 @@ namespace System.Xml
                         }
                         break;
                     }
-                case XmlNodeType.Comment:
-                case XmlNodeType.Document:
-                case XmlNodeType.DocumentFragment:
-                case XmlNodeType.DocumentType:
-                case XmlNodeType.Element:
-                case XmlNodeType.EndElement:
-                case XmlNodeType.EndEntity:
-                case XmlNodeType.Entity:
-                case XmlNodeType.EntityReference:
-                case XmlNodeType.None:
-                case XmlNodeType.Notation:
-                case XmlNodeType.ProcessingInstruction:
-                case XmlNodeType.SignificantWhitespace:
-                case XmlNodeType.Whitespace:
-                case XmlNodeType.XmlDeclaration:
                 default:
                     Debug.Fail("值只能存放在Attribute，CDATA，Text三种类型的节点中！");
                     break;
@@ -357,11 +343,15 @@ namespace System.Xml
         /// <param name="node">所有子节点的父节点</param>
         public static void RemoveAllElements(this XmlNode node)
         {
-            if (node == null)
+            if (!(node is XmlElement) || node.ChildNodes.Count <= 0)
                 return;
-            while (node.ChildNodes.Count > 0)
+            var i = 0;
+            while (node.ChildNodes.Count > i)
             {
-                node.RemoveChild(node.FirstChild);
+                if (node.ChildNodes[i] is XmlElement)
+                    node.RemoveChild(node.ChildNodes[i]);
+                else
+                    i++;
             }
         }
 
