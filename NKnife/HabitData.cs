@@ -128,7 +128,7 @@ namespace NKnife
         {
             if (!File.Exists(FileName))
             {
-                Document = XmlHelper.CreatNewDoucmnet(FileName);
+                Document = XmlHelper.CreateNewDocument(FileName);
             }
             else
             {

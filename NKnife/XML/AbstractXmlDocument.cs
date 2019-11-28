@@ -30,7 +30,7 @@ namespace NKnife.XML
             if (!File.Exists(FilePath))
             {
                 //如果文件不存在，建立这个文件
-                _BaseXmlNode = XmlHelper.CreatNewDoucmnet(FilePath, RootNodeLocalName);
+                _BaseXmlNode = XmlHelper.CreateNewDocument(FilePath, RootNodeLocalName);
             }
             else
             {
