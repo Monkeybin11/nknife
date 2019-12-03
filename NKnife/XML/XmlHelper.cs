@@ -31,7 +31,7 @@ namespace NKnife.XML
             doc.AppendChild(root);
             if (!File.Exists(file))
             {
-                UtilFile.CreateDirectory(file.Substring(0, file.LastIndexOf(Environment.NewLine, StringComparison.Ordinal)));
+                UtilFile.CreateDirectory(file.Substring(0, file.LastIndexOf(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal)));
             }
             doc.Save(file);
             return doc;
