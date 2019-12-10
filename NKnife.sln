@@ -5,12 +5,12 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NKnife", "NKnife\NKnife.csproj", "{B33B0509-229B-4AFE-B774-AEACF7E515C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NKnife.UnitTests", "NKnife.UnitTests\NKnife.UnitTests.csproj", "{724B384A-5E1D-449D-A83B-DAABBFB77F7F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{1C52C8DE-FC73-405B-B469-4EDFA3963A45}"
 	ProjectSection(SolutionItems) = preProject
 		buildAll.cmd = buildAll.cmd
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NKnife.UnitTests", "NKnife.UnitTests\NKnife.UnitTests.csproj", "{443E8961-D89F-4C75-80BA-987F891D0591}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,10 @@ Global
 		{B33B0509-229B-4AFE-B774-AEACF7E515C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B33B0509-229B-4AFE-B774-AEACF7E515C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B33B0509-229B-4AFE-B774-AEACF7E515C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{724B384A-5E1D-449D-A83B-DAABBFB77F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{724B384A-5E1D-449D-A83B-DAABBFB77F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{724B384A-5E1D-449D-A83B-DAABBFB77F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{724B384A-5E1D-449D-A83B-DAABBFB77F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{443E8961-D89F-4C75-80BA-987F891D0591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{443E8961-D89F-4C75-80BA-987F891D0591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{443E8961-D89F-4C75-80BA-987F891D0591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{443E8961-D89F-4C75-80BA-987F891D0591}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
