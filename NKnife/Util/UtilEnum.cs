@@ -136,6 +136,5 @@ namespace NKnife.Util
             return Enum.IsDefined(typeof(T), member);
         }
         #endregion
-
     }
 }

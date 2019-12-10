@@ -55,20 +55,20 @@ namespace NKnife.UnitTests.Zip
         {
             var guid = Guid.NewGuid();
             var bs = guid.ToByteArray();
-            var fileName = GetFileName(pre, guid.ToString());
-            var dir = Path.Combine(path, $"{fileName}.bin");
+            var fileName = $"{GetFileName(pre, guid.ToString())}.bin";
+            var dir = Path.Combine(path, fileName);
             File.WriteAllBytes(dir, bs);
-            var sf = new SimpleFile(dir, Mode.Text, new FileInfo(dir).Length) {BinaryContent = bs};
+            var sf = new SimpleFile(dir, Mode.Text, new FileInfo(dir).Length, fileName) {BinaryContent = bs};
             return sf;
         }
 
         private static  SimpleFile CreateTextFile(string pre, string path)
         {
             var guid = Guid.NewGuid().ToString();
-            var fileName = GetFileName(pre, guid);
-            var dir = Path.Combine(path, $"{fileName}.txt");
+            var fileName = $"{GetFileName(pre, guid)}.txt";
+            var dir = Path.Combine(path, fileName);
             File.AppendAllText(dir, guid);
-            var sf = new SimpleFile(dir, Mode.Text, new FileInfo(dir).Length) {TextContent = guid};
+            var sf = new SimpleFile(dir, Mode.Text, new FileInfo(dir).Length, fileName) {TextContent = guid};
             return sf;
         }
 
@@ -111,17 +111,22 @@ namespace NKnife.UnitTests.Zip
 
     public class SimpleFile
     {
-        public SimpleFile(string path, Mode mode, long size)
+        public SimpleFile(string path, Mode mode, long size, string fileName)
         {
             Path = path;
             Mode = mode;
             Size = size;
+            File = fileName;
         }
 
         /// <summary>
         /// 本目录的绝对路径
         /// </summary>
         public string Path { get; set; }
+        /// <summary>
+        /// 文件名
+        /// </summary>
+        public string File { get; set; }
 
         public Mode Mode { get; set; }
         /// <summary>
