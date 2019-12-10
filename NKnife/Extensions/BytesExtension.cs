@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using NKnife.Util;
@@ -233,5 +234,40 @@ namespace System
         {
             return new MemoryStream(data);
         }
+
+        /// <summary>
+        /// 比较字节数组
+        /// </summary>
+        /// <param name="b1">字节数组1</param>
+        /// <param name="b2">字节数组2</param>
+        public static bool Compare(this byte[] b1, byte[] b2)
+        {
+            if (b1.Length != b2.Length)
+                return false;
+            return b1.Where((t, i) => t.Equals(b2[i])).Any();
+        }
+
+        /// <summary>
+        /// 用memcmp比较字节数组
+        /// </summary>
+        /// <param name="b1">字节数组1</param>
+        /// <param name="b2">字节数组2</param>
+        /// <returns>如果两个数组相同，返回0；如果数组1小于数组2，返回小于0的值；如果数组1大于数组2，返回大于0的值。</returns>
+        public static int MemoryCompare(this byte[] b1, byte[] b2)
+        {
+            IntPtr retval = memcmp(b1, b2, new IntPtr(b1.Length));
+            return retval.ToInt32();
+        }
+
+        /// <summary>
+        /// memcmp API
+        /// </summary>
+        /// <param name="b1">字节数组1</param>
+        /// <param name="b2">字节数组2</param>
+        /// <param name="count"></param>
+        /// <returns>如果两个数组相同，返回0；如果数组1小于数组2，返回小于0的值；如果数组1大于数组2，返回大于0的值。</returns>
+        [DllImport("msvcrt.dll")]
+        private static extern IntPtr memcmp(byte[] b1, byte[] b2, IntPtr count);
+
     }
 }

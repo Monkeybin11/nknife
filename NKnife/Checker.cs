@@ -3,9 +3,8 @@ using NKnife.ShareResources;
 
 namespace NKnife
 {
-    public class Checker
+    public static class Checker
     {
-
         /// <summary>
         /// 检测对象是否为空，为空返回true
         /// </summary>

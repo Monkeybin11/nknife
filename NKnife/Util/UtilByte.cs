@@ -7,8 +7,54 @@ using System.Text.RegularExpressions;
 
 namespace NKnife.Util
 {
-    public class UtilByte
+    public static class UtilByte
     {
+        /// <summary>
+        ///     根据Int类型的值，返回用1或0(对应true或false)填充的数组
+        ///     <remarks>从右侧开始向左索引(0~31)</remarks>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IEnumerable<bool> GetBitList(int value)
+        {
+            var list = new List<bool>(32);
+            for (var i = 0; i <= 31; i++)
+            {
+                var val = 1 << i;
+                list.Add((value & val) == val);
+            }
+            return list;
+        }
+
+        /// <summary>
+        ///     返回Int数据中某一位是否为1
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="index">32位数据的从右向左的偏移位索引(0~31)</param>
+        /// <returns>true表示该位为1，false表示该位为0</returns>
+        public static bool GetBitValue(int value, short index)
+        {
+            if (index > 31) throw new ArgumentOutOfRangeException(nameof(index)); //索引出错
+            if (index <= 0) throw new ArgumentOutOfRangeException(nameof(index));
+            var val = 1 << index;
+            return (value & val) == val;
+        }
+
+        /// <summary>
+        ///     设定Int数据中某一位的值
+        /// </summary>
+        /// <param name="value">位设定前的值</param>
+        /// <param name="index">32位数据的从右向左的偏移位索引(0~31)</param>
+        /// <param name="bitValue">true设该位为1,false设为0</param>
+        /// <returns>返回位设定后的值</returns>
+        public static int SetBitValue(int value, short index, bool bitValue)
+        {
+            if (index > 31) throw new ArgumentOutOfRangeException(nameof(index)); //索引出错
+            if (index <= 0) throw new ArgumentOutOfRangeException(nameof(index));
+            var val = 1 << index;
+            return bitValue ? value | val : value & ~val;
+        }
+
         /// <summary>
         ///     将int转换为大端模式的字节数组，即高位在前（与<seealso cref="ToIntByBigEndian"/>相对应）。BigEndian是指低地址存放最高有效字节，高位在前（MSB）；而LittleEndian则是低地址存放最低有效字节，高位在后（LSB）。
         /// </summary>
@@ -91,39 +137,5 @@ namespace NKnife.Util
         {
             return _ByteCharRegex.IsMatch(str);
         }
-
-        /// <summary>
-        /// 比较字节数组
-        /// </summary>
-        /// <param name="b1">字节数组1</param>
-        /// <param name="b2">字节数组2</param>
-        public static bool Compare(byte[] b1, byte[] b2)
-        {
-            if (b1.Length != b2.Length)
-                return false;
-            return b1.Where((t, i) => t.Equals(b2[i])).Any();
-        }
-
-        /// <summary>
-        /// 用memcmp比较字节数组
-        /// </summary>
-        /// <param name="b1">字节数组1</param>
-        /// <param name="b2">字节数组2</param>
-        /// <returns>如果两个数组相同，返回0；如果数组1小于数组2，返回小于0的值；如果数组1大于数组2，返回大于0的值。</returns>
-        public static int MemoryCompare(byte[] b1, byte[] b2)
-        {
-            IntPtr retval = memcmp(b1, b2, new IntPtr(b1.Length));
-            return retval.ToInt32();
-        }
-
-        /// <summary>
-        /// memcmp API
-        /// </summary>
-        /// <param name="b1">字节数组1</param>
-        /// <param name="b2">字节数组2</param>
-        /// <param name="count"></param>
-        /// <returns>如果两个数组相同，返回0；如果数组1小于数组2，返回小于0的值；如果数组1大于数组2，返回大于0的值。</returns>
-        [DllImport("msvcrt.dll")]
-        private static extern IntPtr memcmp(byte[] b1, byte[] b2, IntPtr count);
     }
 }
