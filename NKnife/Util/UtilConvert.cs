@@ -68,10 +68,7 @@ namespace NKnife.Util
 
         public static T EnumParse<T>(string value, T defaultEnum) where T : struct
         {
-            T rtn;
-            if (Enum.TryParse(value, out rtn))
-                return rtn;
-            return defaultEnum;
+            return Enum.TryParse(value, out T rtn) ? rtn : defaultEnum;
         }
 
         public static Guid GuidParse(object obj)
@@ -87,10 +84,7 @@ namespace NKnife.Util
         /// <returns></returns>
         private static Guid GuidParse(string value)
         {
-            Guid n;
-            if (!Guid.TryParse(value, out n))
-                return Guid.Empty;
-            return n;
+            return !Guid.TryParse(value, out var n) ? Guid.Empty : n;
         }
 
         /// <summary>
@@ -114,8 +108,7 @@ namespace NKnife.Util
         /// <returns></returns>
         private static int Int32Parse(string value, int whenParseFail)
         {
-            int n;
-            if (!int.TryParse(value, out n))
+            if (!int.TryParse(value, out var n))
                 return whenParseFail;
             return n;
         }
@@ -140,8 +133,7 @@ namespace NKnife.Util
         /// <returns></returns>
         private static short Int16Parse(string value, short whenParseFail)
         {
-            short n;
-            if (!short.TryParse(value, out n))
+            if (!short.TryParse(value, out var n))
                 return whenParseFail;
             return n;
         }
@@ -167,8 +159,7 @@ namespace NKnife.Util
                 return false;
             if (v.ToLower().Equals("true"))
                 return true;
-            var i = 0;
-            int.TryParse(v, out i);
+            int.TryParse(v, out var i);
             return IntToBoolean(i);
         }
 
@@ -191,7 +182,7 @@ namespace NKnife.Util
         #region 各进制数间转换
 
         /// <summary>
-        ///     实现各进制数间的转换。如：ConvertBase("15", 10, 16)表示将10进制数15转换为16进制的数。
+        ///     实现各进制数间的转换。如：ConvertBase(10, "15", 16)表示将10进制数15转换为16进制的数。
         /// </summary>
         /// <param name="from">原值的进制,只能是2,8,10,16四个值。</param>
         /// <param name="value">要转换的值,即原值</param>
@@ -199,12 +190,14 @@ namespace NKnife.Util
         public static string ConvertBase(int from, string value, int to)
         {
             // 检查参数
-            if (from != 2 && from != 8 && from != 10 && from != 16) throw new ArgumentOutOfRangeException("from");
-            if (to != 2 && to != 8 && to != 10 && to != 16) throw new ArgumentOutOfRangeException("to");
+            if (from != 2 && from != 8 && from != 10 && from != 16) 
+                throw new ArgumentOutOfRangeException(nameof(@from));
+            if (to != 2 && to != 8 && to != 10 && to != 16) 
+                throw new ArgumentOutOfRangeException(nameof(to));
 
             //将要转换的原值尝试转换成一个Int值
-            int num;
-            if (!int.TryParse(value, out num)) throw new ArgumentNullException("value");
+            if (!int.TryParse(value, out _)) 
+                throw new ArgumentNullException(nameof(value));
 
             var intValue = Convert.ToInt32(value, from); //先转成10进制
             var result = Convert.ToString(intValue, to); //再转成目标进制
@@ -301,7 +294,7 @@ namespace NKnife.Util
         public static object ConvertTo(object data, Type targetType)
         {
             //如果数据为空，则返回
-            if (Checker.IsNullOrEmpty(data)) return null;
+            if (data.IsNullOrEmpty()) return null;
 
             try
             {
@@ -327,7 +320,7 @@ namespace NKnife.Util
         public static T ConvertTo<T>(object data)
         {
             //如果数据为空，则返回
-            if (Checker.IsNullOrEmpty(data)) return default(T);
+            if (data.IsNullOrEmpty()) return default(T);
 
             try
             {
@@ -427,167 +420,6 @@ namespace NKnife.Util
                     if (mode == ConvertMode.Relaxed) return false;
                     throw new ArgumentException(charParam + " , 参数应严格是1或0.");
             }
-        }
-
-        #endregion
-
-        #region byte[]的相关转换
-
-        /// <summary>
-        ///     将字节数组转化为数值
-        /// </summary>
-        /// <param name="arrByte"></param>
-        /// <param name="offset"></param>
-        /// <returns></returns>
-        public static int BytesToInt(byte[] arrByte, int offset)
-        {
-            return BitConverter.ToInt32(arrByte, offset);
-        }
-
-        /// <summary>
-        ///     将数值转化为字节数组
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="reverse">是否需要把得到的字节数组反转，因为Windows操作系统中整形的高低位是反转转置后保存的。</param>
-        /// <returns></returns>
-        public static byte[] IntToBytes(int value, bool reverse)
-        {
-            var ret = BitConverter.GetBytes(value);
-            if (reverse)
-                Array.Reverse(ret);
-            return ret;
-        }
-
-        /// <summary>
-        ///     将字节数组转化为16进制字符串
-        /// </summary>
-        /// <param name="arrByte"></param>
-        /// <param name="reverse">是否需要把得到的字节数组反转，因为Windows操作系统中整形的高低位是反转转置之后保存的。</param>
-        /// <returns></returns>
-        public static string BytesToHex(byte[] arrByte, bool reverse)
-        {
-            var sb = new StringBuilder();
-            if (reverse)
-                Array.Reverse(arrByte);
-            foreach (var b in arrByte)
-                sb.AppendFormat("{0:x2}", b);
-            return sb.ToString();
-        }
-
-        /// <summary>
-        ///     将16进制字符串转化为字节数组
-        /// </summary>
-        /// <param name="hexSrc"></param>
-        /// <returns></returns>
-        public static byte[] HexToBytes(string hexSrc)
-        {
-            var hex = hexSrc.Replace(" ", "");
-            var byteArray = new byte[hex.Length / 2];
-            for (int i = 0, j = 0; i < hex.Length; i = i + 2, j++)
-            {
-                try
-                {
-                    byteArray[j] = Convert.ToByte(hex.Substring(i, 2), 16);
-                }
-                catch (Exception)
-                {
-                }
-            }
-
-            return byteArray;
-        }
-
-        #endregion
-
-        #region 使用指定字符集将string转换成byte[]
-
-        /// <summary>
-        ///     将string转换成byte[]
-        /// </summary>
-        /// <param name="text">要转换的字符串</param>
-        public static byte[] StringToBytes(string text)
-        {
-            return Encoding.Default.GetBytes(text);
-        }
-
-        /// <summary>
-        ///     使用指定字符集将string转换成byte[]
-        /// </summary>
-        /// <param name="text">要转换的字符串</param>
-        /// <param name="encoding">字符编码</param>
-        public static byte[] StringToBytes(string text, Encoding encoding)
-        {
-            return encoding.GetBytes(text);
-        }
-
-        #endregion
-
-        #region 使用指定字符集将byte[]转换成string
-
-        /// <summary>
-        ///     将byte[]转换成string
-        /// </summary>
-        /// <param name="bytes">要转换的字节数组</param>
-        public static string BytesToString(byte[] bytes)
-        {
-            return Encoding.Default.GetString(bytes);
-        }
-
-        /// <summary>
-        ///     使用指定字符集将byte[]转换成string
-        /// </summary>
-        /// <param name="bytes">要转换的字节数组</param>
-        /// <param name="encoding">字符编码</param>
-        public static string BytesToString(byte[] bytes, Encoding encoding)
-        {
-            if (encoding == Encoding.UTF8)
-                if (bytes[0] == 239 && bytes[1] == 187 && bytes[2] == 191)
-                    return encoding.GetString(bytes, 3, bytes.Length - 3);
-            return encoding.GetString(bytes);
-        }
-
-        #endregion
-
-        #region 将流转换成字符串
-
-        /// <summary>
-        ///     将流转换成字符串,同时关闭该流
-        /// </summary>
-        /// <param name="stream">流</param>
-        /// <param name="encoding">字符编码</param>
-        public static string StreamToString(Stream stream, Encoding encoding)
-        {
-            //获取的文本
-            string streamText;
-
-            //读取流
-            try
-            {
-                using (var reader = new StreamReader(stream, encoding))
-                {
-                    streamText = reader.ReadToEnd();
-                }
-            }
-            catch
-            {
-                return string.Empty;
-            }
-            finally
-            {
-                stream.Close();
-            }
-
-            //返回文本
-            return streamText;
-        }
-
-        /// <summary>
-        ///     将流转换成字符串,同时关闭该流
-        /// </summary>
-        /// <param name="stream">流</param>
-        public static string StreamToString(Stream stream)
-        {
-            return StreamToString(stream, Encoding.Default);
         }
 
         #endregion

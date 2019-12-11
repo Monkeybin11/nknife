@@ -402,7 +402,7 @@ namespace NKnife.Maths
 
         public override bool Equals(object obj)
         {
-            if (Checker.IsNullOrEmpty(obj))
+            if (NullExtension.IsNullOrEmpty(obj))
             {
                 return false;
             }

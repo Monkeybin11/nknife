@@ -55,7 +55,7 @@ namespace NKnife.XML
         /// <returns></returns>
         public static XmlDocument CreateNewDocument(string file)
         {
-            return CreateNewDocument(file, "Root");
+            return CreateNewDocument(file, "root");
         }
     }
 }

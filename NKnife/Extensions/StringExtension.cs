@@ -13,12 +13,13 @@ namespace System
         /// </summary>
         /// <param name="srcString">字符串</param>
         /// <param name="stringArray">字符串数组</param>
-        /// <param name="caseInsensetive">是否不区分大小写, true为不区分, false为区分</param>
+        /// <param name="caseSensitive">是否不区分大小写, true为不区分, false为区分</param>
         /// <returns>字符串在指定字符串数组中的位置, 如不存在则返回-1</returns>
-        public static int GetInArrayIndex(this string srcString, string[] stringArray, bool caseInsensetive)
+        public static int GetInArrayIndex(this string srcString, string[] stringArray, bool caseSensitive)
         {
             for (var i = 0; i < stringArray.Length; i++)
-                if (caseInsensetive)
+            {
+                if (caseSensitive)
                 {
                     if (srcString.ToLower() == stringArray[i].ToLower())
                         return i;
@@ -28,6 +29,8 @@ namespace System
                     if (srcString == stringArray[i])
                         return i;
                 }
+            }
+
             return -1;
         }
 
@@ -47,22 +50,22 @@ namespace System
         /// </summary>
         /// <param name="srcString">字符串</param>
         /// <param name="stringArray">字符串数组</param>
-        /// <param name="caseInsensetive">是否不区分大小写, true为不区分, false为区分</param>
+        /// <param name="caseSensitive">是否不区分大小写, true为不区分, false为区分</param>
         /// <returns>判断结果</returns>
-        public static bool InArray(this string srcString, string[] stringArray, bool caseInsensetive)
+        public static bool InArray(this string srcString, string[] stringArray, bool caseSensitive)
         {
-            return GetInArrayIndex(srcString, stringArray, caseInsensetive) >= 0;
+            return GetInArrayIndex(srcString, stringArray, caseSensitive) >= 0;
         }
 
         /// <summary>
         ///     判断指定字符串是否属于指定字符串数组中的一个元素
         /// </summary>
         /// <param name="srcString">字符串</param>
-        /// <param name="stringarray">字符串数组</param>
+        /// <param name="stringArray">字符串数组</param>
         /// <returns>判断结果</returns>
-        public static bool InArray(this string srcString, string[] stringarray)
+        public static bool InArray(this string srcString, string[] stringArray)
         {
-            return InArray(srcString, stringarray, false);
+            return InArray(srcString, stringArray, false);
         }
 
         /// <summary>
@@ -111,7 +114,7 @@ namespace System
         /// <returns>清除后返回的字符串</returns>
         public static string TrimBr(this string str)
         {
-            Match m = null;
+            Match m;
             for (m = UtilRegex.Br.Match(str); m.Success; m = m.NextMatch())
                 str = str.Replace(m.Groups[0].ToString(), "");
             return str;
@@ -129,7 +132,7 @@ namespace System
             if (string.IsNullOrWhiteSpace(str))
                 return true;
             var n = str.Length;
-            var mStr = "[0]{" + n + ",}";
+            var mStr = $"[0]{{{n},}}";
             return Regex.Match(str, mStr).Success;
         }
 
@@ -165,8 +168,7 @@ namespace System
         {
             try
             {
-                int tempResult;
-                if (!int.TryParse(data, out tempResult))
+                if (!int.TryParse(data, out var tempResult))
                 {
                     result = -1;
                     return false;
@@ -198,8 +200,7 @@ namespace System
         {
             try
             {
-                int tempResult;
-                if (!int.TryParse(data, out tempResult))
+                if (!int.TryParse(data, out var tempResult))
                 {
                     result = -1;
                     return false;
@@ -243,18 +244,47 @@ namespace System
         }
 
         /// <summary>
-        ///     判断是否手机号码
+        ///     判断字符串是否能被(filters)过滤
+        ///     strictMatch=true时，是严格过滤模式，src必须完全等于filters中的某一项，才算Match，return true
+        ///     strictMatch=false时，是宽松过滤模式，src只要包含filters中的某一项，算Match，return true
         /// </summary>
-        /// <param name="str"></param>
-        /// <param name="matchString"></param>
+        /// <param name="src"></param>
+        /// <param name="filters"></param>
+        /// <param name="strictMatch"></param>
         /// <returns></returns>
-        public static bool IsMobilePhone(this string str, string matchString = "")
+        public static bool MatchFilters(this string src, string[] filters, bool strictMatch = false)
         {
-            var mStr = string.IsNullOrEmpty(matchString) ? @"^[1]+([35]|[86]|[38]|[37])+\d{9}" : matchString;
-            return Regex.Match(str, mStr).Success;
+            if (filters == null)
+                return false;
+            foreach (var filter in filters)
+                if (strictMatch)
+                {
+                    if (src.Equals(filter))
+                        return true;
+                }
+                else
+                {
+                    if (src.IndexOf(filter, StringComparison.Ordinal) > -1)
+                        return true;
+                }
+            return false;
         }
 
-        // ~~ 判断字符是否为中文 ~~~~~~~
+        /// <summary>
+        ///     将用分隔符分隔ASCII字节的字符串转换成字节数组（去除分隔符）
+        /// </summary>
+        /// <param name="arrayString">用分隔符分隔ASCII字节的字符串</param>
+        /// <param name="separator">分隔符</param>
+        /// <returns>去除分隔符的字符串的字节数组</returns>
+        public static byte[] ToBytes(this string arrayString, params char[] separator)
+        {
+            var newStr = arrayString;
+            foreach (var sep in separator)
+                newStr = newStr.Replace(sep.ToString(), "");
+            return Encoding.ASCII.GetBytes(newStr);
+        }
+
+        #region 与中文有关的判断
 
         /// <summary>
         ///     给定一个字符串，判断其是否是中文字符串
@@ -339,45 +369,7 @@ namespace System
             return false;
         }
 
-        /// <summary>
-        ///     判断字符串是否能被(filters)过滤
-        ///     strictMatch=true时，是严格过滤模式，src必须完全等于filters中的某一项，才算Match，return true
-        ///     strictMatch=false时，是宽松过滤模式，src只要包含filters中的某一项，算Match，return true
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="filters"></param>
-        /// <param name="strictMatch"></param>
-        /// <returns></returns>
-        public static bool MatchFilters(this string src, string[] filters, bool strictMatch = false)
-        {
-            if (filters == null)
-                return false;
-            foreach (var filter in filters)
-                if (strictMatch)
-                {
-                    if (src.Equals(filter))
-                        return true;
-                }
-                else
-                {
-                    if (src.IndexOf(filter, StringComparison.Ordinal) > -1)
-                        return true;
-                }
-            return false;
-        }
+        #endregion
 
-        /// <summary>
-        ///     将用分隔符分隔ACSII字节的字符串转换成字节数组（去除分隔符）
-        /// </summary>
-        /// <param name="arrayString">用分隔符分隔ACSII字节的字符串</param>
-        /// <param name="separator">分隔符</param>
-        /// <returns>去除分隔符的字符串的字节数组</returns>
-        public static byte[] ToBytes(this string arrayString, params char[] separator)
-        {
-            var newStr = arrayString;
-            foreach (var sep in separator)
-                newStr = newStr.Replace(sep.ToString(), "");
-            return Encoding.ASCII.GetBytes(newStr);
-        }
     }
 }

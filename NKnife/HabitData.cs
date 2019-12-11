@@ -36,7 +36,7 @@ namespace NKnife
             get
             {
                 if (string.IsNullOrEmpty(_FileName))
-                    _FileName = UserApplicationDataPath + "\\" + GetType().Name + ".HabitData";
+                    _FileName = UserApplicationDataPath + "\\" + GetType().Name + ".habit";
                 return _FileName;
             }
         }
@@ -53,9 +53,9 @@ namespace NKnife
                 {
                     const Environment.SpecialFolder folder = Environment.SpecialFolder.ApplicationData;
                     string path = Environment.GetFolderPath(folder);
-                    string namespaceStr = Assembly.GetEntryAssembly().GetName().Name;
+                    string namespaceStr = Assembly.GetEntryAssembly()?.GetName().Name;
                     if (string.IsNullOrWhiteSpace(namespaceStr))
-                        namespaceStr = "HabitDataKnife";
+                        namespaceStr = "xknife";
                     string subPath = namespaceStr.Replace('.', '\\').Insert(0, "\\");
                     _UserApplicationDataPath = path + subPath;
                     if (!Directory.Exists(_UserApplicationDataPath))
@@ -170,8 +170,7 @@ namespace NKnife
                 if (node == null)
                 {
                     node = Document.CreateElement(localName);
-                    if (Document.DocumentElement != null)
-                        Document.DocumentElement.AppendChild(node);
+                    Document.DocumentElement?.AppendChild(node);
                     Save();
                 }
                 return (XmlElement) node;
