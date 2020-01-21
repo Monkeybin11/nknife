@@ -24,11 +24,13 @@ namespace NKnife.UnitTests.Jobs
                 Interval = 1000,
                 IsLoop = true,
                 Timeout = 1200,
-                LoopNumber = 1234,
+                LoopCount = 1234,
                 Run = CotrTestFunc1,
                 Verify = CotrTestFunc2
             };
+
             job.Should().NotBeNull();
+            job.CountOfCompleted.Should().Be(0);
             job.IsPool.Should().BeFalse();
         }
 
@@ -38,7 +40,8 @@ namespace NKnife.UnitTests.Jobs
             public int Timeout { get; set; }
             public bool IsLoop { get; set; }
             public int Interval { get; set; }
-            public int LoopNumber { get; set; }
+            public int LoopCount { get; set; }
+            public int CountOfCompleted { get; set; }
             public Func<IJob, bool> Run { get; set; }
             public Func<IJob, bool> Verify { get; set; }
         }
