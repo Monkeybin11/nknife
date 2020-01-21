@@ -335,7 +335,7 @@ namespace NKnife.Util
                 {
                     types = assembly.GetTypes();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     continue;
                 }
@@ -637,7 +637,7 @@ namespace NKnife.Util
                 {
                     return Activator.CreateInstance(type);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return null;
                 }

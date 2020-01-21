@@ -295,12 +295,14 @@ namespace System
         /// </returns>
         public static bool IsChineseLetter(this string src)
         {
-            for (var i = 0; i < src.Length; i++)
+            for (int k = 0; k < src.Length; k++)
             {
                 // \u4e00-\u9fa5 汉字的范围。
                 // ^[\u4e00-\u9fa5]$ 汉字的范围的正则
                 var rx = new Regex("^[\u4e00-\u9fa5]$");
-                return rx.IsMatch(src.Substring(i, 1));
+                var match = rx.IsMatch(src.Substring(k, 1));
+                if (!match)
+                    return false;
             }
             return true;
         }
