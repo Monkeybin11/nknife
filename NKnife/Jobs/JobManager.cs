@@ -11,7 +11,7 @@ namespace NKnife.Jobs
     /// </summary>
     public class JobManager
     {
-        private readonly AutoResetEvent _flowAutoResetEvent = new AutoResetEvent(false);
+        private readonly AutoResetEvent _flowAutoResetEvent = new AutoResetEvent(true);
 
         /// <summary>
         /// 中断工作流的标记。
@@ -28,7 +28,7 @@ namespace NKnife.Jobs
         /// </summary>
         public JobManager()
         {
-            _flowAutoResetEvent.Set();
+            _flowAutoResetEvent.Reset();
         }
 
         /// <summary>

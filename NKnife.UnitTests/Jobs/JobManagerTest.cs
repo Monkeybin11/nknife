@@ -575,18 +575,17 @@ namespace NKnife.UnitTests.Jobs
 
         private bool CountFunc13(IJob job)
         {
-            if (_num13 < 2)
+            if (_num13 < 1)
             {
-                _watch13.Stop();
+                _num13++;
                 _watch13.Reset();
                 _watch13.Start();
-                _num13++;
                 return true;
             }
             _watch13.Stop();
             long watchTime = _watch13.ElapsedMilliseconds;
-            watchTime.Should().BeLessOrEqualTo(INTERVAL_13_14 + 2);
-            watchTime.Should().BeGreaterOrEqualTo(INTERVAL_13_14 - 2);
+            watchTime.Should().BeLessOrEqualTo(INTERVAL_13_14 + 2, $"【Job ID:{((Job)job).Id}】【Num:{_num13}】");
+            watchTime.Should().BeGreaterOrEqualTo(INTERVAL_13_14 - 2,$"【Job ID:{((Job)job).Id}】【Num:{_num13}】");
             _watch13.Reset();
             _watch13.Start();
             return true;
