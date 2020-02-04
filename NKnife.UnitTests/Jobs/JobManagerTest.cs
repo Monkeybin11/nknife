@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -13,6 +14,7 @@ namespace NKnife.UnitTests.Jobs
     {
         private class Job : IJob
         {
+            public int Id { get; set; }
             public bool IsPool { get; } = false;
             public int Timeout { get; set; }
             public bool IsLoop { get; set; }
@@ -44,6 +46,8 @@ namespace NKnife.UnitTests.Jobs
             _number++;
             return true;
         }
+
+        #region 001-004：基本测试
 
         /// <summary>
         /// 单个工作，指定循环次数
@@ -158,6 +162,8 @@ namespace NKnife.UnitTests.Jobs
             _number.Should().Be(102);
         }
 
+        #endregion
+
         #region 005：测试中止功能
 
         private readonly JobManager _runTest005Manager = new JobManager();
@@ -236,6 +242,8 @@ namespace NKnife.UnitTests.Jobs
 
         #endregion
 
+        #region 007：递归
+
         /// <summary>
         /// 测试递归：测试工作流中的工作本身就是工作组，即测试递归的有效性
         /// </summary>
@@ -295,6 +303,12 @@ namespace NKnife.UnitTests.Jobs
             _number.Should().Be(31);
         }
 
+
+
+        #endregion
+
+        #region 008：事件
+
         /// <summary>
         /// 测试各个事件是否都被很好的触发。
         /// </summary>
@@ -349,6 +363,8 @@ namespace NKnife.UnitTests.Jobs
             allWorkDone.Should().BeTrue();
         }
 
+        #endregion
+
         #region 009：测试中止功能的事件
 
         private readonly JobManager _runTest009Manager = new JobManager();
@@ -390,7 +406,7 @@ namespace NKnife.UnitTests.Jobs
 
         #endregion
 
-        #region 010：成组的循环
+        #region 010-012：成组的循环
 
         private int _number1 = 0;
         private int _number2 = 0;
@@ -420,7 +436,11 @@ namespace NKnife.UnitTests.Jobs
         {
             _number = 0;
             var flow = new JobManager();
-            flow.Pool = new JobPool() {IsOverall = true};
+            flow.Pool = new JobPool()
+            {
+                //关键属性：在组内整体轮循
+                IsOverall = true
+            };
             var job1 = new Job
             {
                 IsLoop = true,
@@ -460,7 +480,11 @@ namespace NKnife.UnitTests.Jobs
         {
             _number = 0;
             var flow = new JobManager();
-            flow.Pool = new JobPool() {IsOverall = true};
+            flow.Pool = new JobPool()
+            {
+                //关键属性：在组内整体轮循
+                IsOverall = true
+            };
             var job1 = new Job
             {
                 IsLoop = true,
@@ -502,7 +526,11 @@ namespace NKnife.UnitTests.Jobs
         {
             _number = 0;
             var flow = new JobManager();
-            flow.Pool = new JobPool() { IsOverall = false };
+            flow.Pool = new JobPool()
+            {
+                //关键属性：在组内整体轮循
+                IsOverall = false
+            };
             var job1 = new Job
             {
                 IsLoop = true,
@@ -534,6 +562,114 @@ namespace NKnife.UnitTests.Jobs
             _number1.Should().BeGreaterThan(100);
             _number2.Should().Be(0);
             _number3.Should().Be(0);
+        }
+
+        #endregion
+
+        #region 013：针对工作的间隔时间是否符合逻辑进行测试
+
+        private const int LOOP_COUNT_13_14 = 3;
+        private const int INTERVAL_13_14 = 500;
+        private short _num13 = 0;
+        private readonly Stopwatch _watch13 = new Stopwatch();
+
+        private bool CountFunc13(IJob job)
+        {
+            if (_num13 < 2)
+            {
+                _watch13.Stop();
+                _watch13.Reset();
+                _watch13.Start();
+                _num13++;
+                return true;
+            }
+            _watch13.Stop();
+            long watchTime = _watch13.ElapsedMilliseconds;
+            watchTime.Should().BeLessOrEqualTo(INTERVAL_13_14 + 2);
+            watchTime.Should().BeGreaterOrEqualTo(INTERVAL_13_14 - 2);
+            _watch13.Reset();
+            _watch13.Start();
+            return true;
+        }
+
+        [Fact]
+        public void TestForLogicalTimingOfJobIntervals1()
+        {
+            var flow = new JobManager();
+            flow.Pool = new JobPool()
+            {
+                //关键属性：在组内整体轮循
+                IsOverall = true
+            };
+            var job1 = new Job
+            {
+                Id = 1,
+                IsLoop = true,
+                LoopCount = LOOP_COUNT_13_14,
+                Interval = INTERVAL_13_14,
+                Timeout = INTERVAL_13_14*2,
+                Run = CountFunc13
+            };
+            var job2 = new Job
+            {
+                Id = 2,
+                IsLoop = true,
+                LoopCount = LOOP_COUNT_13_14,
+                Interval = INTERVAL_13_14,
+                Timeout = INTERVAL_13_14 * 2,
+                Run = CountFunc13
+            };
+            var job3 = new Job
+            {
+                Id = 3,
+                IsLoop = true,
+                LoopCount = LOOP_COUNT_13_14,
+                Interval = INTERVAL_13_14,
+                Timeout = INTERVAL_13_14 * 2,
+                Run = CountFunc13
+            };
+            flow.Pool.AddRange(new IJobPoolItem[] { job1, job2, job3 });
+            flow.Run();
+        }
+
+        [Fact]
+        public void TestForLogicalTimingOfJobIntervals2()
+        {
+            var flow = new JobManager();
+            flow.Pool = new JobPool()
+            {
+                //关键属性：单项工作结束后再进行下一项工作，不在组内整体轮循
+                IsOverall = false
+            };
+            var job1 = new Job
+            {
+                Id = 1,
+                IsLoop = true,
+                LoopCount = LOOP_COUNT_13_14,
+                Interval = INTERVAL_13_14,
+                Timeout = INTERVAL_13_14 * 2,
+                Run = CountFunc13
+            };
+            var job2 = new Job
+            {
+                Id = 2,
+                IsLoop = true,
+                LoopCount = LOOP_COUNT_13_14,
+                Interval = INTERVAL_13_14,
+                Timeout = INTERVAL_13_14 * 2,
+                Run = CountFunc13
+            };
+            var job3 = new Job
+            {
+                Id = 3,
+                IsLoop = true,
+                LoopCount = LOOP_COUNT_13_14,
+                Interval = INTERVAL_13_14,
+                Timeout = INTERVAL_13_14 * 2,
+                Run = CountFunc13
+            };
+            flow.Pool.AddRange(new IJobPoolItem[] { job1, job2, job3 });
+            flow.Run();
         }
 
         #endregion
