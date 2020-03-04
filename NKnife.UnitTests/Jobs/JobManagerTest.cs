@@ -201,6 +201,8 @@ namespace NKnife.UnitTests.Jobs
 
         #region 006：测试暂停与继续功能
 
+        #region 006
+
         private readonly JobManager _runTest006Manager = new JobManager();
         private int _count006 = 0;
         private int _number006 = 0;
@@ -239,6 +241,53 @@ namespace NKnife.UnitTests.Jobs
             _count006.Should().Be(10);
             _number006.Should().Be(100);
         }
+
+        #endregion
+
+        #region 006a
+
+        private readonly JobManager _runTest006AManager = new JobManager();
+        private int _count006A = 0;
+
+        private bool OnPauseCountFuncA(IJob job)
+        {
+            _count006A++;
+            if (_count006A == 5)
+            {
+                _runTest006AManager.Pause();
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 006：测试暂停与继续功能。一个无限循环工作，当完成到10的倍数时，暂停，直到完成100项。
+        /// </summary>
+        [Fact]
+        public void RunTest006A()
+        {
+            _count006A = 0;
+            var job = new Job
+            {
+                IsLoop = true,
+                LoopCount = 20,
+                Interval = 2,
+                Timeout = 5,
+                Run = OnPauseCountFuncA
+            };
+            _runTest006AManager.Pool = new JobPool();
+            _runTest006AManager.Pool.Add(job);
+            //另起一个线程执行，当执行计数到5的时候，暂停
+            Task.Factory.StartNew(() => _runTest006AManager.Run());
+            //如果暂停成功，计数器计数应该是5，而无论再等待多少时间
+            Thread.Sleep(100);
+            //断言测试计数器
+            _count006A.Should().Be(5);
+
+            _runTest006AManager.Resume();
+            _runTest006AManager.Break();
+        }
+        
+        #endregion
 
         #endregion
 
@@ -302,9 +351,7 @@ namespace NKnife.UnitTests.Jobs
             flow.Run();
             _number.Should().Be(31);
         }
-
-
-
+        
         #endregion
 
         #region 008：事件

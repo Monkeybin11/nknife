@@ -101,6 +101,9 @@ namespace NKnife.Jobs
                 }
             }
 
+            if (!_breakFlag) //如是有中断信号，那么不算是所有工作完成
+                OnAllWorkDone();
+
             if (jobPool.IsOverall)
             {
                 foreach (var jobItem in jobPool)
@@ -112,9 +115,6 @@ namespace NKnife.Jobs
                     }
                 }
             }
-
-            if (!_breakFlag) //如是有中断信号，那么不算是所有工作完成
-                OnAllWorkDone();
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace NKnife.Jobs
             //**当运行异常时，静置至超时时长，否则静默至间隔时长即结束**
             _flowAutoResetEvent.WaitOne(success ? job.Interval : job.Timeout);
             if (_pauseFlag) //检测暂停标记
-                _flowAutoResetEvent.Reset();
+                _flowAutoResetEvent.WaitOne();
             job.CountOfCompleted++;
             //当该Job需要循环
             //当没有设置循环次数，即无限循环
