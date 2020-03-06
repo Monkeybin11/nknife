@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using NKnife.Events;
 using NKnife.Interface;
@@ -80,43 +81,53 @@ namespace NKnife.Jobs
         /// </summary>
         protected virtual void RunMethod(IJobPool jobPool)
         {
-            foreach (var jobItem in jobPool)
-            {
-                if (_breakFlag) //当检测到中断信号时，不再运行Job
+            if (jobPool.IsOverall) //是否整组轮循
+            {   //整组轮循
+                //给出一个当前池子的所有项目的标记，都置为未完成
+                var all = new List<bool>();
+                for (int i = 0; i < jobPool.Count; i++)
+                    all.Add(false);
+                while (all.Contains(false))//当所有工作完成后，循环结束
                 {
-                    break;
-                }
-
-                if (!jobItem.IsPool)
-                {
-                    if (jobItem is IJob job)
+                    for (int i = 0; i < jobPool.Count; i++)
                     {
-                        RunJob(job, jobPool.IsOverall); //执行单个Job的运行
-                    }
-                }
-                else
-                {
-                    if (jobItem is IJobPool subPool)
-                        RunMethod(subPool); //递归
-                }
-            }
-
-            if (!_breakFlag) //如是有中断信号，那么不算是所有工作完成
-                OnAllWorkDone();
-
-            if (jobPool.IsOverall)
-            {
-                foreach (var jobItem in jobPool)
-                {
-                    if (jobItem is IJob job)
-                    {
-                        if (job.LoopCount == 0 || job.CountOfCompleted < job.LoopCount)
-                            RunMethod(jobPool);
+                        if (_breakFlag) break; //当检测到中断信号时，不再运行Job
+                        IJobPoolItem jobItem = jobPool.ElementAt(i);
+                        if (jobItem is IJob job)
+                        {
+                            if (job.LoopCount == 0 || job.CountOfCompleted < job.LoopCount)
+                            {
+                                RunJob(job, jobPool.IsOverall); //执行单个Job的运行
+                            }
+                            else
+                            {
+                                all[i] = true;//置为已完成标记
+                            }
+                        }
                     }
                 }
             }
+            else
+            {   //执行工作流的每一项工作，将本职工作脚踏实地的完成，才进行下一项工作
+                foreach (IJobPoolItem jobItem in jobPool)
+                {
+                    if (_breakFlag) break; //当检测到中断信号时，不再运行Job
+                    if (!jobItem.IsPool)
+                    {
+                        if (jobItem is IJob job)
+                            RunJob(job, jobPool.IsOverall); //执行单个Job的运行
+                    }
+                    else
+                    {
+                        if (jobItem is IJobPool subPool)
+                            RunMethod(subPool); //递归
+                    }
+                }
+            }
+
+            OnAllWorkDone();
         }
-
+        
         /// <summary>
         /// 运行单个Job
         /// </summary>
@@ -136,14 +147,25 @@ namespace NKnife.Jobs
             if (_pauseFlag) //检测暂停标记
                 _flowAutoResetEvent.WaitOne();
             job.CountOfCompleted++;
-            //当该Job需要循环
-            //当没有设置循环次数，即无限循环
-            //当已设置循环次数，但是已循环次数小于设置值
-            if (!isOverall && job.IsLoop && ((job.LoopCount <= 0) || (job.LoopCount > 0) && (job.CountOfCompleted < job.LoopCount)))
+
+            if (ConditionsForJob(job, isOverall))
             {
                 //递归循环执行本职工作 ;-)
                 RunJob(job, false);
             }
+        }
+
+        /// <summary>
+        /// 当该Job需要循环
+        /// 当没有设置循环次数，即无限循环
+        /// 当已设置循环次数，但是已循环次数小于设置值
+        /// </summary>
+        /// <param name="job">单个Job</param>
+        /// <param name="isOverall">工作池中的子工作轮循模式，当True时，会循环执行整个池中的所有子工作；当False时，对每项子工作都会执行完毕，才执行下一个工作。</param>
+        /// <returns>指定的<see cref="job"/>需要循环处理</returns>
+        private static bool ConditionsForJob(IJob job, bool isOverall)
+        {
+            return !isOverall && job.IsLoop && ((job.LoopCount <= 0) || (job.LoopCount > 0) && (job.CountOfCompleted < job.LoopCount));
         }
 
         /// <summary>
