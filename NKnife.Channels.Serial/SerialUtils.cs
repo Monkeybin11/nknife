@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
-using System.Management;
 
 namespace NKnife.Channels.Serial
 {
@@ -69,25 +68,25 @@ namespace NKnife.Channels.Serial
             LocalSerialPorts.Clear();
             var list = SerialPort.GetPortNames();
             //调用WMI，获取Win32_PnPEntity，即所有设备
-            using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity"))
-            {
-                var hardInfos = searcher.Get();
-                foreach (var serialName in list)
-                {
-                    var des = "";
-                    foreach (var hardInfo in hardInfos)
-                    {
-                        var name = hardInfo.Properties["Name"].Value;
-                        if (name != null)
-                        {
-                            if (NameContains(name.ToString(), serialName)) //筛选
-                                des = $"{name} - {hardInfo.Properties["Manufacturer"].Value}"; //获取制造商
-                        }
-                    }
-                    LocalSerialPorts.Add(serialName, des);
-                }
-                searcher.Dispose();
-            }
+//            using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity"))
+//            {
+//                var hardInfos = searcher.Get();
+//                foreach (var serialName in list)
+//                {
+//                    var des = "";
+//                    foreach (var hardInfo in hardInfos)
+//                    {
+//                        var name = hardInfo.Properties["Name"].Value;
+//                        if (name != null)
+//                        {
+//                            if (NameContains(name.ToString(), serialName)) //筛选
+//                                des = $"{name} - {hardInfo.Properties["Manufacturer"].Value}"; //获取制造商
+//                        }
+//                    }
+//                    LocalSerialPorts.Add(serialName, des);
+//                }
+//                searcher.Dispose();
+//            }
         }
 
         private static bool NameContains(string name, string serialName)

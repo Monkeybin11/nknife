@@ -8,13 +8,11 @@ using NKnife.Channels.EventParams;
 using NKnife.Events;
 using NKnife.Interface;
 using NKnife.Jobs;
-using NLog;
 
 namespace NKnife.Channels.Serial
 {
     public class SerialChannel : ChannelBase<IEnumerable<byte>>
     {
-        private static readonly ILogger _Logger = LogManager.GetCurrentClassLogger();
         private readonly SerialConfig _config;
         private SerialPort _serialPort; //串口操作类（通过.net 类库）
         private bool _isUpdateJobFunc = false;
@@ -107,14 +105,14 @@ namespace NKnife.Channels.Serial
                 {
                     try
                     {
-                        _Logger.Debug($"通讯:准备打开串口:{_serialPort.PortName}:{_serialPort.BaudRate}......");
+                        //_Logger.Debug($"通讯:准备打开串口:{_serialPort.PortName}:{_serialPort.BaudRate}......");
                         _serialPort.Open();
                         IsOpen = true;
                     }
                     catch (Exception e)
                     {
                         IsOpen = false;
-                        _Logger.Warn(e.Message, e);
+                        //_Logger.Warn(e.Message, e);
                     }
                     finally
                     {
@@ -130,17 +128,17 @@ namespace NKnife.Channels.Serial
                 if (IsOpen)
                 {
                     OnOpened();
-                    _Logger.Info($"通讯:成功打开串口:{_serialPort.PortName}:{_serialPort.BaudRate}");
+                    //_Logger.Info($"通讯:成功打开串口:{_serialPort.PortName}:{_serialPort.BaudRate}");
                 }
                 else
                 {
-                    _Logger.Warn($"无法打开串口:COM{_config.Port}");
+                    //_Logger.Warn($"无法打开串口:COM{_config.Port}");
                     thread.Abort();
                 }
             }
             catch (Exception e)
             {
-                _Logger.Error($"无法打开串口:COM{_config.Port}, {e.Message}", e);
+                //_Logger.Error($"无法打开串口:COM{_config.Port}, {e.Message}", e);
                 IsOpen = false;
             }
 
@@ -161,7 +159,7 @@ namespace NKnife.Channels.Serial
                 }
                 catch (Exception e)
                 {
-                    _Logger.Warn($"执行关闭串口前事件异常:{_serialPort.PortName}。{e.Message}", e);
+                    //_Logger.Warn($"执行关闭串口前事件异常:{_serialPort.PortName}。{e.Message}", e);
                 }
 
                 try
@@ -171,11 +169,11 @@ namespace NKnife.Channels.Serial
                     else
                         _serialPort.DataReceived -= AsyncDataReceived;
                     _serialPort.Close();
-                    _Logger.Info($"通讯:成功关闭串口:{_serialPort.PortName}。");
+                    //_Logger.Info($"通讯:成功关闭串口:{_serialPort.PortName}。");
                 }
                 catch (Exception e)
                 {
-                    _Logger.Warn($"关闭串口异常:{_serialPort.PortName}, {e.Message}", e);
+                    //_Logger.Warn($"关闭串口异常:{_serialPort.PortName}, {e.Message}", e);
                     return false;
                 }
 
@@ -185,7 +183,7 @@ namespace NKnife.Channels.Serial
                 }
                 catch (Exception e)
                 {
-                    _Logger.Warn($"执行关闭串口后事件异常:{_serialPort.PortName}。{e.Message}", e);
+                    //_Logger.Warn($"执行关闭串口后事件异常:{_serialPort.PortName}。{e.Message}", e);
                 }
             }
 
@@ -195,7 +193,7 @@ namespace NKnife.Channels.Serial
 
         protected virtual void SerialPortErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-            _Logger.Warn($"SerialPortErrorReceived:{e.EventType}");
+            //_Logger.Warn($"SerialPortErrorReceived:{e.EventType}");
             _serialPort.DiscardInBuffer();
         }
 
@@ -341,11 +339,11 @@ namespace NKnife.Channels.Serial
             }
             catch (TimeoutException e)
             {
-                _Logger.Warn(e,$"串口读取超时异常：{e.Message}");
+                //TODO:_Logger.Warn(e,$"串口读取超时异常：{e.Message}");
             }
             catch (Exception e)
             {
-                _Logger.Warn(e,$"串口读取异常：{e.Message}");
+                //TODO:_Logger.Warn(e,$"串口读取异常：{e.Message}");
             }
             finally
             {
@@ -375,11 +373,11 @@ namespace NKnife.Channels.Serial
             }
             catch (TimeoutException e)
             {
-                _Logger.Warn(e, $"串口读取超时异常：{e.Message}");
+                //_Logger.Warn(e, $"串口读取超时异常：{e.Message}");
             }
             catch (Exception e)
             {
-                _Logger.Warn(e, $"串口读取异常：{e.Message}");
+                //_Logger.Warn(e, $"串口读取异常：{e.Message}");
             }
             if (buffer != null && buffer.Length > 0)
             {

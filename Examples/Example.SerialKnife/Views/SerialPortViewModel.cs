@@ -110,29 +110,29 @@ namespace NKnife.Channels.SerialKnife.Views
             switch (Questions.Mode)
             {
                 case AskMode.Single:
-                {
-                    //将打算发出的问题绑定到channel上
-                    var questionGroup = new SerialQuestionGroup();
-                    var content = Questions.SingleQuestions.Content;
-                    var question = new SerialQuestion(_BindChannel, null, null, Questions.SingleQuestions.IsLoop, content);
-                    questionGroup.Add(question);
-                    _BindChannel.UpdateQuestionGroup(questionGroup);
-
-                    //根据channel的同异步状态执行
-                    if (!IsSync)
-                    {
-                        //当异步时
-                        if (Questions.SingleQuestions.IsLoop)
-                            _BindChannel.TalkTotalTimeout = Questions.SingleQuestions.Time;
-                        _BindChannel.AutoSend(OnAsyncDataSend);
-                    }
-                    else
-                    {
-                        //当同步时
-                        _BindChannel.SendReceiving(OnSyncSend, OnSyncReceived);
-                    }
-                    break;
-                }
+//                {
+//                    //将打算发出的问题绑定到channel上
+//                    var questionGroup = new SerialQuestionGroup();
+//                    var content = Questions.SingleQuestions.Content;
+//                    var question = new SerialQuestion(_BindChannel, null, null, Questions.SingleQuestions.IsLoop, content);
+//                    questionGroup.Add(question);
+//                    _BindChannel.UpdateQuestionGroup(questionGroup);
+//
+//                    //根据channel的同异步状态执行
+//                    if (!IsSync)
+//                    {
+//                        //当异步时
+//                        if (Questions.SingleQuestions.IsLoop)
+//                            _BindChannel.TalkTotalTimeout = Questions.SingleQuestions.Time;
+//                        _BindChannel.AutoSend(OnAsyncDataSend);
+//                    }
+//                    else
+//                    {
+//                        //当同步时
+//                        _BindChannel.SendReceiving(OnSyncSend, OnSyncReceived);
+//                    }
+//                    break;
+//                }
                 case AskMode.Multiterm:
                 case AskMode.User:
                     break;
@@ -143,41 +143,42 @@ namespace NKnife.Channels.SerialKnife.Views
         {
             _BindChannel.Break();
         }
+
         private void OnAsyncDataArrived(object sender, EventArgs<IEnumerable<byte>> e)
         {
             throw new NotImplementedException();
         }
 
-        private void OnAsyncDataArrived(object sender, ChannelAnswerDataEventArgs<byte[]> e)
-        {
-            var exhibitData = (SerialAnswer) (e.Answer);
-            DisplayReceivedData(exhibitData);
-        }
+//        private void OnAsyncDataArrived(object sender, ChannelAnswerDataEventArgs<byte[]> e)
+//        {
+//            var exhibitData = (SerialAnswer) (e.Answer);
+//            DisplayReceivedData(exhibitData);
+//        }
 
         private ushort _SyncReceivedCount = 0;
 
-        private bool OnSyncReceived(IAnswer<byte[]> obj)
-        {
-            var exhibitData = (SerialAnswer) (obj);
-            DisplayReceivedData(exhibitData);
-            if (_SyncReceivedCount < 3)
-            {
-                _SyncReceivedCount++;
-                return false;
-            }
-            _SyncReceivedCount = 0;
-            return true;
-        }
+//        private bool OnSyncReceived(IAnswer<byte[]> obj)
+//        {
+//            var exhibitData = (SerialAnswer) (obj);
+//            DisplayReceivedData(exhibitData);
+//            if (_SyncReceivedCount < 3)
+//            {
+//                _SyncReceivedCount++;
+//                return false;
+//            }
+//            _SyncReceivedCount = 0;
+//            return true;
+//        }
 
-        private void OnAsyncDataSend(IQuestion<byte[]> question)
-        {
-            DisplaySendData(((SerialQuestion) question).Data);
-        }
+//        private void OnAsyncDataSend(IQuestion<byte[]> question)
+//        {
+//            DisplaySendData(((SerialQuestion) question).Data);
+//        }
 
-        private void OnSyncSend(IQuestion<byte[]> question)
-        {
-            DisplaySendData(((SerialQuestion) question).Data);
-        }
+//        private void OnSyncSend(IQuestion<byte[]> question)
+//        {
+//            DisplaySendData(((SerialQuestion) question).Data);
+//        }
 
         private readonly object _DataViewDatasLock = new object();
 
@@ -203,23 +204,23 @@ namespace NKnife.Channels.SerialKnife.Views
             }
         }
 
-        private void DisplayReceivedData(SerialAnswer answer)
-        {
-            RxCount = RxCount + answer.Data.Length;
-            var viewData = new ChannelData();
-            viewData.IsAsk = false;
-            viewData.Content = _HexShowEnable ? answer.Data.ToHexString() : Encoding.Default.GetString(answer.Data);
-            lock (_DataViewDatasLock)
-            {
-                try
-                {
-                    DataView.Datas.Add(viewData);
-                }
-                catch (Exception e)
-                {
-                    _logger.Error($"添加数据时异常:{e.Message}, DataView.Datas.Count:{DataView.Datas.Count}", e);
-                }
-            }
-        }
+//        private void DisplayReceivedData(SerialAnswer answer)
+//        {
+//            RxCount = RxCount + answer.Data.Length;
+//            var viewData = new ChannelData();
+//            viewData.IsAsk = false;
+//            viewData.Content = _HexShowEnable ? answer.Data.ToHexString() : Encoding.Default.GetString(answer.Data);
+//            lock (_DataViewDatasLock)
+//            {
+//                try
+//                {
+//                    DataView.Datas.Add(viewData);
+//                }
+//                catch (Exception e)
+//                {
+//                    _logger.Error($"添加数据时异常:{e.Message}, DataView.Datas.Count:{DataView.Datas.Count}", e);
+//                }
+//            }
+//        }
     }
 }

@@ -12,7 +12,7 @@ namespace NKnife.Channels.SerialKnife.Views.Controls
             InitializeComponent();
 
             _BaudRatesComboBox.Items.AddRange(SerialUtils.BaudRates);
-            _ParitysComboBox.Items.AddRange(SerialUtils.Paritys);
+            _ParitysComboBox.Items.AddRange(SerialUtils.Parities);
             _StopBitsesComboBox.Items.AddRange(SerialUtils.StopBits);
             _DatabitComboBox.Items.AddRange(SerialUtils.DataBits);
 
