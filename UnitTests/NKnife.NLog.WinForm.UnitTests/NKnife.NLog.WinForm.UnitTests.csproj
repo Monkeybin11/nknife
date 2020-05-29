@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NKnife.NLog.WinForm\NKnife.NLog.WinForm.csproj" />
+    <ProjectReference Include="..\..\NKnife.NLog.WinForm\NKnife.NLog.WinForm.csproj" />
   </ItemGroup>
 
 </Project>

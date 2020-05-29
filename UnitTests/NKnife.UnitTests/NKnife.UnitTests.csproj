@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NKnife\NKnife.csproj" />
+    <ProjectReference Include="..\..\NKnife\NKnife.csproj" />
   </ItemGroup>
 
 </Project>
