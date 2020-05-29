@@ -1,4 +1,4 @@
-namespace NKnife.Zip
+namespace NKnife.Upgrade4Github.Util.Zip
 {
     public class GZipResult
     {

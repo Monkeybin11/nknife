@@ -1,4 +1,4 @@
-﻿namespace NKnife.Win.UpdaterFromGitHub.App
+﻿namespace NKnife.Upgrade4Github.App
 {
     partial class UpdaterWorkbench
     {

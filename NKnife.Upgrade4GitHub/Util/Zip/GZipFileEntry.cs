@@ -1,9 +1,8 @@
 using System;
 using System.IO;
 using System.Text;
-using NKnife.Encrypt;
 
-namespace NKnife.Zip
+namespace NKnife.Upgrade4Github.Util.Zip
 {
     /// <summary>
     ///     File entry class.

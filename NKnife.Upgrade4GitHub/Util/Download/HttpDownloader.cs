@@ -5,12 +5,12 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using NKnife.Downloader.Enums;
-using NKnife.Downloader.Interfaces;
-using DownloadProgressChangedEventArgs = NKnife.Downloader.Events.DownloadProgressChangedEventArgs;
-using ProgressChangedEventHandler = NKnife.Downloader.Events.ProgressChangedEventHandler;
+using NKnife.Upgrade4Github.Util.Download.Enums;
+using NKnife.Upgrade4Github.Util.Download.Interfaces;
+using DownloadProgressChangedEventArgs = NKnife.Upgrade4Github.Util.Download.Events.DownloadProgressChangedEventArgs;
+using ProgressChangedEventHandler = NKnife.Upgrade4Github.Util.Download.Events.ProgressChangedEventHandler;
 
-namespace NKnife.Downloader
+namespace NKnife.Upgrade4Github.Util.Download
 {
     /// <summary>
     ///     Contains methods to help downloading

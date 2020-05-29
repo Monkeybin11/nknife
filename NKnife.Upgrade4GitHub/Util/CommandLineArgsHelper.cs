@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace NKnife.Win.UpdaterFromGitHub.Util
+namespace NKnife.Upgrade4Github.Util
 {
     public class CommandLineArgsHelper
     {

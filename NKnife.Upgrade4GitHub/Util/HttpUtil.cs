@@ -2,9 +2,8 @@
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace NKnife.Win.UpdaterFromGitHub.Util
+namespace NKnife.Upgrade4Github.Util
 {
     static class HttpUtil
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using NKnife.Downloader.Events;
+using NKnife.Upgrade4Github.Util.Download.Events;
 
-namespace NKnife.Downloader.Interfaces
+namespace NKnife.Upgrade4Github.Util.Download.Interfaces
 {
     public interface IQueue
     {

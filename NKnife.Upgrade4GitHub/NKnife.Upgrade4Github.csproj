@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D0EB3F04-17E8-4327-B116-5584047888F0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>NKnife.Win.UpdaterFromGitHub</RootNamespace>
-    <AssemblyName>UpdaterFromGitHub</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <RootNamespace>NKnife.Upgrade4Github</RootNamespace>
+    <AssemblyName>Upgrade4Github</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>

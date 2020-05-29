@@ -1,4 +1,4 @@
-﻿namespace NKnife.Downloader.Events
+﻿namespace NKnife.Upgrade4Github.Util.Download.Events
 {
     /// <summary>
     /// Download progress changed event arguments

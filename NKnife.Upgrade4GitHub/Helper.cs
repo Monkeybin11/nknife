@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using NKnife.Win.UpdaterFromGitHub.Base;
-using NKnife.Win.UpdaterFromGitHub.Properties;
-using NKnife.Win.UpdaterFromGitHub.Util;
+using NKnife.Upgrade4Github.Base;
+using NKnife.Upgrade4Github.Properties;
+using NKnife.Upgrade4Github.Util;
 
-namespace NKnife.Win.UpdaterFromGitHub
+namespace NKnife.Upgrade4Github
 {
     /// <summary>
     /// 本组件提供的从github获取更新方法的包装

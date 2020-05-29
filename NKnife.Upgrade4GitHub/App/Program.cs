@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace NKnife.Win.UpdaterFromGitHub.App
+namespace NKnife.Upgrade4Github.App
 {
     static class Program
     {

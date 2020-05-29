@@ -1,4 +1,4 @@
-﻿namespace NKnife.Win.UpdaterFromGitHub.Base
+﻿namespace NKnife.Upgrade4Github.Base
 {
     /// <summary>
     /// 升级状态枚举

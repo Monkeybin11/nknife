@@ -3,15 +3,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using NKnife.Downloader;
-using NKnife.Downloader.Events;
-using NKnife.Downloader.Interfaces;
-using NKnife.Win.UpdaterFromGitHub.Base;
-using NKnife.Win.UpdaterFromGitHub.Properties;
-using NKnife.Win.UpdaterFromGitHub.Util;
-using NKnife.Zip;
+using NKnife.Upgrade4Github.Base;
+using NKnife.Upgrade4Github.Util.Download;
+using NKnife.Upgrade4Github.Util.Download.Events;
+using NKnife.Upgrade4Github.Util.Download.Interfaces;
+using NKnife.Upgrade4Github.Util.Zip;
 
-namespace NKnife.Win.UpdaterFromGitHub.App
+namespace NKnife.Upgrade4Github.App
 {
     /// <summary>
     /// 下载更新包的服务

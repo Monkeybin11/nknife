@@ -6,11 +6,12 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using NKnife.Win.UpdaterFromGitHub.Base;
-using NKnife.Win.UpdaterFromGitHub.Util;
-using NKnife.Zip;
+using NKnife.Upgrade4Github.App;
+using NKnife.Upgrade4Github.Base;
+using NKnife.Upgrade4Github.Util;
+using NKnife.Upgrade4Github.Util.Zip;
 
-namespace NKnife.Win.UpdaterFromGitHub.App
+namespace NKnife.Upgrade4Github.App
 {
     /// <summary>
     /// 更新主窗体

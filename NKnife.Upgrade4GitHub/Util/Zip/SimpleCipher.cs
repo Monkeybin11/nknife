@@ -1,4 +1,4 @@
-﻿namespace NKnife.Encrypt
+﻿namespace NKnife.Upgrade4Github.Util.Zip
 {
     /// <summary>
     ///     简单加密类

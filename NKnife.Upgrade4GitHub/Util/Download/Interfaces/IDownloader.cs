@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using NKnife.Downloader.Enums;
-using NKnife.Downloader.Events;
+using NKnife.Upgrade4Github.Util.Download.Enums;
+using NKnife.Upgrade4Github.Util.Download.Events;
 
-namespace NKnife.Downloader.Interfaces
+namespace NKnife.Upgrade4Github.Util.Download.Interfaces
 {
     public interface IDownloader
     {

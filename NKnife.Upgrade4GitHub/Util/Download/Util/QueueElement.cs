@@ -1,4 +1,4 @@
-﻿namespace NKnife.Downloader.Util
+﻿namespace NKnife.Upgrade4Github.Util.Download.Util
 {
     /// <summary>
     ///     Struct to store the information for download operations

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NKnife.Win.UpdaterFromGitHub.Base
+namespace NKnife.Upgrade4Github.Base
 {
     /// <summary>
     /// 更新参数

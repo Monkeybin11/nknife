@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace NKnife.Win.UpdaterFromGitHub.Base
+namespace NKnife.Upgrade4Github.Base
 {
     public class Author
     {

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using NKnife.Downloader.Enums;
-using NKnife.Downloader.Events;
-using NKnife.Downloader.Interfaces;
-using NKnife.Downloader.Util;
+using NKnife.Upgrade4Github.Util.Download.Enums;
+using NKnife.Upgrade4Github.Util.Download.Events;
+using NKnife.Upgrade4Github.Util.Download.Interfaces;
+using NKnife.Upgrade4Github.Util.Download.Util;
 
-namespace NKnife.Downloader
+namespace NKnife.Upgrade4Github.Util.Download
 {
     /// <summary>
     ///     Provides methods to create and process download queue

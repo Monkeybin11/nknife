@@ -1,7 +1,7 @@
 ﻿using System;
-using NKnife.Downloader.Enums;
+using NKnife.Upgrade4Github.Util.Download.Enums;
 
-namespace NKnife.Downloader.Util
+namespace NKnife.Upgrade4Github.Util.Download.Util
 {
     static class SizeUnitConverter
     {

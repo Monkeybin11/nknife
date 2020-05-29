@@ -1,4 +1,4 @@
-﻿namespace NKnife.Downloader.Enums
+﻿namespace NKnife.Upgrade4Github.Util.Download.Enums
 {
     public enum DownloadState
     {

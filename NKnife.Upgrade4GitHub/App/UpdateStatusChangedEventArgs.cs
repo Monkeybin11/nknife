@@ -1,7 +1,7 @@
 ﻿using System;
-using NKnife.Win.UpdaterFromGitHub.Base;
+using NKnife.Upgrade4Github.Base;
 
-namespace NKnife.Win.UpdaterFromGitHub.App
+namespace NKnife.Upgrade4Github.App
 {
     class UpdateStatusChangedEventArgs : EventArgs
     {

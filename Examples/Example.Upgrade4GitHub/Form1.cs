@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NKnife.Upgrade4Github;
 using NKnife.Win.UpdaterFromGitHub.Example.Properties;
 
 namespace NKnife.Win.UpdaterFromGitHub.Example

@@ -1,6 +1,6 @@
-﻿using NKnife.Downloader.Util;
+﻿using NKnife.Upgrade4Github.Util.Download.Util;
 
-namespace NKnife.Downloader.Events
+namespace NKnife.Upgrade4Github.Util.Download.Events
 {
     /// <summary>
     /// Queue element completed event arguments
