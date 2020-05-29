@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7330EFB8-329A-4AE5-898C-D11F5C052C31}</ProjectGuid>
+    <ProjectGuid>{C444BCD8-F333-4CE9-91E6-B46E356099AD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>NKnife.Win.UpdaterFromGitHub.Example</RootNamespace>
-    <AssemblyName>NKnife.Win.UpdaterFromGitHub.Example</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>NKnife.NLog.WinForm.Example</RootNamespace>
+    <AssemblyName>NKnife.NLog.WinForm.Example</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -33,35 +33,58 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>App.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Properties\main.ico</ApplicationIcon>
+    <ApplicationIcon>Properties\form.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NLog.4.7.2\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2015.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="LeftToolboxView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="LeftToolboxView.Designer.cs">
+      <DependentUpon>LeftToolboxView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LeftToolboxViewViewModel.cs" />
+    <Compile Include="LogPanelTestView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogPanelTestView.Designer.cs">
+      <DependentUpon>LogPanelTestView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Workbench.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workbench.Designer.cs">
+      <DependentUpon>Workbench.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="LeftToolboxView.resx">
+      <DependentUpon>LeftToolboxView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogPanelTestView.resx">
+      <DependentUpon>LogPanelTestView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -73,7 +96,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="App.manifest" />
+    <EmbeddedResource Include="Workbench.resx">
+      <DependentUpon>Workbench.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -88,12 +114,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\main.ico" />
+    <Content Include="Properties\form.ico" />
+    <Content Include="Properties\sub-form.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NKnife.Win.UpdaterFromGitHub\NKnife.Win.UpdaterFromGitHub.csproj">
-      <Project>{d0eb3f04-17e8-4327-b116-5584047888f0}</Project>
-      <Name>NKnife.Win.UpdaterFromGitHub</Name>
+    <ProjectReference Include="..\..\NKnife.NLog.WinForm\NKnife.NLog.WinForm.csproj">
+      <Project>{fc94b5b1-f70c-44d4-9463-ab8eb8faf170}</Project>
+      <Name>NKnife.NLog.WinForm</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

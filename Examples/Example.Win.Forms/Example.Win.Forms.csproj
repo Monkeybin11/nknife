@@ -46,9 +46,6 @@
     <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="NKnife, Version=19.0.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NKnife.19.1.3\lib\netstandard2.0\NKnife.dll</HintPath>
-    </Reference>
     <Reference Include="NKnife.NLog.WinForm, Version=19.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NKnife.NLog.WinForm.19.0.3\lib\net40\NKnife.NLog.WinForm.dll</HintPath>
     </Reference>
@@ -81,7 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\NKnife.Win\Properties\AssemblyVersion.cs">
+    <Compile Include="..\..\NKnife.Win\Properties\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>
     </Compile>
     <Compile Include="Forms\ImagesPanelControlTestDockView.cs">
@@ -122,9 +119,13 @@
     <Content Include="Properties\main.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NKnife.Win.Forms\NKnife.Win.Forms.csproj">
+    <ProjectReference Include="..\..\NKnife.Win.Forms\NKnife.Win.Forms.csproj">
       <Project>{48dcfea4-948a-45f8-8fa5-010a1e095c19}</Project>
       <Name>NKnife.Win.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\NKnife\NKnife.csproj">
+      <Project>{b33b0509-229b-4afe-b774-aeacf7e515c0}</Project>
+      <Name>NKnife</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

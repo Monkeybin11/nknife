@@ -76,8 +76,8 @@ SqlMap:
         );
     DefaultData:
       SqLite: >
-        INSERT INTO Person(Id, Name, Birthday, IDCardNumber, ExaminationNumber, School, Class, StudentNumber, Address, Email, HasCollection) Values('be3b0656-afa0-4414-ac38-5f1058529217', '李子微', '0001/1/1 0:00:00', '', '', '', '', '', '回龙观龙锦苑四区1号楼', 'abcd@gmail.com', 0);
-        INSERT INTO Person(Id, Name, Birthday, IDCardNumber, ExaminationNumber, School, Class, StudentNumber, Address, Email, HasCollection) Values('76480071-e5ea-4126-a836-490028f36541', '赵晓燕', '0001/1/1 0:00:00', '', '', '', '', '', '天通苑东四区18号楼1单元', 'zhaoxiangyan@qq.com', 1);
+        INSERT INTO Person(Id, Name, Birthday, IDCardNumber, ExaminationNumber, School, Class, StudentNumber, Address, Email, HasCollection) Values('c316279b-25a0-4f70-abb7-c5e47f24e59d', '李子微', '0001/1/1 0:00:00', '', '', '', '', '', '回龙观龙锦苑四区1号楼', 'abcd@gmail.com', 0);
+        INSERT INTO Person(Id, Name, Birthday, IDCardNumber, ExaminationNumber, School, Class, StudentNumber, Address, Email, HasCollection) Values('9a9b6ed1-8580-409b-94d8-a1bf5a7f4d3c', '赵晓燕', '0001/1/1 0:00:00', '', '', '', '', '', '天通苑东四区18号楼1单元', 'zhaoxiangyan@qq.com', 1);
     Insert:
       SqLite: >-
         INSERT INTO Person(
@@ -104,7 +104,7 @@ SqlMap:
         );
     DefaultData:
       SqLite: >
-        INSERT INTO Publisher(Id, Name, Year, Scale) Values('3aa79c46-cb2e-4579-aadf-d9a6e30b8174', '美国特别不靠谱出版社', 2020, -1);
+        INSERT INTO Publisher(Id, Name, Year, Scale) Values('3d6eff4a-27e7-4996-b709-03c7067e353b', '美国特别不靠谱出版社', 2020, -1);
     Insert:
       SqLite: >-
         INSERT INTO Publisher(

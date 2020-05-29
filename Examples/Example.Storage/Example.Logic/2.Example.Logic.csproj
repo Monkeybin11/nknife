@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Example.View\0.Example.View.csproj" />
-    <ProjectReference Include="..\NKnife.Storages\NKnife.Storages.csproj" />
   </ItemGroup>
 
 </Project>

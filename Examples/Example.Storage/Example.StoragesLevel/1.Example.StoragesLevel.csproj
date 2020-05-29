@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Example.Common\0.Example.Common.csproj" />
-    <ProjectReference Include="..\NKnife.Storages\NKnife.Storages.csproj" />
   </ItemGroup>
 
 </Project>

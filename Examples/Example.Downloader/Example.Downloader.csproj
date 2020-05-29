@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NKnife.Downloader\NKnife.Downloader.csproj" />
+    <ProjectReference Include="..\..\NKnife.Downloader\NKnife.Downloader.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Net.Mime;
-using System.Runtime.InteropServices;
-using System.Text;
+using NKnife.Downloader;
 using NKnife.Downloader.Interfaces;
 
-namespace NKnife.Downloader.Example
+namespace Example.Downloader
 {
     class Program
     {
