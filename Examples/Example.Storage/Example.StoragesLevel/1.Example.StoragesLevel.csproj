@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Example.StoragesLevel</AssemblyName>
+    <RootNamespace>Example.StoragesLevel</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Example.Common\0.Example.Common.csproj" />
+    <ProjectReference Include="..\NKnife.Storages\NKnife.Storages.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Attributes\Table\**" />
+    <EmbeddedResource Remove="Attributes\Table\**" />
+    <None Remove="Attributes\Table\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Dapper.SimpleCRUD" Version="2.2.0.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
+    <PackageReference Include="MySql.Data" Version="8.0.20" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLog" Version="4.7.2" />
+    <PackageReference Include="Npgsql" Version="4.1.3.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>
