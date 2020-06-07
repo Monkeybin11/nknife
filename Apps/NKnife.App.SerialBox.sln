@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NKnife.App.SerialBox", "NKnife.App.SerialBox\NKnife.App.SerialBox.csproj", "{C65A4EB1-6D6E-4A1F-AFFD-5BE828E335EE}"
 EndProject
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5FFCA8A1-3D95-481A-BAF2-BF90AB253A75}
+		SolutionGuid = {8220B11C-4946-4A7D-AF3C-10582CE016AF}
 	EndGlobalSection
 EndGlobal
