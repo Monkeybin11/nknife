@@ -56,6 +56,22 @@ namespace System
         }
 
         /// <summary>
+        ///     转换为十六进制字符串
+        /// </summary>
+        public static string ToHexString(this IEnumerable<byte> bytes, string separatingCharacter = "")
+        {
+            if (bytes == null)
+                return string.Empty;
+            var sb = new StringBuilder();
+            foreach (var b in bytes)
+                sb.Append(b.ToString("X2")).Append(separatingCharacter);
+            if (separatingCharacter == "")
+                return sb.ToString();
+            else
+                return sb.ToString(0, sb.Length - separatingCharacter.Length);
+        }
+
+        /// <summary>
         ///     转换为Base64字符串
         /// </summary>
         public static string ToBase64String(this byte[] bytes)
