@@ -189,7 +189,7 @@ namespace NKnife.Channels.SerialKnife.Views
             {
                 var viewData = new ChannelData();
                 viewData.IsAsk = true;
-                viewData.Content = _HexShowEnable ? data.ToHexString() : Encoding.Default.GetString(data);
+                viewData.Content = _HexShowEnable ? data.ToHexString(' ') : Encoding.Default.GetString(data);
                 lock (_DataViewDatasLock)
                 {
                     try
@@ -198,7 +198,7 @@ namespace NKnife.Channels.SerialKnife.Views
                     }
                     catch (Exception e)
                     {
-                        _logger.Error($"添加数据时异常:{e.Message}, DataView.Datas.Count:{DataView.Datas.Count}", e);
+                        _logger.Error(e,$"添加数据时异常:{e.Message}, DataView.Datas.Count:{DataView.Datas.Count}");
                     }
                 }
             }

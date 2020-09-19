@@ -58,7 +58,7 @@ namespace System
         /// <summary>
         ///     转换为十六进制字符串
         /// </summary>
-        public static string ToHexString(this IEnumerable<byte> bytes, string separatingCharacter = "")
+        public static string ToHexString(this IEnumerable<byte> bytes, string separatingCharacter = "x")
         {
             if (bytes == null)
                 return string.Empty;

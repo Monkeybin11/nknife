@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyVersion>19.0.1.1</AssemblyVersion>
     <FileVersion>19.0.1.1</FileVersion>
-    <Version>19.2.0</Version>
+    <Version>20.4.0</Version>
     <Authors>lukan@xknife.net</Authors>
     <Company>xknife.net</Company>
   </PropertyGroup>
