@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Xunit;
 
 namespace NKnife.UnitTests.Extensions
@@ -114,5 +115,28 @@ namespace NKnife.UnitTests.Extensions
             Assert.Equal(-1, actual);
         }
 
+        [Fact]
+        public void ToHexStringTest01()
+        {
+            var src = new byte[] {0x01, 0x02, 0x03};
+            var word = src.ToHexString(" ");
+            word.Should().Be("01 02 03");
+        }
+
+        [Fact]
+        public void ToHexStringTest02()
+        {
+            var src = new byte[] {0x01, 0x02, 0x03};
+            var word = src.ToHexString("");
+            word.Should().Be("010203");
+        }
+
+        [Fact]
+        public void ToHexStringTest03()
+        {
+            var src = new byte[] {0xAA};
+            var word = src.ToHexString("");
+            word.Should().Be("AA");
+        }
     }
 }
