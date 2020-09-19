@@ -138,5 +138,54 @@ namespace NKnife.UnitTests.Extensions
             var word = src.ToHexString("");
             word.Should().Be("AA");
         }
+
+
+        [Fact]
+        public void ToHexStringTest04()
+        {
+            var src = new byte[] { 0x01, 0x02, 0x03 };
+            var word = src.ToHexString();
+            word.Should().Be("010203");
+        }
+
+        [Fact]
+        public void ToHexStringTest05()
+        {
+            var src = new byte[] {0x01, 0x02, 0x03};
+            var word = src.ToHexString(new char[] {' '});
+            word.Should().Be("01 02 03");
+        }
+
+        [Fact]
+        public void ToHexStringTest06()
+        {
+            var src = new byte[] {0x01, 0x02, 0x03};
+            var word = src.ToHexString(new char[] {'&', '#', '@'});
+            word.Should().Be("01&#@02&#@03");
+        }
+
+        [Fact]
+        public void ToHexStringTest07()
+        {
+            var src = new byte[] { 0x01, 0x02, 0x03 };
+            var word = src.ToHexString(new char[] { '&', ' ', '@' });
+            word.Should().Be("01& @02& @03");
+        }
+
+        [Fact]
+        public void ToHexStringTest08()
+        {
+            var src = new byte[] { 0x01, 0x02, 0x03 };
+            var word = src.ToHexString("AbC");
+            word.Should().Be("01AbC02AbC03");
+        }
+
+        [Fact]
+        public void ToHexStringTest09()
+        {
+            var src = new byte[] { 0x01, 0x02, 0x03 };
+            var word = src.ToHexString("AbC ");
+            word.Should().Be("01AbC 02AbC 03");
+        }
     }
 }

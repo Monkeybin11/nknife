@@ -60,7 +60,7 @@ namespace NKnife.Channels.SerialKnife.Views.Controls
                     {
                         _SingleQuestionTextbox.Text = !_CurrentIsHex
                             ? Encoding.Default.GetString(text.ToBytes())
-                            : Encoding.Default.GetBytes(text).ToHexString(' ');
+                            : Encoding.Default.GetBytes(text).ToHexString(" ");
                     }
                     catch (Exception e)
                     {

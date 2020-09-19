@@ -189,7 +189,7 @@ namespace NKnife.Channels.SerialKnife.Views
             {
                 var viewData = new ChannelData();
                 viewData.IsAsk = true;
-                viewData.Content = _HexShowEnable ? data.ToHexString(' ') : Encoding.Default.GetString(data);
+                viewData.Content = _HexShowEnable ? data.ToHexString(" ") : Encoding.Default.GetString(data);
                 lock (_DataViewDatasLock)
                 {
                     try
