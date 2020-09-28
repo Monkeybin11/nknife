@@ -8,6 +8,7 @@ using NKnife.Upgrade4Github.Util.Download;
 using NKnife.Upgrade4Github.Util.Download.Events;
 using NKnife.Upgrade4Github.Util.Download.Interfaces;
 using NKnife.Upgrade4Github.Util.Zip;
+using Octokit;
 
 namespace NKnife.Upgrade4Github.App
 {
@@ -34,7 +35,7 @@ namespace NKnife.Upgrade4Github.App
         /// <summary>
         /// 从github获取到的更新信息
         /// </summary>
-        private LatestRelease _currentLatestRelease;
+        private Release _currentLatestRelease;
 
         private bool _isRunStart;
 
@@ -81,7 +82,7 @@ namespace NKnife.Upgrade4Github.App
         {
             await Task.Factory.StartNew(() =>
             {
-                if (!Helper.TryGetLatestRelease(UpdateArgs.Username, UpdateArgs.Project, out _currentLatestRelease, out var msg))
+                if (!FromGithub.TryGetLatestRelease(UpdateArgs.Username, UpdateArgs.Project, out _currentLatestRelease, out var msg))
                 {
                     OnUpdateStatusChanged(new UpdateStatusChangedEventArgs(UpdateStatus.Error, msg));
                     return;
@@ -95,30 +96,30 @@ namespace NKnife.Upgrade4Github.App
         /// <summary>
         /// 为用户界面组装一条更新信息
         /// </summary>
-        private StringBuilder BuildUpdateTipInfo(LatestRelease vi)
+        private StringBuilder BuildUpdateTipInfo(Release release)
         {
             var infoBuilder = new StringBuilder();
-            if (vi == null)
+            if (release == null)
                 return infoBuilder;
             try
             {
-                infoBuilder.AppendLine($"项目：{vi.ReleaseTitle}");
-                infoBuilder.AppendLine($"版本：{vi.Version}");
-                infoBuilder.AppendLine($"日期：{vi.published_at}");
+                infoBuilder.AppendLine($"项目：{release.Name}");
+                infoBuilder.AppendLine($"版本：{release.TagName}");
+                infoBuilder.AppendLine($"日期：{release.PublishedAt}");
             }
             catch (Exception e)
             {
                 OnUpdateStatusChanged(new UpdateStatusChangedEventArgs(UpdateStatus.Error, $"获取更新信息错误。\r\n{e.Message}"));
             }
-            infoBuilder.AppendLine("更新记录：").AppendLine($"{vi.body}");
+            infoBuilder.AppendLine("更新记录：").AppendLine($"{release.Body}");
 
-            if (vi.assets != null)
+            if (release.Assets != null)
             {
                 infoBuilder.AppendLine("------");
-                foreach (var item in vi.assets)
+                foreach (var item in release.Assets)
                 {
-                    var size = item.size / 1024;
-                    infoBuilder.AppendLine($"File：{item.name} ({item.download_count}) Size:{size}Kb");
+                    var size = item.Size / 1024;
+                    infoBuilder.AppendLine($"File：{item.Name} ({item.DownloadCount}) Size:{size}Kb");
                 }
             }
 
@@ -135,8 +136,8 @@ namespace NKnife.Upgrade4Github.App
             _isRunStart = true;
 
             var dir = AppDomain.CurrentDomain.BaseDirectory;
-            var name = _currentLatestRelease.assets[0].name;
-            var url = _currentLatestRelease.assets[0].browser_download_url;
+            var name = _currentLatestRelease.Assets[0].Name;
+            var url = _currentLatestRelease.Assets[0].BrowserDownloadUrl;
             _localFileDir = dir;
             _localFileName = name;
             _localFileFullPath = Path.Combine(dir, name);

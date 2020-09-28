@@ -283,7 +283,7 @@ namespace NKnife.Upgrade4Github.Util.Download
 
         #endregion
 
-        #region Helper Methods
+        #region FromGithub Methods
 
         private void Reset()
         {

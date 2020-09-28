@@ -249,7 +249,7 @@ namespace NKnife.Upgrade4Github.Util.Download
 
         #endregion
 
-        #region Helper Methods
+        #region FromGithub Methods
 
         private async void CreateNextDownload()
         {

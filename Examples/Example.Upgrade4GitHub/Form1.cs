@@ -17,6 +17,9 @@ namespace NKnife.Win.UpdaterFromGitHub.Example
 {
     public partial class Form1 : Form
     {
+        private const string OWNER = "xknife-erian";
+        private const string PROJECT = "nknife.atbugger";
+
         public Form1()
         {
             InitializeComponent();
@@ -32,8 +35,8 @@ namespace NKnife.Win.UpdaterFromGitHub.Example
         {
             try
             {
-                var arguments = "--u xknife-erian --p nknife.serial-protocol-debugger --r NKnife.Win.UpdaterFromGitHub.Example.exe --v 1.2";
-                new Thread(() => Process.Start("UpdaterFromGitHub.exe", arguments)).Start();
+                var arguments = $"--u {OWNER} --p {PROJECT} --r NKnife.Win.UpdaterFromGitHub.Example.exe --v 1.2";
+                new Thread(() => Process.Start("Upgrade4Github.exe", arguments)).Start();
                 Thread.Sleep(5000);
                 Close();
             }
@@ -48,9 +51,9 @@ namespace NKnife.Win.UpdaterFromGitHub.Example
         {
             _updateButton.Enabled = false;
             this.Cursor = Cursors.WaitCursor;
-            if (Helper.TryGetLatestRelease("xknife-erian", "nknife.serial-protocol-debugger", out var latestRelease, out string errorMessage))
+            if (FromGithub.TryGetLatestRelease(OWNER, PROJECT, out var latestRelease, out string errorMessage))
             {
-                MessageBox.Show($"{latestRelease.ReleaseTitle}/{latestRelease.Version}", "获取成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{latestRelease.Name}/{latestRelease.TagName}", "获取成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _updateButton.Enabled = true;
             }
             else
