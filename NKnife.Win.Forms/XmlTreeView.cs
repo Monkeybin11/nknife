@@ -8,18 +8,18 @@ namespace NKnife.Win.Forms
     /// </summary>
     public class XmlTreeView : TreeView
     {
-        public TreeNode BindXml(string xmlstring)
+        public TreeNode BindXml(string xml)
         {
             var doc = new XmlDocument();
-            doc.LoadXml(xmlstring);
-            var treenode = new TreeNode();
+            doc.LoadXml(xml);
+            var treeNode = new TreeNode();
             if (doc.DocumentElement != null)
             {
-                treenode.Text = GetNodeText(doc.DocumentElement);
-                BindXmlDocument(doc.DocumentElement, treenode);
+                treeNode.Text = GetNodeText(doc.DocumentElement);
+                BindXmlDocument(doc.DocumentElement, treeNode);
                 Nodes.Clear();
-                Nodes.Add(treenode);
-                return treenode;
+                Nodes.Add(treeNode);
+                return treeNode;
             }
             return null;
         }
@@ -30,26 +30,26 @@ namespace NKnife.Win.Forms
             {
                 return;
             }
-            foreach (XmlNode subnode in xmlNode.ChildNodes)
+            foreach (XmlNode subNode in xmlNode.ChildNodes)
             {
-                switch (subnode.NodeType)
+                switch (subNode.NodeType)
                 {
                     case XmlNodeType.Element:
                     {
-                        var nodeText = GetNodeText(subnode);
+                        var nodeText = GetNodeText(subNode);
                         var newtreeNode = new TreeNode(nodeText);
                         treeNode.Nodes.Add(newtreeNode);
-                        if (subnode.HasChildNodes)
+                        if (subNode.HasChildNodes)
                         {
-                            BindXmlDocument(subnode, newtreeNode);
+                            BindXmlDocument(subNode, newtreeNode);
                         }
                         break;
                     }
                     case XmlNodeType.Text:
                     {
-                        if (!string.IsNullOrWhiteSpace(subnode.Value))
+                        if (!string.IsNullOrWhiteSpace(subNode.Value))
                         {
-                            var valueNode = new TreeNode(subnode.Value);
+                            var valueNode = new TreeNode(subNode.Value);
                             treeNode.Nodes.Add(valueNode);
                         }
                         break;
@@ -67,7 +67,7 @@ namespace NKnife.Win.Forms
             {
                 foreach (XmlAttribute attribute in node.Attributes)
                 {
-                    sb.Append(string.Format("{0}=\"{1}\"", attribute.LocalName, attribute.Value)).Append(' ');
+                    sb.Append($"{attribute.LocalName}=\"{attribute.Value}\"").Append(' ');
                 }
                 sb.Remove(sb.Length - 1, 1);
             }

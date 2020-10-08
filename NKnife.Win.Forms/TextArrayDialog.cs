@@ -67,7 +67,7 @@ namespace NKnife.Win.Forms
 
         public string[] TextArray
         {
-            get { return (from ListViewItem item in _ListView.Items select item.SubItems[1].Text).ToArray(); }
+            get => (from ListViewItem item in _ListView.Items select item.SubItems[1].Text).ToArray();
             set
             {
                 if (!UtilCollection.IsNullOrEmpty(value))

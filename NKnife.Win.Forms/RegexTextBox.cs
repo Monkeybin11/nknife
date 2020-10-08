@@ -5,61 +5,56 @@ using System.Windows.Forms;
 namespace NKnife.Win.Forms
 {
     /// <summary>
-    /// 一个实现用正则校验的TextBox
+    ///     一个实现用正则校验的TextBox
     /// </summary>
     public class RegexTextBox : TextBox
     {
-        private bool _IsValidating;
-        private Regex _Regex;
-        private Regex _RegexRuntime;
-        private int _SelectionStart;
-        private int _SelectionLength;
-        private string _OldText;
+        private bool _isValidating;
+        private string _oldText;
+        private Regex _regex;
+        private Regex _regexRuntime;
+        private int _selectionLength;
+        private int _selectionStart;
 
         public string RegexText
         {
-            get { return Convert.ToString(_Regex); }
-            set { _Regex = new Regex(value, RegexOptions.ExplicitCapture); }
+            get => Convert.ToString(_regex);
+            set => _regex = new Regex(value, RegexOptions.ExplicitCapture);
         }
 
         public string RegexTextRuntime
         {
-            get { return Convert.ToString(_RegexRuntime); }
-            set { _RegexRuntime = new Regex(value, RegexOptions.ExplicitCapture); }
+            get => Convert.ToString(_regexRuntime);
+            set => _regexRuntime = new Regex(value, RegexOptions.ExplicitCapture);
         }
 
         public bool IsValidate()
         {
-            if (_Regex == null)
-            {
-                throw new ArgumentNullException("RegexText", "没有初始化RegexText");
-            }
-            return _Regex.IsMatch(Text);
+            if (_regex == null) throw new ArgumentException();
+            return _regex.IsMatch(Text);
         }
 
         protected override void OnTextChanged(EventArgs e)
         {
             OnCheckChanged(EventArgs.Empty);
-            if (_IsValidating)
-            {
+            if (_isValidating) 
                 return;
-            }
             //用指定的正则验证
-            if (_RegexRuntime != null)
+            if (_regexRuntime != null)
             {
-                if (_RegexRuntime.IsMatch(Text))
+                if (_regexRuntime.IsMatch(Text))
                 {
-                    _OldText = Text;
-                    _SelectionStart = SelectionStart;
-                    _SelectionLength = SelectionLength;
+                    _oldText = Text;
+                    _selectionStart = SelectionStart;
+                    _selectionLength = SelectionLength;
                 }
                 else
                 {
-                    _IsValidating = true;
-                    Text = _OldText;
-                    _IsValidating = false;
-                    SelectionStart = _SelectionStart;
-                    SelectionLength = _SelectionLength;
+                    _isValidating = true;
+                    Text = _oldText;
+                    _isValidating = false;
+                    SelectionStart = _selectionStart;
+                    SelectionLength = _selectionLength;
                 }
             }
 
@@ -67,21 +62,23 @@ namespace NKnife.Win.Forms
         }
 
         public event EventHandler Changed;
+
         protected virtual void OnCheckChanged(EventArgs e)
         {
-            if (Changed != null)
-                Changed(this, e);
+            Changed?.Invoke(this, e);
         }
+
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            _SelectionStart = SelectionStart;
-            _SelectionLength = SelectionLength;
+            _selectionStart = SelectionStart;
+            _selectionLength = SelectionLength;
             base.OnKeyDown(e);
         }
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            _SelectionStart = SelectionStart;
-            _SelectionLength = SelectionLength;
+            _selectionStart = SelectionStart;
+            _selectionLength = SelectionLength;
             base.OnMouseDown(e);
         }
     }

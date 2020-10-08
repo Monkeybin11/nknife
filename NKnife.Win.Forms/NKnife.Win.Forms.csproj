@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NKnife.Win.Forms</RootNamespace>
     <AssemblyName>NKnife.Win.Forms</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -245,11 +245,11 @@
     <Compile Include="VirticalLine.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WaitMessageForm.cs">
+    <Compile Include="WaitMessageDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WaitMessageForm.Designer.cs">
-      <DependentUpon>WaitMessageForm.cs</DependentUpon>
+    <Compile Include="WaitMessageDialog.Designer.cs">
+      <DependentUpon>WaitMessageDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="WeekGroup.cs">
       <SubType>UserControl</SubType>
@@ -287,8 +287,14 @@
     <EmbeddedResource Include="SexSelector.resx">
       <DependentUpon>SexSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WaitMessageForm.resx">
-      <DependentUpon>WaitMessageForm.cs</DependentUpon>
+    <EmbeddedResource Include="SimpleForm.resx">
+      <DependentUpon>SimpleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextArrayDialog.resx">
+      <DependentUpon>TextArrayDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitMessageDialog.resx">
+      <DependentUpon>WaitMessageDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WeekGroup.resx">
       <DependentUpon>WeekGroup.cs</DependentUpon>

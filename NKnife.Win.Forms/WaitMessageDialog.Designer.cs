@@ -1,6 +1,6 @@
 ﻿namespace NKnife.Win.Forms
 {
-    partial class WaitMessageForm
+    partial class WaitMessageDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitMessageForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitMessageDialog));
             this._LogoBox = new System.Windows.Forms.PictureBox();
             this._TitleLabel = new System.Windows.Forms.Label();
             this._InfomationTextBox = new System.Windows.Forms.TextBox();

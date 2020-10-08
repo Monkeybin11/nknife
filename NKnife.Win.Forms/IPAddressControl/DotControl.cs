@@ -4,142 +4,129 @@ using System.Windows.Forms;
 
 namespace NKnife.Win.Forms.IPAddressControl
 {
-   internal class DotControl : Control
-   {
-      #region Public Properties
+    internal class DotControl : Control
+    {
+        #region Constructors
 
-      public override Size MinimumSize
-      {
-         get
-         {
-            Graphics g = Graphics.FromHwnd( Handle );
+        public DotControl()
+        {
+            Text = ".";
 
-            Size minimumSize = TextRenderer.MeasureText( g,
-               Text, Font, Size,
-               _textFormatFlags );
+            BackColor = SystemColors.Window;
+            Size = MinimumSize;
+            TabStop = false;
 
-            g.Dispose();
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.UserPaint, true);
+        }
 
-            return minimumSize;
-         }
-      }
+        #endregion // Constructors
 
-      public bool ReadOnly
-      {
-         get
-         {
-            return _readOnly;
-         }
-         set
-         {
-            _readOnly = value;
-            Invalidate();
-         }
-      }
+        #region Public Methods
 
-      #endregion // Public Properties
+        public override string ToString()
+        {
+            return Text;
+        }
 
-      #region Public Methods
+        #endregion // Public Methods
 
-      public override string ToString()
-      {
-         return Text;
-      }
+        #region Public Properties
 
-      #endregion // Public Methods
-
-      #region Constructors
-
-      public DotControl()
-      {
-         Text = ".";
-
-         BackColor = SystemColors.Window;
-         Size = MinimumSize;
-         TabStop = false;
-
-         SetStyle( ControlStyles.AllPaintingInWmPaint, true );
-         SetStyle( ControlStyles.OptimizedDoubleBuffer, true );
-         SetStyle( ControlStyles.ResizeRedraw, true );
-         SetStyle( ControlStyles.UserPaint, true );
-      }
-
-      #endregion // Constructors
-
-      #region Protected Methods
-
-      protected override void OnFontChanged( EventArgs e )
-      {
-         base.OnFontChanged( e );
-         Size = MinimumSize;
-      }
-
-      protected override void OnPaint( PaintEventArgs e )
-      {
-         base.OnPaint( e );
-
-         Color backColor = BackColor;
-
-         if ( !_backColorChanged )
-         {
-            if ( !Enabled || ReadOnly )
+        public override Size MinimumSize
+        {
+            get
             {
-               backColor = SystemColors.Control;
+                var g = Graphics.FromHwnd(Handle);
+
+                var minimumSize = TextRenderer.MeasureText(g,
+                    Text, Font, Size,
+                    _textFormatFlags);
+
+                g.Dispose();
+
+                return minimumSize;
             }
-         }
+        }
 
-         Color textColor = ForeColor;
-
-         if ( !Enabled )
-         {
-            textColor = SystemColors.GrayText;
-         }
-         else if ( ReadOnly )
-         {
-            if ( !_backColorChanged )
+        public bool ReadOnly
+        {
+            get => _readOnly;
+            set
             {
-               textColor = SystemColors.WindowText;
+                _readOnly = value;
+                Invalidate();
             }
-         }
+        }
 
-         using ( SolidBrush backgroundBrush = new SolidBrush( backColor ) )
-         {
-            e.Graphics.FillRectangle( backgroundBrush, ClientRectangle );
-         }
+        #endregion // Public Properties
 
-         TextRenderer.DrawText( e.Graphics, Text, Font, ClientRectangle,
-            textColor, _textFormatFlags );
-      }
+        #region Protected Methods
 
-      protected override void OnParentBackColorChanged( EventArgs e )
-      {
-         base.OnParentBackColorChanged( e );
-         BackColor = Parent.BackColor;
-         _backColorChanged = true;
-      }
+        protected override void OnFontChanged(EventArgs e)
+        {
+            base.OnFontChanged(e);
+            Size = MinimumSize;
+        }
 
-      protected override void OnParentForeColorChanged( EventArgs e )
-      {
-         base.OnParentForeColorChanged( e );
-         ForeColor = Parent.ForeColor;
-      }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
 
-      protected override void OnSizeChanged( EventArgs e )
-      {
-         base.OnSizeChanged( e );
-         base.Size = MinimumSize;
-      }
+            var backColor = BackColor;
 
-      #endregion // Protected Methods
+            if (!_backColorChanged)
+                if (!Enabled || ReadOnly)
+                    backColor = SystemColors.Control;
 
-      #region Private Data
+            var textColor = ForeColor;
 
-      private bool _backColorChanged;
-      private bool _readOnly;
+            if (!Enabled)
+                textColor = SystemColors.GrayText;
+            else if (ReadOnly)
+                if (!_backColorChanged)
+                    textColor = SystemColors.WindowText;
 
-      private TextFormatFlags _textFormatFlags = TextFormatFlags.HorizontalCenter | TextFormatFlags.NoPrefix |
-         TextFormatFlags.SingleLine | TextFormatFlags.NoPadding;
+            using (var backgroundBrush = new SolidBrush(backColor))
+            {
+                e.Graphics.FillRectangle(backgroundBrush, ClientRectangle);
+            }
 
-      #endregion // Private Data
-   }
+            TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle,
+                textColor, _textFormatFlags);
+        }
+
+        protected override void OnParentBackColorChanged(EventArgs e)
+        {
+            base.OnParentBackColorChanged(e);
+            BackColor = Parent.BackColor;
+            _backColorChanged = true;
+        }
+
+        protected override void OnParentForeColorChanged(EventArgs e)
+        {
+            base.OnParentForeColorChanged(e);
+            ForeColor = Parent.ForeColor;
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            Size = MinimumSize;
+        }
+
+        #endregion // Protected Methods
+
+        #region Private Data
+
+        private bool _backColorChanged;
+        private bool _readOnly;
+
+        private readonly TextFormatFlags _textFormatFlags = TextFormatFlags.HorizontalCenter | TextFormatFlags.NoPrefix |
+                                                            TextFormatFlags.SingleLine | TextFormatFlags.NoPadding;
+
+        #endregion // Private Data
+    }
 }

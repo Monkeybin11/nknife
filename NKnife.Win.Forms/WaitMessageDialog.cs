@@ -2,9 +2,9 @@
 
 namespace NKnife.Win.Forms
 {
-    public partial class WaitMessageForm : SimpleForm
+    public partial class WaitMessageDialog : SimpleForm
     {
-        public WaitMessageForm()
+        public WaitMessageDialog()
         {
             InitializeComponent();
         }

@@ -49,7 +49,7 @@
             // 
             this._CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this._CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this._CancelButton.Location = new System.Drawing.Point(147, 322);
+            this._CancelButton.Location = new System.Drawing.Point(170, 346);
             this._CancelButton.Name = "_CancelButton";
             this._CancelButton.Size = new System.Drawing.Size(52, 28);
             this._CancelButton.TabIndex = 0;
@@ -60,7 +60,7 @@
             // _AcceptButton
             // 
             this._AcceptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this._AcceptButton.Location = new System.Drawing.Point(88, 322);
+            this._AcceptButton.Location = new System.Drawing.Point(111, 346);
             this._AcceptButton.Name = "_AcceptButton";
             this._AcceptButton.Size = new System.Drawing.Size(52, 28);
             this._AcceptButton.TabIndex = 1;
@@ -77,7 +77,7 @@
             this._TabControl.Location = new System.Drawing.Point(4, 4);
             this._TabControl.Name = "_TabControl";
             this._TabControl.SelectedIndex = 0;
-            this._TabControl.Size = new System.Drawing.Size(274, 313);
+            this._TabControl.Size = new System.Drawing.Size(297, 337);
             this._TabControl.TabIndex = 4;
             // 
             // _TabPage
@@ -89,10 +89,10 @@
             this._TabPage.Controls.Add(this._AgreeButton);
             this._TabPage.Controls.Add(this._CurrentItemValueTextBox);
             this._TabPage.Controls.Add(this._ListView);
-            this._TabPage.Location = new System.Drawing.Point(4, 22);
+            this._TabPage.Location = new System.Drawing.Point(4, 26);
             this._TabPage.Name = "_TabPage";
             this._TabPage.Padding = new System.Windows.Forms.Padding(3);
-            this._TabPage.Size = new System.Drawing.Size(266, 287);
+            this._TabPage.Size = new System.Drawing.Size(289, 307);
             this._TabPage.TabIndex = 0;
             this._TabPage.Text = "数据";
             this._TabPage.UseVisualStyleBackColor = true;
@@ -101,9 +101,9 @@
             // 
             this._DownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._DownButton.Enabled = false;
-            this._DownButton.Location = new System.Drawing.Point(221, 79);
+            this._DownButton.Location = new System.Drawing.Point(220, 79);
             this._DownButton.Name = "_DownButton";
-            this._DownButton.Size = new System.Drawing.Size(42, 23);
+            this._DownButton.Size = new System.Drawing.Size(66, 23);
             this._DownButton.TabIndex = 7;
             this._DownButton.Text = "下移";
             this._DownButton.UseVisualStyleBackColor = true;
@@ -113,9 +113,9 @@
             // 
             this._UpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._UpButton.Enabled = false;
-            this._UpButton.Location = new System.Drawing.Point(221, 55);
+            this._UpButton.Location = new System.Drawing.Point(220, 55);
             this._UpButton.Name = "_UpButton";
-            this._UpButton.Size = new System.Drawing.Size(42, 23);
+            this._UpButton.Size = new System.Drawing.Size(66, 23);
             this._UpButton.TabIndex = 6;
             this._UpButton.Text = "上移";
             this._UpButton.UseVisualStyleBackColor = true;
@@ -125,9 +125,9 @@
             // 
             this._DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this._DeleteButton.Enabled = false;
-            this._DeleteButton.Location = new System.Drawing.Point(221, 26);
+            this._DeleteButton.Location = new System.Drawing.Point(220, 26);
             this._DeleteButton.Name = "_DeleteButton";
-            this._DeleteButton.Size = new System.Drawing.Size(42, 23);
+            this._DeleteButton.Size = new System.Drawing.Size(66, 23);
             this._DeleteButton.TabIndex = 4;
             this._DeleteButton.Text = "删除";
             this._DeleteButton.UseVisualStyleBackColor = true;
@@ -136,9 +136,9 @@
             // _AddButton
             // 
             this._AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this._AddButton.Location = new System.Drawing.Point(221, 2);
+            this._AddButton.Location = new System.Drawing.Point(220, 2);
             this._AddButton.Name = "_AddButton";
-            this._AddButton.Size = new System.Drawing.Size(42, 23);
+            this._AddButton.Size = new System.Drawing.Size(66, 23);
             this._AddButton.TabIndex = 3;
             this._AddButton.Text = "添加";
             this._AddButton.UseVisualStyleBackColor = true;
@@ -148,9 +148,9 @@
             // 
             this._AgreeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this._AgreeButton.Enabled = false;
-            this._AgreeButton.Location = new System.Drawing.Point(221, 261);
+            this._AgreeButton.Location = new System.Drawing.Point(217, 275);
             this._AgreeButton.Name = "_AgreeButton";
-            this._AgreeButton.Size = new System.Drawing.Size(42, 25);
+            this._AgreeButton.Size = new System.Drawing.Size(66, 23);
             this._AgreeButton.TabIndex = 1;
             this._AgreeButton.Text = "应用";
             this._AgreeButton.UseVisualStyleBackColor = true;
@@ -161,9 +161,9 @@
             this._CurrentItemValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._CurrentItemValueTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this._CurrentItemValueTextBox.Location = new System.Drawing.Point(3, 263);
+            this._CurrentItemValueTextBox.Location = new System.Drawing.Point(3, 275);
             this._CurrentItemValueTextBox.Name = "_CurrentItemValueTextBox";
-            this._CurrentItemValueTextBox.Size = new System.Drawing.Size(215, 21);
+            this._CurrentItemValueTextBox.Size = new System.Drawing.Size(211, 23);
             this._CurrentItemValueTextBox.TabIndex = 0;
             // 
             // _ListView
@@ -180,7 +180,7 @@
             this._ListView.Location = new System.Drawing.Point(3, 3);
             this._ListView.MultiSelect = false;
             this._ListView.Name = "_ListView";
-            this._ListView.Size = new System.Drawing.Size(215, 256);
+            this._ListView.Size = new System.Drawing.Size(211, 266);
             this._ListView.TabIndex = 2;
             this._ListView.UseCompatibleStateImageBehavior = false;
             this._ListView.View = System.Windows.Forms.View.Details;
@@ -193,15 +193,15 @@
             // _DataColumnHeader
             // 
             this._DataColumnHeader.Text = "Data";
-            this._DataColumnHeader.Width = 160;
+            this._DataColumnHeader.Width = 150;
             // 
             // TextArrayDialog
             // 
             this.AcceptButton = this._AcceptButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this._CancelButton;
-            this.ClientSize = new System.Drawing.Size(279, 359);
+            this.ClientSize = new System.Drawing.Size(302, 383);
             this.Controls.Add(this._TabControl);
             this.Controls.Add(this._AcceptButton);
             this.Controls.Add(this._CancelButton);
