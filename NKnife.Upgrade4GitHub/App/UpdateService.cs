@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using NKnife.Upgrade4Github.Base;
+using NKnife.Upgrade4Github.Base.GithubDomain;
 using NKnife.Upgrade4Github.Util.Download;
 using NKnife.Upgrade4Github.Util.Download.Events;
 using NKnife.Upgrade4Github.Util.Download.Interfaces;
@@ -35,7 +36,7 @@ namespace NKnife.Upgrade4Github.App
         /// <summary>
         /// 从github获取到的更新信息
         /// </summary>
-        private Release _currentLatestRelease;
+        private LatestRelease _currentLatestRelease;
 
         private bool _isRunStart;
 
@@ -96,7 +97,7 @@ namespace NKnife.Upgrade4Github.App
         /// <summary>
         /// 为用户界面组装一条更新信息
         /// </summary>
-        private StringBuilder BuildUpdateTipInfo(Release release)
+        private StringBuilder BuildUpdateTipInfo(LatestRelease release)
         {
             var infoBuilder = new StringBuilder();
             if (release == null)

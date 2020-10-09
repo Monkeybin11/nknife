@@ -44,6 +44,7 @@
     <ApplicationIcon>Properties\main.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Octokit, Version=0.48.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Octokit.0.48.0\lib\net46\Octokit.dll</HintPath>
     </Reference>
@@ -54,6 +55,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\GithubDomain\Author.cs" />
+    <Compile Include="Base\GithubDomain\ReleaseAsset.cs" />
+    <Compile Include="Base\GithubDomain\ReleaseUpdate.cs" />
     <Compile Include="Base\UpdateArgs.cs" />
     <Compile Include="Base\IUpdateService.cs" />
     <Compile Include="Base\UpdateStatus.cs" />
@@ -82,7 +86,7 @@
     <Compile Include="App\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App\UpdateService.cs" />
-    <Compile Include="Base\LatestRelease.cs" />
+    <Compile Include="Base\GithubDomain\LatestRelease.cs" />
     <Compile Include="Util\Zip\GZip.cs" />
     <Compile Include="Util\Zip\GZipFileEntry.cs" />
     <Compile Include="Util\Zip\GZipFileInfo.cs" />
