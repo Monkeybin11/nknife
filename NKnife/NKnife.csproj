@@ -3,11 +3,22 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>19.0.1.1</AssemblyVersion>
-    <FileVersion>19.0.1.1</FileVersion>
-    <Version>20.5.0</Version>
+    <AssemblyVersion>20.6.0</AssemblyVersion>
+    <FileVersion>20.6.0</FileVersion>
+    <Version>20.6.0</Version>
     <Authors>lukan@xknife.net</Authors>
     <Company>xknife.net</Company>
+    <Description>一个面向.Net的工作组性质的综合开发库。该开发库集成了nknife工作组在研发工作过程中的大量开发经验。但因有大量开发约定并未向外发布，本库暂时仅适用于nknife工作组成员内部使用。当然，如果爱好者参考或部份使用本库，再或能提出宝贵意见或交流，nknife工作组谨表示诚挚的欢迎。</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>E:\xknife.csharper\github\nknife\NKnife\NKnife.xml</DocumentationFile>
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\xknife.csharper\github\nknife\NKnife\NKnife.xml</DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
