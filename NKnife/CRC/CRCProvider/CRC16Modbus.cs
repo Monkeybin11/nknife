@@ -1,12 +1,11 @@
 ﻿using System;
-using NKnife.CRC.Abstract;
-using NKnife.CRC.Status;
+using System.Linq;
 
 namespace NKnife.CRC.CRCProvider
 {
-    internal class CRC16Modbus : AbsCRCProvider
+    public class CRC16Modbus : BaseCRCProvider
     {
-        private static uint[] _crcTable =
+        private static readonly uint[] _CRCTable =
         {
             0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241,
             0XC601, 0X06C0, 0X0780, 0XC741, 0X0500, 0XC5C1, 0XC481, 0X0440,
@@ -42,22 +41,23 @@ namespace NKnife.CRC.CRCProvider
             0X8201, 0X42C0, 0X4380, 0X8341, 0X4100, 0X81C1, 0X8081, 0X4040
         };
 
-        protected override uint[] CRCTable => _crcTable;
-
-        protected override uint Polynomial { get; set; }
-
-        public override CRCStatus GetCRC(byte[] originalArray)
+        public override byte[] CRCheck(byte[] source)
         {
-            CRCStatus status = base.GetCRC(originalArray);
+            if (source.IsNullOrEmpty())
+                throw new ArgumentNullException();
             ushort crc = 0xFFFF;
-
-            foreach (byte datum in originalArray)
-            {
-                crc = (ushort)((crc >> 8) ^ this.CRCTable[(crc ^ datum) & 0xFF]);
-            }
+            foreach (var b in source) 
+                crc = (ushort) ((crc >> 8) ^ _CRCTable[(crc ^ b) & 0xFF]);
             var crcArray = BitConverter.GetBytes(crc);
-            base.GetCRCStatus(ref status, crc, crcArray, originalArray);
-            return status;
+            switch (Endianness)
+            {
+                case Endianness.LE:
+                    break;
+                case Endianness.BE:
+                    Array.Reverse(crcArray);
+                    break;
+            }
+            return crcArray;
         }
     }
 }

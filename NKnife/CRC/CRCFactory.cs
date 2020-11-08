@@ -1,72 +1,54 @@
-﻿using NKnife.CRC.Abstract;
+﻿using System;
+using System.ComponentModel;
 using NKnife.CRC.CRCProvider;
-using NKnife.CRC.Enum;
+using NKnife.Interface;
 
 namespace NKnife.CRC
 {
+    /// <summary>
+    ///     从CRC模式工厂获取指定模式的CRC校验器
+    /// </summary>
     public class CRCFactory
     {
-        //property
-        private AbsCRCProvider Provider { get; set; }
-
-        public OriginalDataFormat DataFormat { get; set; } = OriginalDataFormat.HEX;
-
-        public AbsCRCProvider CreateProvider(Enum.CRCProvider provider)
+        /// <summary>
+        ///     从CRC模式工厂获取指定模式的CRC校验器
+        /// </summary>
+        /// <param name="provider">指定的校验模式</param>
+        public ICRCProvider CreateProvider(CRCProviderMode provider)
         {
-            this.Provider = null;
+            if (!Enum.IsDefined(typeof(CRCProviderMode), provider)) 
+                throw new InvalidEnumArgumentException(nameof(provider), (int) provider, typeof(CRCProviderMode));
             switch (provider)
             {
-                case Enum.CRCProvider.CRC16:
-                    this.Provider = new CRC16();
-                    break;
-
-                case Enum.CRCProvider.CRC32:
-                    this.Provider = new CRC32();
-                    break;
-
-                case Enum.CRCProvider.CRC8:
-                    this.Provider = new CRC8();
-                    break;
-
-                case Enum.CRCProvider.CRC8CCITT:
-                    this.Provider = new CRC8(0x07);
-                    break;
-
-                case Enum.CRCProvider.CRC8DALLASMAXIM:
-                    this.Provider = new CRC8(0x31);
-                    break;
-
-                case Enum.CRCProvider.CRC8SAEJ1850:
-                    this.Provider = new CRC8(0x1D);
-                    break;
-
-                case Enum.CRCProvider.CRC8WCDMA:
-                    this.Provider = new CRC8(0x9b);
-                    break;
-
-                case Enum.CRCProvider.CRC16Modbus:
-                    this.Provider = new CRC16Modbus();
-                    break;
-
-                case Enum.CRCProvider.CRC16CCITT_0x0000:
-                    this.Provider = new CRC16CCITT(0x0000);
-                    break;
-
-                case Enum.CRCProvider.CRC16CCITT_0xFFFF:
-                    this.Provider = new CRC16CCITT(0xFFFF);
-                    break;
-
-                case Enum.CRCProvider.CRC16CCITT_0x1D0F:
-                    this.Provider = new CRC16CCITT(0x1D0F);
-                    break;
-
-                case Enum.CRCProvider.CRC16Kermit:
-                    this.Provider = new CRC16Kermit();
-                    break;
+                case CRCProviderMode.CRC16:
+                    return new CRC16();
+                case CRCProviderMode.CRC32:
+                    return new CRC32();
+                case CRCProviderMode.CRC8:
+                    return new CRC8();
+                case CRCProviderMode.CRC8_DS18B20:
+                    return new CRC8(0x8C);
+                case CRCProviderMode.CRC8_CCITT:
+                    return new CRC8(0x07);
+                case CRCProviderMode.CRC8_DALLASMAXIM:
+                    return new CRC8(0x31);
+                case CRCProviderMode.CRC8_SAEJ1850:
+                    return new CRC8(0x1D);
+                case CRCProviderMode.CRC8_WCDMA:
+                    return new CRC8(0x9B);
+                case CRCProviderMode.CRC16_Modbus:
+                    return new CRC16Modbus();
+                case CRCProviderMode.CRC16_CCITT_0x0000:
+                    return new CRC16CCITT();
+                case CRCProviderMode.CRC16_CCITT_0xFFFF:
+                    return new CRC16CCITT(0xFFFF);
+                case CRCProviderMode.CRC16_CCITT_0x1D0F:
+                    return new CRC16CCITT(0x1D0F);
+                case CRCProviderMode.CRC16_Kermit:
+                    return new CRC16Kermit();
+                default:
+                    return new CRC16Modbus();
             }
-            this.Provider.DataFormat = this.DataFormat;
-
-            return this.Provider;
         }
     }
 }

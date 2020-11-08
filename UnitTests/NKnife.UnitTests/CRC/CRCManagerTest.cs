@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using NKnife.CRC;
-using NKnife.CRC.Enum;
 using Xunit;
 
 namespace NKnife.UnitTests.CRC
@@ -15,260 +15,132 @@ namespace NKnife.UnitTests.CRC
         private readonly CRCFactory _factory = new CRCFactory();
 
         [Fact]
-        public void CRC16_ASCII_Test()
+        public void CRC16CCITT_0x0000_Test()
         {
-            _factory.DataFormat = OriginalDataFormat.ASCII;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16);
+            var provider = _factory.CreateProvider(CRCProviderMode.CRC16_CCITT_XModem);
             var source = "1234567890";
-            var expectedCheckSum = "C57A";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
 
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
+            provider.Endianness = Endianness.LE;
+            var leCRC = "21D3";
+            var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(leCRC, actual.ToHexString());
+
+            provider.Endianness = Endianness.BE;
+            var beCRC = "D321";
+            actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(beCRC, actual.ToHexString());
         }
 
         [Fact]
-        public void CRC16_HEX_Test()
+        public void CRC16CCITT_0x1D0F_Test()
         {
-            _factory.DataFormat = OriginalDataFormat.HEX;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16);
+            var provider = _factory.CreateProvider(CRCProviderMode.CRC16_CCITT_0x1D0F);
             var source = "1234567890";
-            var expectedCheckSum = "4F74";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
 
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
+            provider.Endianness = Endianness.LE;
+            var leCRC = "D857";
+            var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(leCRC, actual.ToHexString());
+
+            provider.Endianness = Endianness.BE;
+            var beCRC = "57D8";
+            actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(beCRC, actual.ToHexString());
         }
 
         [Fact]
-        public void CRC32_ASCII_Test()
+        public void CRC16CCITT_0xFFFF_Test()
         {
-            _factory.DataFormat = OriginalDataFormat.ASCII;
-            var provider = _factory.CreateProvider(CRCProvider.CRC32);
+            var provider = _factory.CreateProvider(CRCProviderMode.CRC16_CCITT_0xFFFF);
             var source = "1234567890";
-            var expectedCheckSum = "261DAEE5";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
+
+            provider.Endianness = Endianness.LE;
+            var leCRC = "1832";
+            var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(leCRC, actual.ToHexString());
+
+            provider.Endianness = Endianness.BE;
+            var beCRC = "3218";
+            actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(beCRC, actual.ToHexString());
         }
 
         [Fact]
-        public void CRC32_HEX_Test()
+        public void CRC16Kermit_Test()
         {
-            _factory.DataFormat = OriginalDataFormat.HEX;
-            var provider = _factory.CreateProvider(CRCProvider.CRC32);
+            var provider = _factory.CreateProvider(CRCProviderMode.CRC16_Kermit);
             var source = "1234567890";
-            var expectedCheckSum = "DC936EB1";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
+
+            provider.Endianness = Endianness.LE;
+            var leCRC = "6B28";
+            var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(leCRC, actual.ToHexString());
+
+            provider.Endianness = Endianness.BE;
+            var beCRC = "286B";
+            actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(beCRC, actual.ToHexString());
         }
 
         [Fact]
-        public void CRC16CCITT_0x0000_ASCII_Test()
+        public void CRC16Modbus_Test()
         {
-            _factory.DataFormat = OriginalDataFormat.ASCII;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16CCITT_0x0000);
+            var provider = _factory.CreateProvider(CRCProviderMode.CRC16_Modbus);
             var source = "1234567890";
-            var expectedCheckSum = "D321";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
+
+            provider.Endianness = Endianness.LE;
+            var leCRC = "0AC2";
+            var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(leCRC, actual.ToHexString());
+
+            provider.Endianness = Endianness.BE;
+            var beCRC = "C20A";
+            actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(beCRC, actual.ToHexString());
         }
 
         [Fact]
-        public void CRC16CCITT_0x0000_HEX_Test()
+        public void CRC16_Test()
         {
-            _factory.DataFormat = OriginalDataFormat.HEX;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16CCITT_0x0000);
+            var provider = _factory.CreateProvider(CRCProviderMode.CRC16);
             var source = "1234567890";
-            var expectedCheckSum = "48E6";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
+
+            provider.Endianness = Endianness.LE;
+            var leCRC = "7AC5";
+            var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(leCRC, actual.ToHexString());
+
+            provider.Endianness = Endianness.BE;
+            var beCRC = "C57A";
+            actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(beCRC, actual.ToHexString());
         }
 
         [Fact]
-        public void CRC16CCITT_0x1D0F_ASCII_Test()
+        public void CRC32_Test()
         {
-            _factory.DataFormat = OriginalDataFormat.ASCII;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16CCITT_0x1D0F);
+            var provider = _factory.CreateProvider(CRCProviderMode.CRC32);
             var source = "1234567890";
-            var expectedCheckSum = "57D8";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
+
+            provider.Endianness = Endianness.LE;
+            var leCRC = "E5AE1D26";
+            var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(leCRC, actual.ToHexString());
+
+            provider.Endianness = Endianness.BE;
+            var beCRC = "261DAEE5";
+            actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(beCRC, actual.ToHexString());
         }
 
         [Fact]
-        public void CRC16CCITT_0x1D0F_HEX_Test()
+        public void CRC8_Test()
         {
-            _factory.DataFormat = OriginalDataFormat.HEX;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16CCITT_0x1D0F);
-            var source = "1234567890";
-            var expectedCheckSum = "B928";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
-        }
-
-        [Fact]
-        public void CRC16CCITT_0xFFFF_ASCII_Test()
-        {
-            _factory.DataFormat = OriginalDataFormat.ASCII;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16CCITT_0xFFFF);
-            var source = "1234567890";
-            var expectedCheckSum = "3218";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
-        }
-
-        [Fact]
-        public void CRC16CCITT_0xFFFF_HEX_Test()
-        {
-            _factory.DataFormat = OriginalDataFormat.HEX;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16CCITT_0xFFFF);
-            var source = "1234567890";
-            var expectedCheckSum = "59EA";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
-        }
-
-        [Fact]
-        public void CRC16Kermit_ASCII_Test()
-        {
-            _factory.DataFormat = OriginalDataFormat.ASCII;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16Kermit);
-            var source = "1234567890";
-            var expectedCheckSum = "6B28";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
-        }
-
-        [Fact]
-        public void CRC16Kermit_HEX_Test()
-        {
-            _factory.DataFormat = OriginalDataFormat.HEX;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16Kermit);
-            var source = "1234567890";
-            var expectedCheckSum = "6163";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
-        }
-
-        [Fact]
-        public void CRC8_ASCII_Test()
-        {
-            _factory.DataFormat = OriginalDataFormat.ASCII;
-            var provider = _factory.CreateProvider(CRCProvider.CRC8);
+            var provider = _factory.CreateProvider(CRCProviderMode.CRC8);
             var source = "1234567890";
             var expectedCheckSum = "38";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
-        }
-
-        [Fact]
-        public void CRC16Modbus_ASCII_Test()
-        {
-            _factory.DataFormat = OriginalDataFormat.ASCII;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16Modbus);
-            var source = "1234567890";
-            var expectedCheckSum = "C20A";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
-        }
-
-        [Fact]
-        public void CRC16Modbus_HEX_Test()
-        {
-            _factory.DataFormat = OriginalDataFormat.HEX;
-            var provider = _factory.CreateProvider(CRCProvider.CRC16Modbus);
-            var source = "CC0900097600040000";
-            var expectedCheckSum = "0C47";
-            var expectedCheckSumValue = Convert.ToUInt32(expectedCheckSum, 16);
-            var expectedCheckSumArray = provider.HexStringToBytes(expectedCheckSum);
-            var expectedFullData = source + expectedCheckSum;
-            var actual = provider.GetCRC(source);
-            Assert.Equal(expectedCheckSum, actual.CrcHexadecimal);
-            Assert.Equal(expectedCheckSumValue, actual.CrcDecimal);
-            Assert.Equal(expectedFullData, actual.FullDataHexadecimal);
-            Assert.True(expectedCheckSumArray.SequenceEqual(actual.CrcArray));
+            var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
+            Assert.Equal(expectedCheckSum, actual.ToHexString());
         }
 
         [Fact]
@@ -276,10 +148,9 @@ namespace NKnife.UnitTests.CRC
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                _factory.DataFormat = OriginalDataFormat.HEX;
-                var provider = _factory.CreateProvider(CRCProvider.CRC16Modbus);
+                var provider = _factory.CreateProvider(CRCProviderMode.CRC16_Modbus);
                 var source = "";
-                var actual = provider.GetCRC(source);
+                var actual = provider.CRCheck(Encoding.ASCII.GetBytes(source));
             });
         }
 
@@ -288,10 +159,9 @@ namespace NKnife.UnitTests.CRC
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                _factory.DataFormat = OriginalDataFormat.ASCII;
-                var provider = _factory.CreateProvider(CRCProvider.CRC16Modbus);
+                var provider = _factory.CreateProvider(CRCProviderMode.CRC16_Modbus);
                 var source = new byte[0];
-                provider.GetCRC(source);
+                provider.CRCheck(source);
             });
         }
 
@@ -300,47 +170,10 @@ namespace NKnife.UnitTests.CRC
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                _factory.DataFormat = OriginalDataFormat.ASCII;
-                var provider = _factory.CreateProvider(CRCProvider.CRC16Modbus);
+                var provider = _factory.CreateProvider(CRCProviderMode.CRC16_Modbus);
                 byte[] source = null;
-                provider.GetCRC(source);
-            });
-        }
-
-        [Fact]
-        public void BytesToHexString1_Exception_Test()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                _factory.DataFormat = OriginalDataFormat.ASCII;
-                var provider = _factory.CreateProvider(CRCProvider.CRC16Modbus);
-                var source = new byte[0];
-                var actual = provider.BytesToHexString(source);
-            });
-        }
-
-        [Fact]
-        public void BytesToHexString2_Exception_Test()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                _factory.DataFormat = OriginalDataFormat.ASCII;
-                var provider = _factory.CreateProvider(CRCProvider.CRC16Modbus);
-
-                byte[] source = null;
-                var actual = provider.BytesToHexString(source);
-            });
-        }
-
-        [Fact]
-        public void HexStringToBytes_Exception_Test()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                _factory.DataFormat = OriginalDataFormat.ASCII;
-                var provider = _factory.CreateProvider(CRCProvider.CRC16Modbus);
-
-                var actual = provider.HexStringToBytes("");
+                // ReSharper disable once ExpressionIsAlwaysNull
+                provider.CRCheck(source);
             });
         }
     }

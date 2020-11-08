@@ -1,62 +1,38 @@
-﻿using NKnife.CRC.Abstract;
-using NKnife.CRC.Status;
+﻿using System;
 
 namespace NKnife.CRC.CRCProvider
 {
-    internal class CRC8 : AbsCRCProvider
+    public class CRC8 : BaseCRCProvider
     {
-        private uint[] _crcTable = new uint[256];
-        private uint _polynomial = 0xd5;
+        private readonly uint[] _crcTable = new uint[256];
 
-        protected override uint[] CRCTable
+        public CRC8(uint polynomial = 0xD5)
         {
-            get { return _crcTable; }
-        }
-
-        protected override uint Polynomial
-        {
-            get { return _polynomial; }
-            set { _polynomial = value; }
-        }
-
-        public CRC8(uint Polynomial = 0xd5)
-        {
-            this.Polynomial = Polynomial;
-
-            for (int i = 0; i < 256; ++i)
+            for (var i = 0; i < 256; ++i)
             {
-                int curr = i;
+                var curr = i;
 
-                for (int j = 0; j < 8; ++j)
-                {
+                for (var j = 0; j < 8; ++j)
                     if ((curr & 0x80) != 0)
-                    {
-                        curr = (curr << 1) ^ (byte)this.Polynomial;
-                    }
+                        curr = (curr << 1) ^ (byte) polynomial;
                     else
-                    {
                         curr <<= 1;
-                    }
-                }
 
-                this.CRCTable[i] = (byte)curr;
+                _crcTable[i] = (byte) curr;
             }
         }
 
-        public override CRCStatus GetCRC(byte[] OriginalArray)
+        public override byte[] CRCheck(byte[] source)
         {
-            CRCStatus status = base.GetCRC(OriginalArray);
+            if(source.IsNullOrEmpty())
+                throw new ArgumentNullException();
             byte crc = 0;
 
-            foreach (byte b in OriginalArray)
-            {
-                crc = (byte)this.CRCTable[crc ^ b];
-            }
+            foreach (var b in source) 
+                crc = (byte) _crcTable[crc ^ b];
 
-            byte[] crcArray = new byte[1] { crc };
-
-            base.GetCRCStatus(ref status, crc, crcArray, OriginalArray);
-            return status;
+            var crcArray = new[] {crc};
+            return crcArray;
         }
     }
 }

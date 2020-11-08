@@ -1,62 +1,65 @@
 ﻿using System;
-using NKnife.CRC.Abstract;
-using NKnife.CRC.Status;
+using System.Linq;
+// ReSharper disable InconsistentNaming
 
 namespace NKnife.CRC.CRCProvider
 {
-    internal class CRC16CCITT : AbsCRCProvider
+    /// <summary>
+    /// CRC16CCITT算法
+    /// </summary>
+    public class CRC16CCITT : BaseCRCProvider
     {
-        private const uint initail = 4129;
-        private uint[] _crcTable = new uint[256];
-        private uint _polynomial = 0;
+        private const uint Initail = 4129;
+        private readonly uint[] _crcTable = new uint[256];
+        private readonly uint _polynomial;
 
-        protected override uint[] CRCTable
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="polynomial"></param>
+        public CRC16CCITT(uint polynomial = 0)
         {
-            get { return _crcTable; }
-        }
+            _polynomial = polynomial;
 
-        protected override uint Polynomial
-        {
-            get { return _polynomial; }
-            set { _polynomial = value; }
-        }
-
-        public CRC16CCITT(uint Polynomial = 0)
-        {
-            this.Polynomial = Polynomial;
-
-            for (uint i = 0; i < this.CRCTable.Length; ++i)
+            for (uint i = 0; i < _crcTable.Length; ++i)
             {
                 uint temp = 0;
-                uint value = i << 8;
+                var value = i << 8;
                 for (uint j = 0; j < 8; ++j)
                 {
                     if (((temp ^ value) & 0x8000) != 0)
-                    {
-                        temp = (temp << 1) ^ initail;
-                    }
+                        temp = (temp << 1) ^ Initail;
                     else
-                    {
                         temp <<= 1;
-                    }
                     value <<= 1;
                 }
 
-                this.CRCTable[i] = temp;
+                _crcTable[i] = temp;
             }
         }
 
-        public override CRCStatus GetCRC(byte[] OriginalArray)
+        /// <summary>
+        /// 校验
+        /// </summary>
+        /// <param name="source">待校验的数据</param>
+        /// <returns>CRC校验码</returns>
+        public override byte[] CRCheck(byte[] source)
         {
-            CRCStatus status = base.GetCRC(OriginalArray);
-            ushort crc = (ushort)this.Polynomial;
-            for (int i = 0; i < OriginalArray.Length; ++i)
-            {
-                crc = (ushort)((crc << 8) ^ _crcTable[((crc >> 8) ^ (0xff & OriginalArray[i]))]);
-            }
+            if (source.IsNullOrEmpty())
+                throw new ArgumentNullException();
+            var crc = (ushort) _polynomial;
+            crc = source.Aggregate(crc, (current, t) => (ushort) ((current << 8) ^ _crcTable[(current >> 8) ^ (0xFF & t)]));
+
             var crcArray = BitConverter.GetBytes(crc);
-            base.GetCRCStatus(ref status, crc, crcArray, OriginalArray);
-            return status;
+            switch (Endianness)
+            {
+                case Endianness.LE:
+                    break;
+                case Endianness.BE:
+                    Array.Reverse(crcArray);
+                    break;
+            }
+            return crcArray;
         }
     }
 }

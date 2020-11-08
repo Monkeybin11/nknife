@@ -1,65 +1,53 @@
 ﻿using System;
-using NKnife.CRC.Abstract;
-using NKnife.CRC.Status;
 
 namespace NKnife.CRC.CRCProvider
 {
-    internal class CRC16Kermit : AbsCRCProvider
+    public class CRC16Kermit : BaseCRCProvider
     {
-        private uint[] _crcTable = new uint[256];
-        private uint _polynomial = 0x8408;
+        private readonly uint[] _crcTable = new uint[256];
 
-        protected override uint[] CRCTable
+        public CRC16Kermit(uint polynomial = 0x8408)
         {
-            get { return _crcTable; }
-        }
-
-        protected override uint Polynomial
-        {
-            get { return _polynomial; }
-            set { _polynomial = value; }
-        }
-
-        public CRC16Kermit(uint Polynomial = 0x8408)
-        {
-            this.Polynomial = Polynomial;
-            for (uint i = 0; i < this.CRCTable.Length; ++i)
+            for (uint i = 0; i < _crcTable.Length; ++i)
             {
                 uint value = 0;
-                uint temp = i;
+                var temp = i;
                 for (uint j = 0; j < 8; ++j)
                 {
                     if (((value ^ temp) & 0x0001) != 0)
-                    {
-                        value = (value >> 1) ^ this.Polynomial;
-                    }
+                        value = (value >> 1) ^ polynomial;
                     else
-                    {
                         value >>= 1;
-                    }
                     temp >>= 1;
                 }
-                this.CRCTable[i] = value;
+
+                _crcTable[i] = value;
             }
         }
 
-        public override CRCStatus GetCRC(byte[] OriginalArray)
+        public override byte[] CRCheck(byte[] source)
         {
-            CRCStatus status = base.GetCRC(OriginalArray);
+            if (source.IsNullOrEmpty())
+                throw new ArgumentNullException();
             ushort crc = 0;
 
-            for (uint i = 0; i < OriginalArray.Length; ++i)
+            for (uint i = 0; i < source.Length; ++i)
             {
-                byte index = (byte)(crc ^ OriginalArray[i]);
-                crc = (ushort)((crc >> 8) ^ this.CRCTable[index]);
+                var index = (byte) (crc ^ source[i]);
+                crc = (ushort) ((crc >> 8) ^ _crcTable[index]);
             }
+
             var crcArray = BitConverter.GetBytes(crc);
 
-            Array.Reverse(crcArray);
-
-            var crcTemp = Convert.ToUInt32(crcArray[1].ToString("X") + crcArray[0].ToString("X"), 16);
-            base.GetCRCStatus(ref status, crcTemp, crcArray, OriginalArray);
-            return status;
+            switch (Endianness)
+            {
+                case Endianness.LE:
+                    break;
+                case Endianness.BE:
+                    Array.Reverse(crcArray);
+                    break;
+            }
+            return crcArray;
         }
     }
 }
